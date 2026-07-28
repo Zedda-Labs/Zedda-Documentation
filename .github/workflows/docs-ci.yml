@@ -3,10 +3,6 @@ name: Documentation CI/CD & Security Audit
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'static-src/**'
-      - 'scripts/build-docs.js'
-      - '.github/workflows/docs-ci.yml'
   repository_dispatch:
     types: [ main-repo-updated ]
   pull_request:
@@ -35,10 +31,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install Build Dependencies
-        run: npm ci || npm install
+        run: npm install
 
       - name: Build Static Documentation
         run: node scripts/build-docs.js
