@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-audit:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -38,13 +38,20 @@ jobs:
       - name: Build Static Documentation
         run: node scripts/build-docs.js
 
+      - name: Deploy to gh-pages Branch
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main' || github.event_name == 'repository_dispatch' || github.event_name == 'release'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public/docs
+
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'public/docs'
 
   deploy-github-pages:
-    needs: build-and-audit
+    needs: build-and-deploy
     if: (github.ref == 'refs/heads/main' || github.event_name == 'repository_dispatch' || github.event_name == 'release') && github.event_name != 'pull_request'
     environment:
       name: github-pages
@@ -54,3 +61,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
