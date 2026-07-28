@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="{{BASE_HREF}}">
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="generator" content="Zedda docs static generator">
+
+  <!-- Production Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://pypistats.org https://api.pepy.tech; img-src 'self' data: https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <!-- SEO & Canonical Links -->
+  <link rel="canonical" href="https://zedda.io/{{CURRENT_ID}}.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="alternate icon" href="assets/logo-dark.png">
+  <title>{{TITLE}}</title>
+
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedda.io/{{CURRENT_ID}}.html">
+  <meta property="og:site_name" content="Zedda">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Zeddalabs">
+  <meta name="twitter:creator" content="@Zeddalabs">
+  <meta name="twitter:title" content="{{TITLE}}">
+  <meta name="twitter:description" content="{{DESCRIPTION}}">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Zedda",
+    "operatingSystem": "Linux, macOS, Windows",
+    "applicationCategory": "DeveloperApplication",
+    "programmingLanguage": ["Python", "C++"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "url": "https://github.com/Zedda-Labs/Zedda",
+      "email": "zeddalabs@gmail.com",
+      "sameAs": [
+        "https://x.com/Zeddalabs",
+        "https://www.linkedin.com/company/zedda-labs/",
+        "https://pypi.org/project/zedda"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Prevent theme flash: set theme class before paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("zedda-theme");
+        var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || "system";
+        var isDark = theme === "dark" || (theme === "system" && sysDark);
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.toggle("dark", isDark);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="{{BODY_CLASS}}" data-current-id="{{CURRENT_ID}}">
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Top navigation bar -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+          <span class="brand-version">v{{VERSION}}</span>
+        </a>
+      </div>
+
+      <div class="topbar-center">
+        <nav class="topbar-nav-links" aria-label="Main Navigation">
+          <a href="introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="api/overview.html" class="topbar-nav-link">API</a>
+          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <button class="search-trigger" id="search-trigger" aria-label="Search documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-trigger-text">Search…</span>
+          <kbd class="search-trigger-kbd">/</kbd>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark theme">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="{{REPO_URL}}" class="topbar-link" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+
+  <!-- Main layout: sidebar + content + toc -->
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Documentation sidebar">
+      <script>(function(){try{var s=document.currentScript.parentElement,v=sessionStorage.getItem("zedda-sidebar-scroll");if(v&&v!=="0")s.scrollTop=parseInt(v,10);}catch(e){}})();</script>
+      <div class="sidebar-inner">
+        {{SIDEBAR}}
+      </div>
+    </aside>
+
+    <main class="main" id="main" role="main">
+      <div class="main-inner">
+        <div class="main-content-area">
+          {{BREADCRUMBS}}
+
+          <article class="content">
+            {{CONTENT_HEADER}}
+            <div class="content-body">
+              {{BODY}}
+            </div>
+
+            {{PREV_NEXT}}
+
+            <div class="content-footer-meta">
+              <a href="{{EDIT_URL}}" target="_blank" rel="noopener noreferrer" class="edit-github-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Edit this page on GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <aside class="toc-wrapper" aria-label="Table of contents">
+          {{TOC}}
+        </aside>
+      </div>
+
+      <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="footer-copyright">© 2026 Zedda Labs</span>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="{{REPO_URL}}" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
+          </div>
+          <div class="footer-right">
+            <span class="footer-version">v{{VERSION}}</span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Search dialog -->
+  <div class="search-modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="search-modal-backdrop" data-close-search></div>
+    <div class="search-modal-panel">
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" class="search-input" id="search-input" placeholder="Search the documentation…" aria-label="Search query" autocomplete="off" spellcheck="false">
+        <kbd class="search-input-kbd">Esc</kbd>
+      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+        <div class="search-results-empty">Start typing to search…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="./">
+  <meta name="description" content="Profile, scan, compare, clean, and ask questions about your data in under a minute.">
+  <meta name="generator" content="Zedda docs static generator">
+
+  <!-- Production Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://pypistats.org https://api.pepy.tech; img-src 'self' data: https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <!-- SEO & Canonical Links -->
+  <link rel="canonical" href="https://zedda.io/quickstart.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="alternate icon" href="assets/logo-dark.png">
+  <title>Quick Start — Zedda Docs</title>
+
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:title" content="Quick Start — Zedda Docs">
+  <meta property="og:description" content="Profile, scan, compare, clean, and ask questions about your data in under a minute.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedda.io/quickstart.html">
+  <meta property="og:site_name" content="Zedda">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Zeddalabs">
+  <meta name="twitter:creator" content="@Zeddalabs">
+  <meta name="twitter:title" content="Quick Start — Zedda Docs">
+  <meta name="twitter:description" content="Profile, scan, compare, clean, and ask questions about your data in under a minute.">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Zedda",
+    "operatingSystem": "Linux, macOS, Windows",
+    "applicationCategory": "DeveloperApplication",
+    "programmingLanguage": ["Python", "C++"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "url": "https://github.com/Zedda-Labs/Zedda",
+      "email": "zeddalabs@gmail.com",
+      "sameAs": [
+        "https://x.com/Zeddalabs",
+        "https://www.linkedin.com/company/zedda-labs/",
+        "https://pypi.org/project/zedda"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Prevent theme flash: set theme class before paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("zedda-theme");
+        var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || "system";
+        var isDark = theme === "dark" || (theme === "system" && sysDark);
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.toggle("dark", isDark);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-doc" data-current-id="quickstart">
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Top navigation bar -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+          <span class="brand-version">v0.4.8</span>
+        </a>
+      </div>
+
+      <div class="topbar-center">
+        <nav class="topbar-nav-links" aria-label="Main Navigation">
+          <a href="introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="api/overview.html" class="topbar-nav-link">API</a>
+          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <button class="search-trigger" id="search-trigger" aria-label="Search documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-trigger-text">Search…</span>
+          <kbd class="search-trigger-kbd">/</kbd>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark theme">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://github.com/Zedda-Labs/Zedda" class="topbar-link" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+
+  <!-- Main layout: sidebar + content + toc -->
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Documentation sidebar">
+      <script>(function(){try{var s=document.currentScript.parentElement,v=sessionStorage.getItem("zedda-sidebar-scroll");if(v&&v!=="0")s.scrollTop=parseInt(v,10);}catch(e){}})();</script>
+      <div class="sidebar-inner">
+        <nav class="sidebar-nav" aria-label="Documentation">
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Getting Started</summary>
+    <div class="sidebar-group-children">
+  <a href="introduction.html" class="sidebar-link" style="--depth: 1" aria-current="false">Introduction</a>
+  <a href="installation.html" class="sidebar-link" style="--depth: 1" aria-current="false">Installation</a>
+  <a href="quickstart.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">Quick Start</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Guides</summary>
+    <div class="sidebar-group-children">
+  <a href="guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
+  <a href="guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
+  <a href="guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
+  <a href="guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
+  <a href="guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
+  <a href="guides/reports.html" class="sidebar-link" style="--depth: 1" aria-current="false">HTML Reports</a>
+    </div>
+  </details>
+  <a href="cli.html" class="sidebar-link" style="--depth: 0" aria-current="false">CLI Reference</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Python API</summary>
+    <div class="sidebar-group-children">
+  <a href="api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="api/scan.html" class="sidebar-link" style="--depth: 1" aria-current="false">scan()</a>
+  <a href="api/profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">profile()</a>
+  <a href="api/compare.html" class="sidebar-link" style="--depth: 1" aria-current="false">compare()</a>
+  <a href="api/ml-ready.html" class="sidebar-link" style="--depth: 1" aria-current="false">ml_ready()</a>
+  <a href="api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
+  <a href="api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
+  <a href="api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
+  <a href="api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
+  <a href="api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
+  <a href="api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
+  <a href="api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
+  <a href="api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">C++ API</summary>
+    <div class="sidebar-group-children">
+  <a href="cpp-api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="cpp-api/column-accumulator.html" class="sidebar-link" style="--depth: 1" aria-current="false">ColumnAccumulator</a>
+  <a href="cpp-api/correlation-engine.html" class="sidebar-link" style="--depth: 1" aria-current="false">CorrelationEngine</a>
+  <a href="cpp-api/profile-result.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileResult</a>
+  <a href="cpp-api/hyperloglog.html" class="sidebar-link" style="--depth: 1" aria-current="false">HyperLogLog</a>
+  <a href="cpp-api/mmap-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">MmapFile</a>
+  <a href="cpp-api/simd-scanner.html" class="sidebar-link" style="--depth: 1" aria-current="false">SimdScanner</a>
+  <a href="cpp-api/stream-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">CsvStreamReader</a>
+  <a href="cpp-api/profile-builder.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileBuilder</a>
+  <a href="cpp-api/arrow-profiler.html" class="sidebar-link" style="--depth: 1" aria-current="false">ArrowProfiler</a>
+  <a href="cpp-api/parsing-utils.html" class="sidebar-link" style="--depth: 1" aria-current="false">Parsing Utils</a>
+    </div>
+  </details>
+  <a href="configuration.html" class="sidebar-link" style="--depth: 0" aria-current="false">Configuration</a>
+  <a href="architecture.html" class="sidebar-link" style="--depth: 0" aria-current="false">Architecture</a>
+  <a href="examples.html" class="sidebar-link" style="--depth: 0" aria-current="false">Examples</a>
+  <a href="benchmarks.html" class="sidebar-link" style="--depth: 0" aria-current="false">Benchmarks</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Contributing</summary>
+    <div class="sidebar-group-children">
+  <a href="contributing/setup.html" class="sidebar-link" style="--depth: 1" aria-current="false">Development Setup</a>
+  <a href="contributing/standards.html" class="sidebar-link" style="--depth: 1" aria-current="false">Coding Standards</a>
+  <a href="contributing/structure.html" class="sidebar-link" style="--depth: 1" aria-current="false">Project Structure</a>
+  <a href="contributing/security.html" class="sidebar-link" style="--depth: 1" aria-current="false">Security</a>
+  <a href="contributing/releasing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Releasing</a>
+    </div>
+  </details>
+  <a href="changelog.html" class="sidebar-link" style="--depth: 0" aria-current="false">Changelog</a>
+  <a href="license.html" class="sidebar-link" style="--depth: 0" aria-current="false">License &amp; Notices</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Legal Policies</summary>
+    <div class="sidebar-group-children">
+  <a href="privacy.html" class="sidebar-link" style="--depth: 1" aria-current="false">Privacy Policy</a>
+  <a href="cookies.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cookie Policy</a>
+    </div>
+  </details>
+</nav>
+
+      </div>
+    </aside>
+
+    <main class="main" id="main" role="main">
+      <div class="main-inner">
+        <div class="main-content-area">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="quickstart.html">Getting Started</a></li><li><span aria-current="page">Quick Start</span></li></ol></nav>
+
+          <article class="content">
+            <header class="content-header">
+         <h1 class="content-title">Quick Start</h1>
+         <p class="content-description">Profile, scan, compare, clean, and ask questions about your data in under a minute.</p>
+       </header>
+            <div class="content-body">
+              <p>This page gets you from <code>pip install</code> to a clean dataset in under a minute. Every snippet here works against the Titanic CSV — feel free to substitute your own file.</p>
+<h2 id="1-install" tabindex="-1"><a class="header-anchor" href="#1-install" aria-hidden="true">#</a> 1. Install</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">pip install zedda
+</code></pre>
+<p>For Parquet support or pandas DataFrame input, install with the <code>[parquet]</code> extra:</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">pip install <span class="hljs-string">&quot;zedda[parquet]&quot;</span>
+</code></pre>
+<h2 id="2-profile-a-file" tabindex="-1"><a class="header-anchor" href="#2-profile-a-file" aria-hidden="true">#</a> 2. Profile a file</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">python -c <span class="hljs-string">&quot;import zedda as zd; zd.profile(&#x27;https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv&#x27;)&quot;</span>
+</code></pre>
+<p>Or, in a script:</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.profile(<span class="hljs-string">&quot;data.csv&quot;</span>)
+</code></pre>
+<p>Zedda prints a Rich-formatted EDA report to the terminal: dataset overview panel, data quality score, per-column table (type, nulls, unique, mean, stddev, min, max, skewness, kurtosis), smart warnings, and Pearson correlation alerts above |r| ≥ 0.7.</p>
+<h2 id="3-use-a-dataframe-instead-of-a-path" tabindex="-1"><a class="header-anchor" href="#3-use-a-dataframe-instead-of-a-path" aria-hidden="true">#</a> 3. Use a DataFrame instead of a path</h2>
+<p>Every function accepts a pandas or polars DataFrame directly. A file path is never required.</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+df = pd.read_csv(<span class="hljs-string">&quot;data.csv&quot;</span>)
+zd.profile(df)
+</code></pre>
+<p>For polars:</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> polars <span class="hljs-keyword">as</span> pl
+<span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+df = pl.read_csv(<span class="hljs-string">&quot;data.csv&quot;</span>)
+zd.profile(df)
+</code></pre>
+<div class="callout callout--note">
+      <div class="callout-title">Note</div>
+      <p>Passing a DataFrame writes a temporary Parquet file under the hood, so the <code>[parquet]</code> extra is required for pandas. Polars DataFrames work without the extra because polars ships its own Arrow writer.</p>
+
+    </div>
+<h2 id="4-get-a-silent-profile-for-cicd" tabindex="-1"><a class="header-anchor" href="#4-get-a-silent-profile-for-cicd" aria-hidden="true">#</a> 4. Get a silent profile for CI/CD</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+result = zd.scan(<span class="hljs-string">&quot;data.csv&quot;</span>)
+<span class="hljs-built_in">print</span>(result.num_rows, result.num_cols)
+<span class="hljs-built_in">print</span>(result.overall_null_pct)
+</code></pre>
+<p><code>scan()</code> returns a <a href="api/dataset-profile.html"><code>DatasetProfile</code></a> without printing anything — ideal for asserting data quality in a pipeline.</p>
+<h2 id="5-list-every-warning" tabindex="-1"><a class="header-anchor" href="#5-list-every-warning" aria-hidden="true">#</a> 5. List every warning</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.warnings(<span class="hljs-string">&quot;data.csv&quot;</span>)
+</code></pre>
+<p>This prints every issue ranked by severity (critical → warning → info), each with inline fix code, plus a copy-paste block at the end and the overall quality score.</p>
+<p>For programmatic access in CI, use <a href="api/collect-warnings.html"><code>collect_warnings()</code></a>:</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+issues = zd.collect_warnings(<span class="hljs-string">&quot;data.csv&quot;</span>)
+critical = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> issues <span class="hljs-keyword">if</span> i[<span class="hljs-string">&quot;severity&quot;</span>] == <span class="hljs-string">&quot;critical&quot;</span>]
+<span class="hljs-keyword">assert</span> <span class="hljs-keyword">not</span> critical, <span class="hljs-string">f&quot;<span class="hljs-subst">{<span class="hljs-built_in">len</span>(critical)}</span> critical data quality issues&quot;</span>
+</code></pre>
+<h2 id="6-compare-two-snapshots" tabindex="-1"><a class="header-anchor" href="#6-compare-two-snapshots" aria-hidden="true">#</a> 6. Compare two snapshots</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.compare(<span class="hljs-string">&quot;train.csv&quot;</span>, <span class="hljs-string">&quot;test.csv&quot;</span>)
+</code></pre>
+<p>Zedda prints a schema diff (added, removed, type-mismatched columns), null-rate changes, distribution shifts on numeric columns, new categories in categorical columns, and a final verdict: <code>PASS</code>, <code>REVIEW</code>, or <code>FAIL</code>.</p>
+<h2 id="7-auto-clean-with-a-backup" tabindex="-1"><a class="header-anchor" href="#7-auto-clean-with-a-backup" aria-hidden="true">#</a> 7. Auto-clean with a backup</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.clean(<span class="hljs-string">&quot;data.csv&quot;</span>, output=<span class="hljs-string">&quot;clean.csv&quot;</span>)
+<span class="hljs-comment"># To restore the original:</span>
+zd.clean.undo(<span class="hljs-string">&quot;data.csv&quot;</span>)
+</code></pre>
+<p><code>clean()</code> writes a <code>.zedda-backup</code> of the original file (idempotent — never overwrites an existing backup), applies every auto-fixable warning, writes the cleaned file, and writes a JSON audit trail at <code>clean_cleaning_audit.json</code> in the output directory.</p>
+<h2 id="8-ask-a-plain-english-question" tabindex="-1"><a class="header-anchor" href="#8-ask-a-plain-english-question" aria-hidden="true">#</a> 8. Ask a plain-English question</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.ask(<span class="hljs-string">&quot;data.csv&quot;</span>, <span class="hljs-string">&quot;any nulls here?&quot;</span>)
+</code></pre>
+<p>By default <code>ask()</code> tries four offline pattern matchers first (row count, column count, null summary, single-column stat, correlation summary). If none match and the <code>ZEDDA_AI_KEY</code> environment variable is set, it falls back to an LLM call. See <a href="guides/ai-qa.html">AI Q&amp;A</a> and <a href="configuration.html">Configuration</a>.</p>
+<h2 id="9-export-an-html-report" tabindex="-1"><a class="header-anchor" href="#9-export-an-html-report" aria-hidden="true">#</a> 9. Export an HTML report</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
+
+zd.report(<span class="hljs-string">&quot;data.csv&quot;</span>, output=<span class="hljs-string">&quot;rep.html&quot;</span>)
+</code></pre>
+<p>The report is a single self-contained HTML file: inline CSS, inline SVG sparklines, zero external network requests. Safe to email or host statically.</p>
+<h2 id="what-you-have-now" tabindex="-1"><a class="header-anchor" href="#what-you-have-now" aria-hidden="true">#</a> What you have now</h2>
+<p>You have used every top-level Zedda function. From here:</p>
+<ul>
+<li><a href="guides/profiling.html">Guides</a> — deeper walkthroughs of each function with sample output.</li>
+<li><a href="api/overview.html">Python API</a> — every argument, return type, and exception.</li>
+<li><a href="cli.html">CLI</a> — the same functions exposed as <code>zedda</code> subcommands.</li>
+<li><a href="architecture.html">Architecture</a> — how the C++17 engine streams terabyte-scale files in 2 MB of memory.</li>
+</ul>
+
+            </div>
+
+            <nav class="prev-next" aria-label="Pagination"><a href="installation.html" class="prev-next-card prev-next-card--prev">
+      <span class="prev-next-label">Previous</span>
+      <span class="prev-next-title">Installation</span>
+    </a><a href="guides/profiling.html" class="prev-next-card prev-next-card--next">
+      <span class="prev-next-label">Next</span>
+      <span class="prev-next-title">Profiling Datasets</span>
+    </a></nav>
+
+            <div class="content-footer-meta">
+              <a href="https://github.com/Zedda-Labs/Zedda/blob/main/static-src/content/quickstart.md" target="_blank" rel="noopener noreferrer" class="edit-github-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Edit this page on GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <aside class="toc-wrapper" aria-label="Table of contents">
+          <nav class="toc" aria-label="On this page">
+  <p class="toc-title">On this page</p>
+  <ul class="toc-list">
+    <li class="toc-item toc-item--h2"><a href="#1-install" class="toc-link"># 1. Install</a></li>
+    <li class="toc-item toc-item--h2"><a href="#2-profile-a-file" class="toc-link"># 2. Profile a file</a></li>
+    <li class="toc-item toc-item--h2"><a href="#3-use-a-dataframe-instead-of-a-path" class="toc-link"># 3. Use a DataFrame instead of a path</a></li>
+    <li class="toc-item toc-item--h2"><a href="#4-get-a-silent-profile-for-cicd" class="toc-link"># 4. Get a silent profile for CI/CD</a></li>
+    <li class="toc-item toc-item--h2"><a href="#5-list-every-warning" class="toc-link"># 5. List every warning</a></li>
+    <li class="toc-item toc-item--h2"><a href="#6-compare-two-snapshots" class="toc-link"># 6. Compare two snapshots</a></li>
+    <li class="toc-item toc-item--h2"><a href="#7-auto-clean-with-a-backup" class="toc-link"># 7. Auto-clean with a backup</a></li>
+    <li class="toc-item toc-item--h2"><a href="#8-ask-a-plain-english-question" class="toc-link"># 8. Ask a plain-English question</a></li>
+    <li class="toc-item toc-item--h2"><a href="#9-export-an-html-report" class="toc-link"># 9. Export an HTML report</a></li>
+    <li class="toc-item toc-item--h2"><a href="#what-you-have-now" class="toc-link"># What you have now</a></li>
+  </ul>
+</nav>
+
+        </aside>
+      </div>
+
+      <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="footer-copyright">© 2026 Zedda Labs</span>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://github.com/Zedda-Labs/Zedda" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
+          </div>
+          <div class="footer-right">
+            <span class="footer-version">v0.4.8</span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Search dialog -->
+  <div class="search-modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="search-modal-backdrop" data-close-search></div>
+    <div class="search-modal-panel">
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" class="search-input" id="search-input" placeholder="Search the documentation…" aria-label="Search query" autocomplete="off" spellcheck="false">
+        <kbd class="search-input-kbd">Esc</kbd>
+      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+        <div class="search-results-empty">Start typing to search…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.3.0",
+    "markdown-it-anchor": "^9.2.1",
+    "markdown-it-link-attributes": "^4.0.1"
+  }
+}
