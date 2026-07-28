@@ -481,16 +481,19 @@ html.dark .theme-icon--sun { display: block; }
 .sidebar-group-title::before {
   content: "";
   display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 4px solid currentColor;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  margin-right: var(--space-2);
-  transition: transform 0.15s;
-  opacity: 0.6;
+  width: 5px;
+  height: 5px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  margin-right: var(--space-3);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.75;
 }
-.sidebar-group--open > .sidebar-group-title::before { transform: rotate(90deg); }
+details[open] > .sidebar-group-title::before,
+.sidebar-group--open > .sidebar-group-title::before {
+  transform: rotate(45deg);
+}
 .sidebar-group-title:hover { background: var(--surface-3); color: var(--text-secondary); }
 
 .sidebar-group-children {
@@ -795,8 +798,12 @@ html.dark .callout code { background: rgba(255, 255, 255, 0.08); }
   transition: color 0.1s, border-color 0.1s;
 }
 .toc-item--h3 .toc-link { padding-left: var(--space-6); font-size: 0.78rem; }
-.toc-link:hover { color: var(--text); text-decoration: none; }
-.toc-link.active { color: var(--brand); border-left-color: var(--brand); font-weight: 500; }
+.toc-link.active,
+.toc-link--active {
+  color: var(--brand) !important;
+  border-left-color: var(--brand) !important;
+  font-weight: 600 !important;
+}
 
 /* -------- 11. Footer -------- */
 .footer {
@@ -1292,6 +1299,54 @@ html.dark .polars-glow-1 {
 
 html.dark .polars-glow-2 {
   background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.35), transparent);
+}
+
+/* Premium SaaS Light Mode Hero Multi-Layer Blue Glow (Vercel / Supabase / Linear style) */
+.hero-light-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 1;
+}
+
+/* Layer 1: Large Central Soft Blue Radial Aura behind Hero text */
+html:not(.dark) .hero-light-glow-1 {
+  top: -10%;
+  left: 15%;
+  width: 650px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(96, 165, 250, 0.12) 50%, transparent 75%);
+  animation: heroGlowPulse1 8s ease-in-out infinite alternate;
+}
+
+/* Layer 2: Vibrant Electric Accent Glow behind Terminal */
+html:not(.dark) .hero-light-glow-2 {
+  top: 10%;
+  right: 5%;
+  width: 550px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(59, 130, 246, 0.09) 60%, transparent 80%);
+  animation: heroGlowPulse2 10s ease-in-out infinite alternate;
+}
+
+/* Layer 3: Cyan/Turquoise Soft Ambient Base Glow */
+html:not(.dark) .hero-light-glow-3 {
+  bottom: 0%;
+  left: 30%;
+  width: 700px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.14) 0%, rgba(59, 130, 246, 0.07) 55%, transparent 75%);
+}
+
+@keyframes heroGlowPulse1 {
+  0% { transform: scale(0.95) translate(0, 0); opacity: 0.8; }
+  100% { transform: scale(1.08) translate(20px, -15px); opacity: 1; }
+}
+
+@keyframes heroGlowPulse2 {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.85; }
+  100% { transform: scale(1.12) translate(-15px, 20px); opacity: 1; }
 }
 
 /* 2-Column Hero Grid Container */
