@@ -275,8 +275,13 @@ function build() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
 
-  // Copy assets (CSS, JS, images)
+  // Copy assets (CSS, JS, images, favicons)
   copyDir(ASSETS_SRC, path.join(OUT, "assets"));
+  // Copy root favicon.ico for direct browser root requests
+  const rootFavicon = path.join(ASSETS_SRC, "favicon.ico");
+  if (fs.existsSync(rootFavicon)) {
+    fs.copyFileSync(rootFavicon, path.join(OUT, "favicon.ico"));
+  }
   // Also copy any page-specific subdirectories
   copyDir(CONTENT, path.join(OUT, "_content"), { onlyFiles: false, filter: (f) => !f.endsWith(".md") });
 
