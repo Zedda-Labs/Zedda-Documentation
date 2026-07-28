@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <meta name="description" content="Directory layout — python/, src/, include/, tests/, benchmarks/, docs/.">
+  <meta name="generator" content="Zedda docs static generator">
+
+  <!-- Production Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://pypistats.org https://api.pepy.tech; img-src 'self' data: https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <!-- SEO & Canonical Links -->
+  <link rel="canonical" href="https://zedda.io/contributing/structure.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="alternate icon" href="assets/logo-dark.png">
+  <title>Project Structure — Zedda Docs</title>
+
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:title" content="Project Structure — Zedda Docs">
+  <meta property="og:description" content="Directory layout — python/, src/, include/, tests/, benchmarks/, docs/.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedda.io/contributing/structure.html">
+  <meta property="og:site_name" content="Zedda">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Zeddalabs">
+  <meta name="twitter:creator" content="@Zeddalabs">
+  <meta name="twitter:title" content="Project Structure — Zedda Docs">
+  <meta name="twitter:description" content="Directory layout — python/, src/, include/, tests/, benchmarks/, docs/.">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Zedda",
+    "operatingSystem": "Linux, macOS, Windows",
+    "applicationCategory": "DeveloperApplication",
+    "programmingLanguage": ["Python", "C++"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "url": "https://github.com/Zedda-Labs/Zedda",
+      "email": "zeddalabs@gmail.com",
+      "sameAs": [
+        "https://x.com/Zeddalabs",
+        "https://www.linkedin.com/company/zedda-labs/",
+        "https://pypi.org/project/zedda"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Prevent theme flash: set theme class before paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("zedda-theme");
+        var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || "system";
+        var isDark = theme === "dark" || (theme === "system" && sysDark);
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.toggle("dark", isDark);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-doc" data-current-id="contributing/structure">
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Top navigation bar -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+          <span class="brand-version">v0.4.8</span>
+        </a>
+      </div>
+
+      <div class="topbar-center">
+        <nav class="topbar-nav-links" aria-label="Main Navigation">
+          <a href="introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="api/overview.html" class="topbar-nav-link">API</a>
+          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <button class="search-trigger" id="search-trigger" aria-label="Search documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-trigger-text">Search…</span>
+          <kbd class="search-trigger-kbd">/</kbd>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark theme">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://github.com/Zedda-Labs/Zedda" class="topbar-link" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+
+  <!-- Main layout: sidebar + content + toc -->
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Documentation sidebar">
+      <script>(function(){try{var s=document.currentScript.parentElement,v=sessionStorage.getItem("zedda-sidebar-scroll");if(v&&v!=="0")s.scrollTop=parseInt(v,10);}catch(e){}})();</script>
+      <div class="sidebar-inner">
+        <nav class="sidebar-nav" aria-label="Documentation">
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Getting Started</summary>
+    <div class="sidebar-group-children">
+  <a href="introduction.html" class="sidebar-link" style="--depth: 1" aria-current="false">Introduction</a>
+  <a href="installation.html" class="sidebar-link" style="--depth: 1" aria-current="false">Installation</a>
+  <a href="quickstart.html" class="sidebar-link" style="--depth: 1" aria-current="false">Quick Start</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Guides</summary>
+    <div class="sidebar-group-children">
+  <a href="guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
+  <a href="guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
+  <a href="guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
+  <a href="guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
+  <a href="guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
+  <a href="guides/reports.html" class="sidebar-link" style="--depth: 1" aria-current="false">HTML Reports</a>
+    </div>
+  </details>
+  <a href="cli.html" class="sidebar-link" style="--depth: 0" aria-current="false">CLI Reference</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Python API</summary>
+    <div class="sidebar-group-children">
+  <a href="api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="api/scan.html" class="sidebar-link" style="--depth: 1" aria-current="false">scan()</a>
+  <a href="api/profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">profile()</a>
+  <a href="api/compare.html" class="sidebar-link" style="--depth: 1" aria-current="false">compare()</a>
+  <a href="api/ml-ready.html" class="sidebar-link" style="--depth: 1" aria-current="false">ml_ready()</a>
+  <a href="api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
+  <a href="api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
+  <a href="api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
+  <a href="api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
+  <a href="api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
+  <a href="api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
+  <a href="api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
+  <a href="api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">C++ API</summary>
+    <div class="sidebar-group-children">
+  <a href="cpp-api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="cpp-api/column-accumulator.html" class="sidebar-link" style="--depth: 1" aria-current="false">ColumnAccumulator</a>
+  <a href="cpp-api/correlation-engine.html" class="sidebar-link" style="--depth: 1" aria-current="false">CorrelationEngine</a>
+  <a href="cpp-api/profile-result.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileResult</a>
+  <a href="cpp-api/hyperloglog.html" class="sidebar-link" style="--depth: 1" aria-current="false">HyperLogLog</a>
+  <a href="cpp-api/mmap-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">MmapFile</a>
+  <a href="cpp-api/simd-scanner.html" class="sidebar-link" style="--depth: 1" aria-current="false">SimdScanner</a>
+  <a href="cpp-api/stream-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">CsvStreamReader</a>
+  <a href="cpp-api/profile-builder.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileBuilder</a>
+  <a href="cpp-api/arrow-profiler.html" class="sidebar-link" style="--depth: 1" aria-current="false">ArrowProfiler</a>
+  <a href="cpp-api/parsing-utils.html" class="sidebar-link" style="--depth: 1" aria-current="false">Parsing Utils</a>
+    </div>
+  </details>
+  <a href="configuration.html" class="sidebar-link" style="--depth: 0" aria-current="false">Configuration</a>
+  <a href="architecture.html" class="sidebar-link" style="--depth: 0" aria-current="false">Architecture</a>
+  <a href="examples.html" class="sidebar-link" style="--depth: 0" aria-current="false">Examples</a>
+  <a href="benchmarks.html" class="sidebar-link" style="--depth: 0" aria-current="false">Benchmarks</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Contributing</summary>
+    <div class="sidebar-group-children">
+  <a href="contributing/setup.html" class="sidebar-link" style="--depth: 1" aria-current="false">Development Setup</a>
+  <a href="contributing/standards.html" class="sidebar-link" style="--depth: 1" aria-current="false">Coding Standards</a>
+  <a href="contributing/structure.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">Project Structure</a>
+  <a href="contributing/security.html" class="sidebar-link" style="--depth: 1" aria-current="false">Security</a>
+  <a href="contributing/releasing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Releasing</a>
+    </div>
+  </details>
+  <a href="changelog.html" class="sidebar-link" style="--depth: 0" aria-current="false">Changelog</a>
+  <a href="license.html" class="sidebar-link" style="--depth: 0" aria-current="false">License &amp; Notices</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Legal Policies</summary>
+    <div class="sidebar-group-children">
+  <a href="privacy.html" class="sidebar-link" style="--depth: 1" aria-current="false">Privacy Policy</a>
+  <a href="cookies.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cookie Policy</a>
+    </div>
+  </details>
+</nav>
+
+      </div>
+    </aside>
+
+    <main class="main" id="main" role="main">
+      <div class="main-inner">
+        <div class="main-content-area">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="contributing/structure.html">Contributing</a></li><li><span aria-current="page">Project Structure</span></li></ol></nav>
+
+          <article class="content">
+            <header class="content-header">
+         <h1 class="content-title">Project Structure</h1>
+         <p class="content-description">Directory layout — python/, src/, include/, tests/, benchmarks/, docs/.</p>
+       </header>
+            <div class="content-body">
+              <p>Zedda’s repository is organised so that each concern has a clear home.</p>
+<pre class="hljs code-block-pre" tabindex="0"><code>Zedda/
+├── .clang-format              # C++17 Google-based, 4-space indent, 100-col
+├── .coveragerc                # pytest-cov config (source=python/zedda, fail_under=55)
+├── .github/                   # CI workflows, issue templates, CODEOWNERS
+├── .gitmodules                # nanobind + thread-pool submodules
+├── .pre-commit-config.yaml    # ruff, mypy, clang-format hooks
+├── CHANGELOG.md               # Keep-a-Changelog format
+├── CITATION.cff               # cff-version 1.2.0
+├── CMakeLists.txt             # 286 lines — root CMake build
+├── CODE_OF_CONDUCT.md         # Contributor Covenant 2.1
+├── CONTRIBUTING.md            # Dev setup, project structure, coding standards
+├── Dockerfile                 # Multi-stage builder + runtime (~200MB)
+├── LICENSE                    # MIT
+├── README.md                  # Project overview
+├── RELEASING.md               # 6-step release process + hotfix flow
+├── SECURITY.md                # Supported versions + 4-tier SLA
+├── THIRD_PARTY_NOTICES.md     # 7 dependencies with versions/licenses/URLs
+├── bump.py                    # Version-bump helper (0.4.7 → 0.4.8)
+├── pyproject.toml             # scikit-build-core backend
+├── benchmarks/
+│   └── bench_main.cpp         # 303 lines — synthetic 31-col CSV timing
+├── conda-recipe/
+│   └── meta.yaml              # conda-forge-style recipe (version 0.4.5 — stale)
+├── docs/                      # Existing markdown docs
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   ├── GETTING_STARTED.md
+│   ├── GUIDE.md
+│   ├── logo.png               # light-mode logo
+│   ├── logo-dark.png          # dark-mode logo
+│   └── images/                # demo screenshots (orphaned — not referenced)
+├── examples/
+│   └── titanic_quickstart.ipynb
+├── extern/                    # git submodules
+│   ├── nanobind/              # C++ → Python bindings
+│   └── thread-pool/           # BS::thread_pool (also vendored at include/zedda/)
+├── include/zedda/             # Public C++ headers
+│   ├── arrow_profiler.hpp
+│   ├── simd_scanner.hpp
+│   ├── hyperloglog.hpp
+│   ├── profile_result.hpp
+│   ├── parsing_utils.hpp
+│   ├── correlation_engine.hpp
+│   ├── stream_reader.hpp
+│   ├── mmap_reader.hpp
+│   ├── profile_builder.hpp
+│   ├── column_accumulator.hpp
+│   ├── BS_thread_pool.hpp     # vendored third-party
+│   └── fast_float/            # vendored third-party v8.0.0
+├── python/zedda/              # Python package
+│   ├── __init__.py            # ~4,300 lines — public API + Rich rendering
+│   ├── cli.py                 # ~550 lines — Typer CLI with 11 commands
+│   ├── report.py              # ~870 lines — HTML report generator
+│   ├── ai_insights.py         # 47 lines — get_insights() for --ai
+│   ├── _constants.py          # 91 lines — Arrow sizes, ASK allowlists, AI config
+│   ├── _format.py             # 95 lines — formatting helpers
+│   ├── _warnings.py           # 181 lines — issue detection
+│   ├── _resolve.py            # 103 lines — input resolution
+│   ├── _scan.py               # 174 lines — count_lines + scan_arrow
+│   ├── _compare.py            # 199 lines — schema diff, distribution shift
+│   ├── _ml_ready.py           # 199 lines — ML readiness scoring
+│   ├── _fix.py                # 130 lines — fix-code generation
+│   ├── _clean.py              # 213 lines — backup, cleaning, audit, undo
+│   ├── _merge.py              # 93 lines — schema check, combine
+│   ├── _ask.py                # 176 lines — offline patterns
+│   └── py.typed               # PEP 561 marker
+├── src/
+│   ├── bindings/
+│   │   └── bindings.cpp       # 127 lines — NB_MODULE(fasteda_core)
+│   └── core/
+│       ├── arrow_profiler.cpp # 485 lines — Arrow C Data Interface consumer
+│       ├── mmap_reader.cpp    # 221 lines — POSIX + Win32 mmap
+│       ├── profile_builder.cpp# 796 lines — multi-threaded orchestrator
+│       ├── simd_scanner.cpp   # 324 lines — AVX2/AVX-512 + dispatch
+│       └── stream_reader.cpp  # 758 lines — CSV streaming engine
+└── tests/
+    ├── cpp/                   # 9 C++ test executables
+    ├── python/                # 17 pytest files
+    ├── fuzz/
+    │   └── fuzz_csv_parser.cpp # libFuzzer harness
+    ├── test_phase3.py         # integration smoke test
+    └── test_hotfix_0_4_5.py   # regression tests for v0.4.5 hotfixes
+</code></pre>
+<h2 id="key-files-at-a-glance" tabindex="-1"><a class="header-anchor" href="#key-files-at-a-glance" aria-hidden="true">#</a> Key files at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Lines</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>python/zedda/__init__.py</code></td>
+<td>~4,300</td>
+<td>Public Python API + Rich rendering layer</td>
+</tr>
+<tr>
+<td><code>python/zedda/cli.py</code></td>
+<td>~550</td>
+<td>Typer CLI with 11 commands</td>
+</tr>
+<tr>
+<td><code>python/zedda/report.py</code></td>
+<td>~870</td>
+<td>HTML report generator</td>
+</tr>
+<tr>
+<td><code>src/core/profile_builder.cpp</code></td>
+<td>796</td>
+<td>Multi-threaded orchestrator</td>
+</tr>
+<tr>
+<td><code>src/core/stream_reader.cpp</code></td>
+<td>758</td>
+<td>CSV streaming engine</td>
+</tr>
+<tr>
+<td><code>src/core/arrow_profiler.cpp</code></td>
+<td>485</td>
+<td>Arrow C Data Interface consumer</td>
+</tr>
+<tr>
+<td><code>src/core/simd_scanner.cpp</code></td>
+<td>324</td>
+<td>AVX2 / AVX-512 + dispatch</td>
+</tr>
+<tr>
+<td><code>src/core/mmap_reader.cpp</code></td>
+<td>221</td>
+<td>POSIX + Win32 mmap</td>
+</tr>
+<tr>
+<td><code>src/bindings/bindings.cpp</code></td>
+<td>127</td>
+<td>nanobind NB_MODULE(fasteda_core)</td>
+</tr>
+<tr>
+<td><code>CMakeLists.txt</code></td>
+<td>286</td>
+<td>Root CMake build</td>
+</tr>
+</tbody>
+</table>
+<h2 id="where-things-live" tabindex="-1"><a class="header-anchor" href="#where-things-live" aria-hidden="true">#</a> Where things live</h2>
+<ul>
+<li><strong>Adding a new public Python function?</strong> Put it in <code>python/zedda/__init__.py</code> and add it to <code>__all__</code>. Delegate the heavy logic to a new <code>python/zedda/_your_module.py</code>.</li>
+<li><strong>Adding a new CLI command?</strong> Add a <code>@app.command()</code> function in <code>python/zedda/cli.py</code>.</li>
+<li><strong>Adding a new C++ header?</strong> Put it in <code>include/zedda/your_header.hpp</code> in namespace <code>zedda</code>. Add the source file in <code>src/core/your_header.cpp</code> and add it to <code>FASTEDA_SOURCES</code> in <code>CMakeLists.txt</code>.</li>
+<li><strong>Adding a new C++ test?</strong> Put it in <code>tests/cpp/test_your_thing.cpp</code> and register it with <code>add_test()</code> in <code>CMakeLists.txt</code> (CI-C3).</li>
+<li><strong>Adding a new Python test?</strong> Put it in <code>tests/python/test_your_thing.py</code>. pytest discovers it automatically.</li>
+</ul>
+<h2 id="audit-fix-provenance" tabindex="-1"><a class="header-anchor" href="#audit-fix-provenance" aria-hidden="true">#</a> Audit-fix provenance</h2>
+<p>The codebase is heavily annotated with audit-fix identifiers (e.g. <code>FIX P-C1</code>, <code>FIX C-H1</code>, <code>FIX CI-M20</code>, <code>SEC-P02</code>, <code>ISS-016</code>, <code>Batch 7</code>). These appear in comments throughout <code>__init__.py</code>, <code>CMakeLists.txt</code>, workflow files, and test files.</p>
+<p><code>tests/python/test_audit_regression.py</code> is structured as a 1:1 mapping between these finding IDs and test classes (<code>TestPathTraversalPC1</code>, <code>TestFixAllNullPC3</code>, <code>TestCleanDataFramePC4</code>, etc.). When fixing a new audit issue, follow the same convention.</p>
+<h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See also</h2>
+<ul>
+<li><a href="contributing/setup.html">Development Setup</a> — how to build and test.</li>
+<li><a href="contributing/standards.html">Coding Standards</a> — ruff, mypy, clang-format.</li>
+<li><a href="architecture.html">Architecture</a> — how the pieces fit together at runtime.</li>
+</ul>
+
+            </div>
+
+            <nav class="prev-next" aria-label="Pagination"><a href="contributing/standards.html" class="prev-next-card prev-next-card--prev">
+      <span class="prev-next-label">Previous</span>
+      <span class="prev-next-title">Coding Standards</span>
+    </a><a href="contributing/security.html" class="prev-next-card prev-next-card--next">
+      <span class="prev-next-label">Next</span>
+      <span class="prev-next-title">Security</span>
+    </a></nav>
+
+            <div class="content-footer-meta">
+              <a href="https://github.com/Zedda-Labs/Zedda/blob/main/static-src/content/contributing/structure.md" target="_blank" rel="noopener noreferrer" class="edit-github-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Edit this page on GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <aside class="toc-wrapper" aria-label="Table of contents">
+          <nav class="toc" aria-label="On this page">
+  <p class="toc-title">On this page</p>
+  <ul class="toc-list">
+    <li class="toc-item toc-item--h2"><a href="#key-files-at-a-glance" class="toc-link"># Key files at a glance</a></li>
+    <li class="toc-item toc-item--h2"><a href="#where-things-live" class="toc-link"># Where things live</a></li>
+    <li class="toc-item toc-item--h2"><a href="#audit-fix-provenance" class="toc-link"># Audit-fix provenance</a></li>
+    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link"># See also</a></li>
+  </ul>
+</nav>
+
+        </aside>
+      </div>
+
+      <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="footer-copyright">© 2026 Zedda Labs</span>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://github.com/Zedda-Labs/Zedda" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
+          </div>
+          <div class="footer-right">
+            <span class="footer-version">v0.4.8</span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Search dialog -->
+  <div class="search-modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="search-modal-backdrop" data-close-search></div>
+    <div class="search-modal-panel">
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" class="search-input" id="search-input" placeholder="Search the documentation…" aria-label="Search query" autocomplete="off" spellcheck="false">
+        <kbd class="search-input-kbd">Esc</kbd>
+      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+        <div class="search-results-empty">Start typing to search…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/main.js" defer></script>
+</body>
+</html>

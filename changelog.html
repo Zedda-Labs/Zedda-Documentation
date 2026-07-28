@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="./">
+  <meta name="description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta name="generator" content="Zedda docs static generator">
+
+  <!-- Production Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://pypistats.org https://api.pepy.tech; img-src 'self' data: https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+  <!-- SEO & Canonical Links -->
+  <link rel="canonical" href="https://zedda.io/changelog.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="alternate icon" href="assets/logo-dark.png">
+  <title>Changelog — Zedda Docs</title>
+
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:title" content="Changelog — Zedda Docs">
+  <meta property="og:description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedda.io/changelog.html">
+  <meta property="og:site_name" content="Zedda">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Zeddalabs">
+  <meta name="twitter:creator" content="@Zeddalabs">
+  <meta name="twitter:title" content="Changelog — Zedda Docs">
+  <meta name="twitter:description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Zedda",
+    "operatingSystem": "Linux, macOS, Windows",
+    "applicationCategory": "DeveloperApplication",
+    "programmingLanguage": ["Python", "C++"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "url": "https://github.com/Zedda-Labs/Zedda",
+      "email": "zeddalabs@gmail.com",
+      "sameAs": [
+        "https://x.com/Zeddalabs",
+        "https://www.linkedin.com/company/zedda-labs/",
+        "https://pypi.org/project/zedda"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Prevent theme flash: set theme class before paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("zedda-theme");
+        var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || "system";
+        var isDark = theme === "dark" || (theme === "system" && sysDark);
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.toggle("dark", isDark);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-doc" data-current-id="changelog">
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Top navigation bar -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+          <span class="brand-version">v0.4.8</span>
+        </a>
+      </div>
+
+      <div class="topbar-center">
+        <nav class="topbar-nav-links" aria-label="Main Navigation">
+          <a href="introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="api/overview.html" class="topbar-nav-link">API</a>
+          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <button class="search-trigger" id="search-trigger" aria-label="Search documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-trigger-text">Search…</span>
+          <kbd class="search-trigger-kbd">/</kbd>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark theme">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://github.com/Zedda-Labs/Zedda" class="topbar-link" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+
+  <!-- Main layout: sidebar + content + toc -->
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Documentation sidebar">
+      <script>(function(){try{var s=document.currentScript.parentElement,v=sessionStorage.getItem("zedda-sidebar-scroll");if(v&&v!=="0")s.scrollTop=parseInt(v,10);}catch(e){}})();</script>
+      <div class="sidebar-inner">
+        <nav class="sidebar-nav" aria-label="Documentation">
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Getting Started</summary>
+    <div class="sidebar-group-children">
+  <a href="introduction.html" class="sidebar-link" style="--depth: 1" aria-current="false">Introduction</a>
+  <a href="installation.html" class="sidebar-link" style="--depth: 1" aria-current="false">Installation</a>
+  <a href="quickstart.html" class="sidebar-link" style="--depth: 1" aria-current="false">Quick Start</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Guides</summary>
+    <div class="sidebar-group-children">
+  <a href="guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
+  <a href="guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
+  <a href="guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
+  <a href="guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
+  <a href="guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
+  <a href="guides/reports.html" class="sidebar-link" style="--depth: 1" aria-current="false">HTML Reports</a>
+    </div>
+  </details>
+  <a href="cli.html" class="sidebar-link" style="--depth: 0" aria-current="false">CLI Reference</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Python API</summary>
+    <div class="sidebar-group-children">
+  <a href="api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="api/scan.html" class="sidebar-link" style="--depth: 1" aria-current="false">scan()</a>
+  <a href="api/profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">profile()</a>
+  <a href="api/compare.html" class="sidebar-link" style="--depth: 1" aria-current="false">compare()</a>
+  <a href="api/ml-ready.html" class="sidebar-link" style="--depth: 1" aria-current="false">ml_ready()</a>
+  <a href="api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
+  <a href="api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
+  <a href="api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
+  <a href="api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
+  <a href="api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
+  <a href="api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
+  <a href="api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
+  <a href="api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
+    </div>
+  </details>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">C++ API</summary>
+    <div class="sidebar-group-children">
+  <a href="cpp-api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="cpp-api/column-accumulator.html" class="sidebar-link" style="--depth: 1" aria-current="false">ColumnAccumulator</a>
+  <a href="cpp-api/correlation-engine.html" class="sidebar-link" style="--depth: 1" aria-current="false">CorrelationEngine</a>
+  <a href="cpp-api/profile-result.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileResult</a>
+  <a href="cpp-api/hyperloglog.html" class="sidebar-link" style="--depth: 1" aria-current="false">HyperLogLog</a>
+  <a href="cpp-api/mmap-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">MmapFile</a>
+  <a href="cpp-api/simd-scanner.html" class="sidebar-link" style="--depth: 1" aria-current="false">SimdScanner</a>
+  <a href="cpp-api/stream-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">CsvStreamReader</a>
+  <a href="cpp-api/profile-builder.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileBuilder</a>
+  <a href="cpp-api/arrow-profiler.html" class="sidebar-link" style="--depth: 1" aria-current="false">ArrowProfiler</a>
+  <a href="cpp-api/parsing-utils.html" class="sidebar-link" style="--depth: 1" aria-current="false">Parsing Utils</a>
+    </div>
+  </details>
+  <a href="configuration.html" class="sidebar-link" style="--depth: 0" aria-current="false">Configuration</a>
+  <a href="architecture.html" class="sidebar-link" style="--depth: 0" aria-current="false">Architecture</a>
+  <a href="examples.html" class="sidebar-link" style="--depth: 0" aria-current="false">Examples</a>
+  <a href="benchmarks.html" class="sidebar-link" style="--depth: 0" aria-current="false">Benchmarks</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Contributing</summary>
+    <div class="sidebar-group-children">
+  <a href="contributing/setup.html" class="sidebar-link" style="--depth: 1" aria-current="false">Development Setup</a>
+  <a href="contributing/standards.html" class="sidebar-link" style="--depth: 1" aria-current="false">Coding Standards</a>
+  <a href="contributing/structure.html" class="sidebar-link" style="--depth: 1" aria-current="false">Project Structure</a>
+  <a href="contributing/security.html" class="sidebar-link" style="--depth: 1" aria-current="false">Security</a>
+  <a href="contributing/releasing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Releasing</a>
+    </div>
+  </details>
+  <a href="changelog.html" class="sidebar-link sidebar-link--active" style="--depth: 0" aria-current="page">Changelog</a>
+  <a href="license.html" class="sidebar-link" style="--depth: 0" aria-current="false">License &amp; Notices</a>
+  <details class="sidebar-group sidebar-group--open" open>
+    <summary class="sidebar-group-title">Legal Policies</summary>
+    <div class="sidebar-group-children">
+  <a href="privacy.html" class="sidebar-link" style="--depth: 1" aria-current="false">Privacy Policy</a>
+  <a href="cookies.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cookie Policy</a>
+    </div>
+  </details>
+</nav>
+
+      </div>
+    </aside>
+
+    <main class="main" id="main" role="main">
+      <div class="main-inner">
+        <div class="main-content-area">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Changelog</span></li></ol></nav>
+
+          <article class="content">
+            <header class="content-header">
+         <h1 class="content-title">Changelog</h1>
+         <p class="content-description">All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.</p>
+       </header>
+            <div class="content-body">
+              <p>All notable changes to Zedda are documented in <a href="https://github.com/Zedda-Labs/Zedda/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer"><code>CHANGELOG.md</code></a> in <a href="https://keepachangelog.com/en/1.1.0/" target="_blank" rel="noopener noreferrer">Keep-a-Changelog</a> 1.1.0 format. This page mirrors that file.</p>
+<h2 id="unreleased" tabindex="-1"><a class="header-anchor" href="#unreleased" aria-hidden="true">#</a> [Unreleased]</h2>
+<p><em>No unreleased changes.</em></p>
+<h2 id="048-2026-07-25-pre-release-audit-cicd-hardening" tabindex="-1"><a class="header-anchor" href="#048-2026-07-25-pre-release-audit-cicd-hardening" aria-hidden="true">#</a> [0.4.8] — 2026-07-25 — Pre-Release Audit &amp; CI/CD Hardening</h2>
+<h3 id="fixed-release-cicd" tabindex="-1"><a class="header-anchor" href="#fixed-release-cicd" aria-hidden="true">#</a> Fixed — Release &amp; CI/CD</h3>
+<ul>
+<li><strong>Release Verification:</strong> Fixed tag version string stripping (<code>v0.4.8</code> → <code>0.4.8</code>) in <code>release.yml</code> post-publish verification step to ensure <code>pip install zedda==0.4.8</code> succeeds.</li>
+<li><strong>Cross-Platform Compatibility:</strong> Added <code>shell: bash</code> to PyPI propagation wait step in <code>release.yml</code> to resolve Windows runner execution failures.</li>
+<li><strong>Documentation:</strong> Updated test status badge URL in <code>README.md</code> to point to <code>ci.yml</code> (was 404 on <code>tests.yml</code>).</li>
+<li><strong>Version Alignment:</strong> Updated fallback version string in <code>report.py</code> to <code>0.4.8</code> and synced <code>CITATION.cff</code> to <code>0.4.8</code>.</li>
+<li><strong>Type Safety:</strong> Resolved mypy type check error on <code>cli.py:93</code>.</li>
+</ul>
+<h2 id="045-2026-07-15-audit-remediation-patch-release" tabindex="-1"><a class="header-anchor" href="#045-2026-07-15-audit-remediation-patch-release" aria-hidden="true">#</a> [0.4.5] — 2026-07-15 — Audit Remediation Patch Release</h2>
+<h3 id="security" tabindex="-1"><a class="header-anchor" href="#security" aria-hidden="true">#</a> Security</h3>
+<ul>
+<li><strong>CRITICAL (P-C1):</strong> Fixed path traversal in <code>scan(allowed_dir=...)</code>. The previous <code>str.startswith()</code> check let <code>/data/uploads_evil/x.csv</code> match <code>/data/uploads</code>. Now uses <code>Path.relative_to()</code> for proper containment.</li>
+<li><strong>(P-H1):</strong> Fixed <code>_ask_validate_path</code> blocked-root check using <code>Path.relative_to()</code> instead of <code>str.startswith()</code> (was over-blocking <code>/rootkit/x.csv</code>).</li>
+<li><strong>(P-H9/H10):</strong> <code>clean()</code> now validates backup and audit-trail paths to prevent path traversal via user-supplied <code>output</code>.</li>
+<li><strong>(D-1):</strong> Declared <code>requests&gt;=2.31</code> in <code>[ai]</code> extra — was imported but never declared, silently breaking AI support for every <code>[ai]</code> user.</li>
+<li><strong>(CI-C1):</strong> Removed <code>continue-on-error: true</code> from <code>publish_test</code> job — the TestPyPI→PyPI safety gate was non-functional.</li>
+<li><strong>(CI-C2):</strong> Fixed fuzz crash-artifact upload condition (<code>if: failure()</code> never fired because the fuzzer step had <code>continue-on-error: true</code>).</li>
+<li><strong>(CI-H1):</strong> SHA-pinned <code>pypa/gh-action-pypi-publish</code> (was floating <code>@release/v1</code>).</li>
+<li><strong>(CI-H3):</strong> Made dependency-review blocking (was advisory-only).</li>
+<li><strong>(CI-H4):</strong> Docker image now runs as non-root user (uid 1000).</li>
+</ul>
+<h3 id="fixed-c-correctness" tabindex="-1"><a class="header-anchor" href="#fixed-c-correctness" aria-hidden="true">#</a> Fixed — C++ correctness</h3>
+<ul>
+<li><strong>(C-H1):</strong> Pearson correlation switched from naive 5-sum formula to Welford-style online covariance. Numerically stable for any input scale (was catastrophically cancelling for values near 1e8+).</li>
+<li><strong>(C-H2):</strong> CSV parser in <code>profile_builder</code> now properly unescapes <code>&quot;&quot;</code> → <code>&quot;</code> inside quoted fields (was leaving both quotes in the string_view).</li>
+<li><strong>(C-H5):</strong> Arrow boolean/datetime/int8-16/uint32-64/float16 columns are now handled natively (were silently treated as all-null).</li>
+<li><strong>(C-H6):</strong> All-null Arrow columns are now skipped in the pair-accumulator loop (was reading garbage from <code>buffers[1]</code> and feeding into Pearson).</li>
+<li><strong>(C-H7):</strong> MSVC AVX-512 detection now includes <code>_xgetbv</code> OS XSAVE check; CMake uses <code>/arch:AVX512</code> (was <code>/arch:AVX2</code> which doesn’t define <code>__AVX512F__</code>).</li>
+<li><strong>(C-H8):</strong> <code>config_.has_header=false</code> is now honored in <code>profile_builder</code> (was silently dropping the first data row).</li>
+<li><strong>(C-H9):</strong> <code>config_.null_string</code> is now honored in <code>profile_builder</code> (was silently ignored — only hardcoded null markers were detected).</li>
+<li><strong>(C-H11):</strong> UTF-8 BOM is now skipped in both mmap and fgets paths (was prefixing the first column header with 3 garbage bytes).</li>
+<li><strong>(C-H12):</strong> Boolean parsing tightened to exact case-insensitive match (was matching “track”, “field”, “from”, etc. as TRUE).</li>
+<li><strong>(C-M9):</strong> Only strips trailing quote if field was actually quoted.</li>
+</ul>
+<h3 id="fixed-python-correctness" tabindex="-1"><a class="header-anchor" href="#fixed-python-correctness" aria-hidden="true">#</a> Fixed — Python correctness</h3>
+<ul>
+<li><strong>(P-C2):</strong> <code>fix(apply=True)</code> now applies the same clip-at-99th-percentile fix shown in the displayed copy-paste code (was running <code>np.log1p()</code> instead — different schema, different semantics).</li>
+<li><strong>(P-C3):</strong> <code>fix(apply=True)</code> no longer crashes on all-null string columns (<code>Series.mode()</code> returns empty Series; <code>[0]</code> raised <code>IndexError</code>).</li>
+<li><strong>(P-C4):</strong> <code>clean()</code> no longer writes output to a deleted temp file when input is a DataFrame and <code>output=None</code> (was silent data loss).</li>
+<li><strong>(P-C5):</strong> <code>scan()</code> now preserves the original traceback (<code>from e</code> instead of <code>from None</code>).</li>
+<li><strong>(P-H5):</strong> Six public APIs (<code>compare</code>, <code>ml_ready</code>, <code>warnings</code>, <code>fix</code>, <code>clean</code>, <code>merge</code>) now raise <code>ZeddaError</code> instead of <code>return None</code> when Rich is missing.</li>
+<li><strong>(P-H6):</strong> <code>merge()</code> now skips files that fail to scan with a warning, instead of aborting the entire merge.</li>
+<li><strong>(P-H11):</strong> <code>clean()</code> no longer fabricates a fake “after” quality score on rescan failure.</li>
+<li><strong>(P-H12/H13):</strong> <code>ask()</code> return type now consistent with docstring; exception path no longer risks <code>NameError</code> on <code>msg</code>.</li>
+<li><strong>(P-M7/M8):</strong> <code>_count_lines</code> returns <code>None</code> on error; fixes off-by-one for files without trailing newline.</li>
+</ul>
+<h3 id="fixed-cicd" tabindex="-1"><a class="header-anchor" href="#fixed-cicd" aria-hidden="true">#</a> Fixed — CI/CD</h3>
+<ul>
+<li><strong>(CI-C3):</strong> Added <code>enable_testing()</code> + <code>add_test()</code> to <code>CMakeLists.txt</code> — <code>ctest</code> now discovers all 9 C++ tests (was running zero, giving false sense of coverage).</li>
+<li><strong>(CI-H5):</strong> <code>test_hyperloglog</code> is now run in CI (was built but never executed).</li>
+<li><strong>(CI-H6):</strong> <code>tests/test_hotfix_0_4_5.py</code> is now run in CI.</li>
+<li><strong>(CI-H7):</strong> Wheels are now smoke-tested via <code>CIBW_TEST_COMMAND</code> before PyPI publish.</li>
+<li><strong>(CI-M1/M2):</strong> Test matrix now includes Python 3.10/3.11 and macos-13 (Intel).</li>
+<li><strong>(CI-M3):</strong> Migrated <code>manylinux2014</code> → <code>manylinux_2_28</code> (CentOS 7 EOL).</li>
+<li><strong>(CI-M10):</strong> Collapsed 6-wheel STABLE_ABI matrix to single <code>cp39</code> (abi3 covers 3.9+).</li>
+<li><strong>(CI-M19):</strong> Split <code>publish_pypi</code> (id-token only) from <code>github_release</code> (contents:write).</li>
+<li><strong>(CI-M20):</strong> Renamed CMake project <code>fasteda</code>→<code>zedda</code>, version <code>0.1.0</code>→<code>0.4.5</code>.</li>
+</ul>
+<h3 id="changed" tabindex="-1"><a class="header-anchor" href="#changed" aria-hidden="true">#</a> Changed</h3>
+<ul>
+<li><strong>(D-2):</strong> <code>[ai]</code> extra now declares <code>requests</code> instead of the unused <code>openai</code> SDK.</li>
+<li><strong>(P-M21/M22):</strong> <code>warnings()</code> and <code>fix()</code> now accept <code>sample_size</code> parameter for API consistency with <code>profile</code>/<code>scan</code>/<code>compare</code>.</li>
+<li><strong>(M-22):</strong> <code>[dev]</code> extra now includes <code>ruff</code>, <code>mypy</code>, <code>types-requests</code>, <code>pre-commit</code>, <code>cibuildwheel</code> (was installed ad-hoc in CI).</li>
+<li><strong>(M-24):</strong> AI endpoint is now configurable via <code>ZEDDA_AI_ENDPOINT</code> env var.</li>
+</ul>
+<div class="callout callout--warning">
+      <div class="callout-title">Warning</div>
+      <p><strong>Note on M-24:</strong> While the <code>ZEDDA_AI_ENDPOINT</code> env var is read into the <code>AI_ENDPOINT</code> constant, the actual <code>_ask_zedda_ai()</code> call site hardcodes the Groq URL. This is an incomplete fix tracked for a future release.</p>
+
+    </div>
+<h3 id="refactor" tabindex="-1"><a class="header-anchor" href="#refactor" aria-hidden="true">#</a> Refactor</h3>
+<ul>
+<li><strong>(Batch 7):</strong> Began splitting the 4,287-line <code>__init__.py</code> into focused modules: <code>_constants.py</code>, <code>_format.py</code>, <code>_warnings.py</code>, <code>_scan.py</code>. Public API unchanged.</li>
+<li><strong>(C-L5):</strong> <code>ArrowProfiler</code> destructor declared <code>= default</code> (was out-of-line empty).</li>
+<li><strong>(C-L12):</strong> <code>~CsvStreamReader</code> marked <code>noexcept</code>.</li>
+<li><strong>(C-L18):</strong> <code>pair_accs_</code> memory released after <code>finalize()</code> (was holding 64MB).</li>
+<li><strong>(C-M2):</strong> <code>get_active_scanner</code> cached via <code>std::call_once</code> (was calling <code>std::getenv</code> on every invocation).</li>
+<li><strong>(C-M6):</strong> <code>profile_builder</code> diagnostics routed to <code>stderr</code> (was corrupting stdout).</li>
+<li><strong>(C-M10):</strong> 15 <code>ColumnProfile</code> fields exposed as read-only via <code>def_ro</code>.</li>
+<li><strong>(C-M8/C-L6):</strong> Type-promotion lattice in <code>ColumnAccumulator::merge</code> — INTEGER + FLOAT → FLOAT, STRING wins over numeric. Previously per-thread type detection produced inconsistent merged types.</li>
+<li><strong>(L-1):</strong> Removed redundant <code>Path as _P</code> re-import in <code>_resolve_input</code>.</li>
+<li><strong>(L-7):</strong> <code>__all__</code> now includes <code>export</code> alias.</li>
+<li><strong>(L-8):</strong> Removed trailing non-code comments at EOF.</li>
+<li><strong>(L-19):</strong> <code>ask()</code> uses module-level <code>time</code> import (was re-imported as <code>_time</code>).</li>
+</ul>
+<h3 id="tests" tabindex="-1"><a class="header-anchor" href="#tests" aria-hidden="true">#</a> Tests</h3>
+<ul>
+<li><strong>(Batch 11):</strong> Added <code>tests/python/test_audit_regression.py</code> with 32 test cases covering all Critical/High audit fixes: path traversal, BOM handling, boolean parsing, fix-apply divergence, clean data loss, merge skip-on-fail, traceback preservation, ctest registration, CMake project name, thread-safe cache, count_lines edge cases, sample_size API consistency, extracted modules.</li>
+<li><strong>(Batch 17):</strong> C-M1 — pair_accs packed into upper-triangle layout, halving memory (64 MB → 32 MB at N=1000; 512 MB → 256 MB with 8 threads). Also fixes C-L3 (merge loop now iterates N*(N-1)/2 instead of N²).</li>
+<li><strong>(Batch 18):</strong> C-H10 — Embedded newlines in quoted CSV fields now handled correctly in the single-threaded CsvStreamReader path (RFC 4180 §6). The parallel ProfileBuilder path still has this limitation (C-M5 deferred).</li>
+<li><strong>(Batch 19):</strong> P-M29 — <code>clean()</code> caches <code>mode()</code> result (was calling twice). P-M30 — <code>_ask_pattern_c</code> parquet/feather reads capped at 5M rows (was uncapped). C-M3 — SIMD scanner now warns when a row has more fields than expected.</li>
+<li><strong>(Batch 20):</strong> Added 7 property-based tests with hypothesis for CSV parser fuzzing (random valid CSV generation, BOM, trailing newline, quoted fields).</li>
+<li><strong>(Batch 22):</strong> C-M5/C-H10 — Parallel ProfileBuilder path now handles embedded newlines in quoted fields (RFC 4180 §6). After fgets returns a line, checks for unterminated quotes and keeps reading until the quote closes. Both single-threaded and parallel paths now handle embedded newlines.</li>
+<li><strong>(Batch 23):</strong> C-L7/C-L11 — All null markers (NA, NaN, N/A, null, none, #N/A) are now case-insensitive in both <code>fast_is_null()</code> and <code>is_null_sv()</code>. Previously “NaN”/“nan” was case-insensitive but “null”/“NULL”/“None”/“none” were exact-case only — “Null”, “nULL”, “NONE” were not detected as null.</li>
+<li><strong>(Batch 24):</strong> P-M19 — <code>_ask_pattern_d</code> regexes hoisted to module scope (was recompiling 7 regexes on every call).</li>
+<li><strong>(Batch 25):</strong> <a href="http://API.md" target="_blank" rel="noopener noreferrer">API.md</a> documentation corrected: <code>zd.profile()</code> return type fixed (None → DatasetProfile), <code>zd.fix()</code> added (was missing entirely), <code>zd.ask()</code> return type matches actual behavior, all 22 <code>ColumnProfile</code> attributes documented (was 8), <code>CorrelationResult</code> and <code>ZeddaError</code> documented.</li>
+<li><strong>(Batch 27-32):</strong> P-M1 RESOLVED — Extracted 10 focused modules from <code>__init__.py</code>: <code>_constants</code>, <code>_format</code>, <code>_warnings</code>, <code>_scan</code>, <code>_resolve</code>, <code>_compare</code>, <code>_ml_ready</code>, <code>_fix</code>, <code>_merge</code>, <code>_clean</code>, <code>_ask</code>. Total 1,377 lines of pure logic extracted, all testable in isolation. The Rich rendering layer and public API orchestration remain in <code>__init__.py</code>. All 80 Medium-severity findings are now resolved.</li>
+<li><strong>(Batch 34-38):</strong> Added 60 unit tests for all extracted modules (<code>test_extracted_modules.py</code>). Uses mock ColumnProfile/DatasetProfile objects so tests don’t need the C++ core. Covers: schema diff, distribution shift (including negative mean M-32), verdict computation, ML readiness scoring, fix code generation (P-C2 clip not log1p), merge overlap (P-H7 O(N)), clean backup/audit (P-H9/H10), ask pattern matching, format helpers, and code injection prevention (SEC-P01).</li>
+<li><strong>(Batch 40-41):</strong> <code>_quality_score()</code> and <code>_quality_score_display()</code> now delegate to shared helpers (<code>_is_outlier_column</code>, <code>_render_quality_bar</code>, <code>_quality_label</code>). FIX M-36: <code>original_cols=0</code> no longer disables the dropped-column penalty. FIX M-11: score clamped to <code>[0, 100]</code>.</li>
+<li><strong>(Batch 42):</strong> Added 3 C++ tests to <code>test_profile_builder.cpp</code>: BOM handling (C-H11), embedded newlines in parallel path (C-H10), type promotion int→float (C-M8). All pass.</li>
+<li><strong>(Batch 44):</strong> Coverage measurement: <code>pytest-cov</code> added to <code>[dev]</code> extras, <code>.coveragerc</code> config, CI runs with <code>--cov</code>, Codecov badge in README. First measurement: 58.16% (target: 70% for v0.6.0).</li>
+<li><strong>(Batch 45):</strong> P-M20 (redundant dedup in ml_ready), P-M18 (useless <code>result = None</code> in ask), P-M37 (negative <code>coerced_count</code> in clean).</li>
+<li><strong>(Batch 46):</strong> <code>.clang-format</code> file added (C++17, Google-based, 4-space indent, 100-col limit). Pre-commit clang-format hook now has a config.</li>
+<li><strong>(Batch 48-50):</strong> 27 new unit tests for extracted modules. Coverage improved from 58.2% to 61.5%. Key improvements: <code>_clean.py</code> 30%→97%, <code>_format.py</code> 56%→95%, <code>_fix.py</code> 58%→79%, <code>_warnings.py</code> 78%→93%. Total tests: 166 (was 139).</li>
+<li><strong>(Batch 52-58):</strong> 23 more unit tests + L-22/L-23/L-24/L-25 fixes. <code>_ml_ready.py</code> reaches 100% coverage, <code>_ask.py</code> reaches 97.3%. json/shutil moved to module level (L-22), <code>merge()</code> exception chain preserved (L-23), <code>compare()</code> counters documented (L-24), <code>collect_warnings()</code> added as public API (L-25). Total tests: 189 (was 166). Coverage: 63.0%.</li>
+<li><strong>(Batch 61-63):</strong> 33 more tests + L-20 fix. <code>_resolve.py</code> 21%→93%, <code>_scan.py</code> count_lines 0%→100%, <code>cli.py</code> 0%→52% (10 CLI smoke tests). L-20: <code>_ask_zedda_ai</code> except cascade now includes exception type. Total tests: 222 (was 189). Coverage: 66.9%.</li>
+</ul>
+<h2 id="046-2026-07-10" tabindex="-1"><a class="header-anchor" href="#046-2026-07-10" aria-hidden="true">#</a> [0.4.6] — 2026-07-10</h2>
+<h3 id="fixed" tabindex="-1"><a class="header-anchor" href="#fixed" aria-hidden="true">#</a> Fixed</h3>
+<ul>
+<li><strong>Installation:</strong> Bumped the <code>pyarrow</code> upper bound constraint from <code>&lt;20</code> to <code>&lt;27</code> (allowing up to pyarrow 26.x). This resolves a severe installation failure on Python 3.14 (and newer) where pip would fall back to a source build due to missing wheels in older pyarrow versions.</li>
+</ul>
+<h3 id="changed-1" tabindex="-1"><a class="header-anchor" href="#changed-1" aria-hidden="true">#</a> Changed</h3>
+<ul>
+<li><strong>BREAKING CHANGE:</strong> <code>pyarrow</code> is no longer a core dependency, making the base installation significantly faster and smaller for CSV-only users. If you rely on Parquet files, Arrow IPC, or pandas DataFrame inputs, you must now explicitly install the parquet extra: <code>pip install &quot;zedda[parquet]&quot;</code>.</li>
+</ul>
+<h2 id="045-2026-07-09" tabindex="-1"><a class="header-anchor" href="#045-2026-07-09" aria-hidden="true">#</a> [0.4.5] — 2026-07-09</h2>
+<h3 id="fixed-1" tabindex="-1"><a class="header-anchor" href="#fixed-1" aria-hidden="true">#</a> Fixed</h3>
+<ul>
+<li><strong>BUG 1:</strong> Fixed an issue where <code>zd.scan(df)</code> and <code>zd.profile(df)</code> would silently swallow <code>ImportError</code> if <code>pyarrow</code> was missing, incorrectly throwing an <code>Unsupported input type</code> error.</li>
+<li><strong>BUG 2:</strong> Fixed <code>zd.clean()</code> and <code>zd.fix(apply=True)</code> crashing on numeric columns containing non-numeric garbage values by coercing them using <code>pd.to_numeric(errors='coerce')</code> prior to aggregations.</li>
+<li><strong>BUG 3:</strong> Enforced UTF-8 encoding on Windows (<code>sys.stdout.reconfigure</code>) and replaced mojibake characters in <code>zd.fix()</code> output with proper Unicode bullets and arrows.</li>
+<li><strong>BUG 4:</strong> Replaced manual OSC-8 ANSI sequences in <code>zd.report()</code> with Rich’s native Text markup to avoid leaking raw terminal escape codes in Jupyter notebooks.</li>
+<li><strong>BUG 6:</strong> Removed extraneous trailing newlines from several <code>console.print()</code> calls to fix excessive spacing in the terminal UI.</li>
+</ul>
+<h3 id="changed-2" tabindex="-1"><a class="header-anchor" href="#changed-2" aria-hidden="true">#</a> Changed</h3>
+<ul>
+<li><strong>BUG 5 (Minor Breaking Change):</strong> <code>zd.profile()</code> now returns <code>None</code> instead of <code>DatasetProfileWrapper</code> to prevent double-printing the report in Jupyter cells. Programmatic users should use <code>zd.scan()</code> instead.</li>
+</ul>
+<div class="callout callout--note">
+      <div class="callout-title">Note</div>
+      <p>The CHANGELOG notes <code>profile()</code> returns <code>None</code> here, but the current source code (v0.4.8) returns <code>DatasetProfile</code> from both <code>scan()</code> and <code>profile()</code>. The “return None” behaviour was reverted at some point after 0.4.5.</p>
+
+    </div>
+<h2 id="044-2026-07-05" tabindex="-1"><a class="header-anchor" href="#044-2026-07-05" aria-hidden="true">#</a> [0.4.4] — 2026-07-05</h2>
+<h3 id="added" tabindex="-1"><a class="header-anchor" href="#added" aria-hidden="true">#</a> Added</h3>
+<ul>
+<li><strong><code>zd.clean()</code></strong>: AI-powered automatic data cleaning (drops sparse columns, imputes missing values, removes IDs).</li>
+<li><strong><code>zd.merge()</code></strong>: Intelligent dataset merging with automatic ID inference and semantic alignment.</li>
+<li><strong><code>zd.warnings()</code></strong>: Clean, structured list of every data quality warning found in the dataset.</li>
+<li>Enterprise Dependabot configuration with intelligent grouping.</li>
+<li>CodeQL security scanning (C++ + Python).</li>
+<li>Dependency review workflow (blocks vulnerable PRs).</li>
+<li>Release drafter for automated changelog generation.</li>
+<li>Multi-stage Dockerfile (image size ~1.5 GB → ~200 MB).</li>
+<li>GHCR publishing alongside Docker Hub.</li>
+<li>Docker smoke test before publish.</li>
+<li><code>.pre-commit-config.yaml</code> with Ruff hooks.</li>
+<li><code>CODEOWNERS</code> for automatic reviewer assignment.</li>
+<li><code>.dockerignore</code> for build context optimization.</li>
+<li>Ruff linting &amp; formatting configuration.</li>
+<li>mypy type checking configuration.</li>
+<li>ccache for C++ test builds.</li>
+<li>Cross-platform CI matrix (Linux, macOS, Windows).</li>
+<li>Python version matrix (3.9, 3.12, 3.13).</li>
+<li>CMake-driven C++ tests (all 7 test binaries).</li>
+<li>Concurrency groups on all workflows.</li>
+<li>Timeout limits on all CI jobs.</li>
+</ul>
+<h3 id="changed-3" tabindex="-1"><a class="header-anchor" href="#changed-3" aria-hidden="true">#</a> Changed</h3>
+<ul>
+<li><code>tests.yml</code>: Complete rewrite with lint, typecheck, test-cpp, test-python jobs.</li>
+<li><code>build_wheels.yml</code>: <code>publish_pypi</code> now depends on <code>publish_test</code> (safety gate).</li>
+<li><code>docker_publish.yml</code>: Added GHCR, smoke test, multi-arch on tag pushes only.</li>
+<li><code>.gitignore</code>: Deduplicated (was doubled) and added missing entries.</li>
+</ul>
+<h3 id="fixed-2" tabindex="-1"><a class="header-anchor" href="#fixed-2" aria-hidden="true">#</a> Fixed</h3>
+<ul>
+<li>Fixed bug where <code>zd.fix()</code> applied <code>fillna</code> instead of <code>drop</code> to string columns &gt;50% null.</li>
+<li>Fixed bug where <code>zd.profile()</code> smart warnings icons were failing to render due to <code>x/!/i</code> char mismatch.</li>
+<li>Fixed bug where <code>zd.compare()</code> gave <code>FAIL</code> for expected missing target columns in test data (now gives <code>REVIEW</code>).</li>
+<li>Production PyPI publish could proceed even if TestPyPI upload failed (C-05).</li>
+<li>Only 4 of 8 C++ test binaries were running in CI — switched to CMake-driven builds for all 8 assertion-based test binaries (C-06).</li>
+<li><code>.gitignore</code> contained duplicate content (W-DX-06).</li>
+</ul>
+<h2 id="020-2026-06-28" tabindex="-1"><a class="header-anchor" href="#020-2026-06-28" aria-hidden="true">#</a> [0.2.0] — 2026-06-28</h2>
+<div class="callout callout--note">
+      <div class="callout-title">Note</div>
+      <p>Versions 0.3.x were internal development releases with no public changelog entries. All features planned for 0.3.0 shipped in 0.4.0+.</p>
+
+    </div>
+<h3 id="added-1" tabindex="-1"><a class="header-anchor" href="#added-1" aria-hidden="true">#</a> Added</h3>
+<ul>
+<li>Arrow profiler for Parquet/Arrow file support.</li>
+<li>SIMD scanner with AVX2/AVX-512 runtime dispatch.</li>
+<li>Memory-mapped file reader (<code>mmap_reader.cpp</code>).</li>
+<li>Profile builder for structured report generation.</li>
+<li>Cross-platform wheel builds (Linux, macOS x86_64 + arm64, Windows).</li>
+<li>PyPI publishing via OIDC (no stored API tokens).</li>
+<li><code>zd.compare()</code> for dataset drift detection.</li>
+<li><code>zd.fix()</code> for auto-generated data cleaning code.</li>
+<li><code>zd.ml_ready()</code> for ML readiness assessment.</li>
+<li>CLI interface via Typer.</li>
+</ul>
+<h2 id="010-2026-06-15" tabindex="-1"><a class="header-anchor" href="#010-2026-06-15" aria-hidden="true">#</a> [0.1.0] — 2026-06-15</h2>
+<h3 id="added-2" tabindex="-1"><a class="header-anchor" href="#added-2" aria-hidden="true">#</a> Added</h3>
+<ul>
+<li>Initial release.</li>
+<li>C++17 streaming CSV parser.</li>
+<li>Basic statistical profiling (mean, median, std, min, max).</li>
+<li>Python bindings via nanobind.</li>
+<li><code>zd.profile()</code> and <code>zd.scan()</code> API.</li>
+</ul>
+<h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See also</h2>
+<ul>
+<li><a href="contributing/releasing.html">Releasing</a> — the release process.</li>
+<li><a href="https://github.com/Zedda-Labs/Zedda/releases" target="_blank" rel="noopener noreferrer">GitHub releases</a> — release notes on GitHub.</li>
+<li><a href="https://pypi.org/project/zedda/#history" target="_blank" rel="noopener noreferrer">PyPI</a> — every published version.</li>
+</ul>
+
+            </div>
+
+            <nav class="prev-next" aria-label="Pagination"><a href="contributing/releasing.html" class="prev-next-card prev-next-card--prev">
+      <span class="prev-next-label">Previous</span>
+      <span class="prev-next-title">Releasing</span>
+    </a><a href="license.html" class="prev-next-card prev-next-card--next">
+      <span class="prev-next-label">Next</span>
+      <span class="prev-next-title">License &amp; Notices</span>
+    </a></nav>
+
+            <div class="content-footer-meta">
+              <a href="https://github.com/Zedda-Labs/Zedda/blob/main/static-src/content/changelog.md" target="_blank" rel="noopener noreferrer" class="edit-github-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Edit this page on GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <aside class="toc-wrapper" aria-label="Table of contents">
+          <nav class="toc" aria-label="On this page">
+  <p class="toc-title">On this page</p>
+  <ul class="toc-list">
+    <li class="toc-item toc-item--h2"><a href="#unreleased" class="toc-link"># [Unreleased]</a></li>
+    <li class="toc-item toc-item--h2"><a href="#048-2026-07-25-pre-release-audit-cicd-hardening" class="toc-link"># [0.4.8] — 2026-07-25 — Pre-Release Audit &amp;amp; CI/CD Hardening</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-release-cicd" class="toc-link"># Fixed — Release &amp;amp; CI/CD</a></li>
+    <li class="toc-item toc-item--h2"><a href="#045-2026-07-15-audit-remediation-patch-release" class="toc-link"># [0.4.5] — 2026-07-15 — Audit Remediation Patch Release</a></li>
+    <li class="toc-item toc-item--h3"><a href="#security" class="toc-link"># Security</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-c-correctness" class="toc-link"># Fixed — C++ correctness</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-python-correctness" class="toc-link"># Fixed — Python correctness</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-cicd" class="toc-link"># Fixed — CI/CD</a></li>
+    <li class="toc-item toc-item--h3"><a href="#changed" class="toc-link"># Changed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#refactor" class="toc-link"># Refactor</a></li>
+    <li class="toc-item toc-item--h3"><a href="#tests" class="toc-link"># Tests</a></li>
+    <li class="toc-item toc-item--h2"><a href="#046-2026-07-10" class="toc-link"># [0.4.6] — 2026-07-10</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed" class="toc-link"># Fixed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#changed-1" class="toc-link"># Changed</a></li>
+    <li class="toc-item toc-item--h2"><a href="#045-2026-07-09" class="toc-link"># [0.4.5] — 2026-07-09</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-1" class="toc-link"># Fixed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#changed-2" class="toc-link"># Changed</a></li>
+    <li class="toc-item toc-item--h2"><a href="#044-2026-07-05" class="toc-link"># [0.4.4] — 2026-07-05</a></li>
+    <li class="toc-item toc-item--h3"><a href="#added" class="toc-link"># Added</a></li>
+    <li class="toc-item toc-item--h3"><a href="#changed-3" class="toc-link"># Changed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-2" class="toc-link"># Fixed</a></li>
+    <li class="toc-item toc-item--h2"><a href="#020-2026-06-28" class="toc-link"># [0.2.0] — 2026-06-28</a></li>
+    <li class="toc-item toc-item--h3"><a href="#added-1" class="toc-link"># Added</a></li>
+    <li class="toc-item toc-item--h2"><a href="#010-2026-06-15" class="toc-link"># [0.1.0] — 2026-06-15</a></li>
+    <li class="toc-item toc-item--h3"><a href="#added-2" class="toc-link"># Added</a></li>
+    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link"># See also</a></li>
+  </ul>
+</nav>
+
+        </aside>
+      </div>
+
+      <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <span class="footer-copyright">© 2026 Zedda Labs</span>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://github.com/Zedda-Labs/Zedda" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="footer-sep" aria-hidden="true">·</span>
+            <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
+          </div>
+          <div class="footer-right">
+            <span class="footer-version">v0.4.8</span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Search dialog -->
+  <div class="search-modal" id="search-modal" hidden role="dialog" aria-modal="true" aria-label="Search documentation">
+    <div class="search-modal-backdrop" data-close-search></div>
+    <div class="search-modal-panel">
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" class="search-input" id="search-input" placeholder="Search the documentation…" aria-label="Search query" autocomplete="off" spellcheck="false">
+        <kbd class="search-input-kbd">Esc</kbd>
+      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+        <div class="search-results-empty">Start typing to search…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/main.js" defer></script>
+</body>
+</html>
