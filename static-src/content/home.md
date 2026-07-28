@@ -9,6 +9,9 @@ is_home: true
 <div class="hero-polars-bg">
   <div class="polars-glow-line polars-glow-1"></div>
   <div class="polars-glow-line polars-glow-2"></div>
+  <div class="hero-light-glow hero-light-glow-1"></div>
+  <div class="hero-light-glow hero-light-glow-2"></div>
+  <div class="hero-light-glow hero-light-glow-3"></div>
 </div>
 
 <div class="hero-grid-container">

@@ -766,5 +766,77 @@
 
       runTerminalSequence();
     }
+
+    // 7. Robust Anchor Smooth Scrolling & TOC ScrollSpy Engine
+    const tocLinks = document.querySelectorAll(".toc-link, a[href^='#']");
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (!href || href === "#" || !href.startsWith("#")) return;
+        
+        const targetId = href.slice(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          const topbarHeight = 80;
+          const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - topbarHeight;
+          
+          window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: "smooth"
+          });
+          
+          if (history.pushState) {
+            history.pushState(null, "", href);
+          } else {
+            window.location.hash = href;
+          }
+
+          document.querySelectorAll(".toc-link").forEach((l) => {
+            l.classList.remove("toc-link--active", "active");
+            l.removeAttribute("aria-current");
+          });
+          if (link.classList.contains("toc-link")) {
+            link.classList.add("toc-link--active", "active");
+            link.setAttribute("aria-current", "location");
+          }
+        }
+      });
+    });
+
+    // ScrollSpy with IntersectionObserver
+    const headings = Array.from(document.querySelectorAll(".content-body h2[id], .content-body h3[id], .content-body h4[id]"));
+    if (headings.length > 0 && "IntersectionObserver" in window) {
+      const headingMap = new Map();
+      document.querySelectorAll(".toc-link").forEach((l) => {
+        const href = l.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          headingMap.set(href.slice(1), l);
+        }
+      });
+
+      const spyObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            const activeTocLink = headingMap.get(id);
+            if (activeTocLink) {
+              document.querySelectorAll(".toc-link").forEach((l) => {
+                l.classList.remove("toc-link--active", "active");
+                l.removeAttribute("aria-current");
+              });
+              activeTocLink.classList.add("toc-link--active", "active");
+              activeTocLink.setAttribute("aria-current", "location");
+            }
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: "-80px 0px -60% 0px",
+        threshold: 0
+      });
+
+      headings.forEach((h) => spyObserver.observe(h));
+    }
   });
 })();

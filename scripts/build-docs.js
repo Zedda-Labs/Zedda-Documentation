@@ -141,7 +141,6 @@ function renderLayout({
     .replace("{{PREV_NEXT}}", prevNextHtml)
     .replace(/{{VERSION}}/g, version)
     .replace(/{{REPO_URL}}/g, repoUrl)
-    .replace(/{{EDIT_URL}}/g, `${repoUrl}/blob/main/static-src/content/${currentId}.md`)
     .replace(/{{CURRENT_ID}}/g, currentId)
     .replace(/{{IS_HOME}}/g, isHome ? "true" : "false")
     .replace(/{{BODY_CLASS}}/g, isHome ? "page-home" : "page-doc");
