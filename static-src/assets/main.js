@@ -628,9 +628,24 @@
           link.setAttribute("aria-current", "page");
           activeLink = link;
           
-          const parentGroup = link.closest("details.sidebar-group");
-          if (parentGroup) parentGroup.open = true;
+          let parentGroup = link.closest("details.sidebar-group");
+          while (parentGroup) {
+            parentGroup.open = true;
+            parentGroup.classList.add("sidebar-group--open");
+            parentGroup = parentGroup.parentElement ? parentGroup.parentElement.closest("details.sidebar-group") : null;
+          }
         }
+      });
+
+      // Synchronize details toggle events recursively for arrow rotation animation
+      document.querySelectorAll("details.sidebar-group").forEach((group) => {
+        group.addEventListener("toggle", () => {
+          if (group.open) {
+            group.classList.add("sidebar-group--open");
+          } else {
+            group.classList.remove("sidebar-group--open");
+          }
+        });
       });
 
       // Clear scroll position memory when clicking topbar links so it auto-scrolls to new section
