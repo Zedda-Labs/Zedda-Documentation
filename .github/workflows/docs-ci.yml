@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   repository_dispatch:
-    types: [ main-repo-updated ]
+    types: [ main-repo-updated, zedda_docs_updated ]
   pull_request:
     branches: [ main ]
   release:
