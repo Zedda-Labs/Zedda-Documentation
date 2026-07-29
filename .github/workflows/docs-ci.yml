@@ -1,64 +1,135 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# docs-ci.yml — Documentation CI/CD, Synchronization & Security Audit
+#
+# Builds, tests, and deploys the Zedda static documentation site to GitHub Pages.
+# Listens for local pushes as well as cross-repository `repository_dispatch`
+# events sent from `Zedda-Labs/Zedda` (events: main-repo-updated, zedda_docs_updated).
+# ──────────────────────────────────────────────────────────────────────────────
+
 name: Documentation CI/CD & Security Audit
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   repository_dispatch:
     types: [ main-repo-updated, zedda_docs_updated ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
   release:
     types: [ published ]
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: 'Optional commit SHA from Zedda main repository to build from'
+        required: false
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "docs-pages-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
+    name: Build Static Documentation Site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      # Step 1: Harden the GitHub Actions runner security posture
+      - name: Harden Runner Environment
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
 
+      # Step 2: Checkout the local zedda-docs repository (builder & design system)
+      - name: Checkout Docs Builder Repository
+        uses: actions/checkout@v4.2.2
+
+      # Step 3: Checkout source content from main Zedda repository IF triggered by dispatch or target_sha
+      - name: Checkout Source Zedda Repository at Dispatched SHA
+        if: github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.target_sha != '')
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: ${{ github.event.client_payload.source_repo || 'Zedda-Labs/Zedda' }}
+          ref: ${{ github.event.client_payload.commit_sha || inputs.target_sha || 'main' }}
+          path: zedda-source
+
+      # Step 4: Synchronize fresh documentation content from Zedda into static-src/content
+      - name: Synchronize Documentation Files from Zedda Source
+        if: github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.target_sha != '')
+        run: |
+          echo "=== Synchronizing documentation content from source repository ==="
+          TARGET_SHA="${{ github.event.client_payload.commit_sha || inputs.target_sha || 'main' }}"
+          echo "Dispatched Commit SHA: ${TARGET_SHA}"
+
+          # Ensure destination directories exist
+          mkdir -p static-src/content/guides
+          mkdir -p static-src/content/api
+          mkdir -p static-src/content/cpp-api
+          mkdir -p static-src/content/contributing
+          mkdir -p static-src/assets
+
+          # Copy Markdown guides and assets if available in zedda-source
+          if [ -d "zedda-source/docs" ]; then
+            cp -rf zedda-source/docs/* static-src/content/ 2>/dev/null || true
+            if [ -d "zedda-source/docs/images" ]; then
+              cp -rf zedda-source/docs/images/* static-src/assets/ 2>/dev/null || true
+            fi
+            if [ -f "zedda-source/docs/logo.png" ]; then
+              cp -f zedda-source/docs/logo.png static-src/assets/logo.png
+            fi
+            if [ -f "zedda-source/docs/logo-dark.png" ]; then
+              cp -f zedda-source/docs/logo-dark.png static-src/assets/logo-dark.png
+            fi
+          fi
+
+          # Sync top-level project documentation files
+          [ -f "zedda-source/README.md" ] && cp -f zedda-source/README.md static-src/content/introduction.md
+          [ -f "zedda-source/CHANGELOG.md" ] && cp -f zedda-source/CHANGELOG.md static-src/content/changelog.md
+          [ -f "zedda-source/CONTRIBUTING.md" ] && cp -f zedda-source/CONTRIBUTING.md static-src/content/contributing/setup.md
+          [ -f "zedda-source/SECURITY.md" ] && cp -f zedda-source/SECURITY.md static-src/content/contributing/security.md
+          [ -f "zedda-source/RELEASING.md" ] && cp -f zedda-source/RELEASING.md static-src/content/contributing/releasing.md
+          [ -f "zedda-source/LICENSE" ] && cp -f zedda-source/LICENSE static-src/content/license.md
+
+          echo "✅ Documentation content synchronized from Zedda commit ${TARGET_SHA}."
+
+      # Step 5: Setup Node.js Environment with NPM Caching enabled
       - name: Setup Node.js Environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.2.0
         with:
           node-version: '20'
+          cache: 'npm'
 
+      # Step 6: Configure GitHub Pages Environment Metadata
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      # Step 7: Install Build Dependencies deterministically via npm ci
       - name: Install Build Dependencies
-        run: npm install
+        run: npm ci
 
+      # Step 8: Build Static Documentation using existing static site generator
       - name: Build Static Documentation
         run: node scripts/build-docs.js
 
-      - name: Deploy to gh-pages Branch
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main' || github.event_name == 'repository_dispatch' || github.event_name == 'release'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public/docs
-
-      - name: Upload Build Artifact
-        uses: actions/upload-pages-artifact@v3
+      # Step 9: Upload Build Artifact for GitHub Pages
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: 'public/docs'
 
   deploy-github-pages:
+    name: Deploy to GitHub Pages
     needs: build-and-deploy
-    if: (github.ref == 'refs/heads/main' || github.event_name == 'repository_dispatch' || github.event_name == 'release') && github.event_name != 'pull_request'
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'repository_dispatch' || github.event_name == 'release') && github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Deploy built HTML pages artifact to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-        continue-on-error: true
+        uses: actions/deploy-pages@v4.0.5
