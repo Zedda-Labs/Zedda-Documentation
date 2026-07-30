@@ -1179,7 +1179,7 @@ html.dark .page-home .content {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
 }
 
-.page-home .sidebar,
+.page-home .sidebar:not(.is-open),
 .page-home .toc-wrapper,
 .page-home .breadcrumbs,
 .page-home .skip-link,
