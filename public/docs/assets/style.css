@@ -1036,37 +1036,37 @@ html.dark .home-logo--dark { display: block; }
 .hljs-strong { font-weight: 700; }
 
 /* -------- 16. Responsive -------- */
-@media (max-width: 1180px) {
-  /* Hide TOC, content spans full width */
+@media (max-width: 1080px) {
   .main-inner { grid-template-columns: minmax(0, 1fr); max-width: var(--content-max-width); padding-left: var(--space-6); padding-right: var(--space-6); }
   .toc-wrapper { display: none; }
 }
 
 @media (max-width: 900px) {
-  /* Sidebar becomes a drawer */
-  .layout { grid-template-columns: minmax(0, 1fr); }
+  .layout { display: block; }
   .sidebar {
     position: fixed;
     top: var(--topbar-height);
     left: 0;
     width: 280px;
     height: calc(100vh - var(--topbar-height));
-    z-index: 40;
+    z-index: 100;
     transform: translateX(-100%);
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     background: var(--bg);
-    box-shadow: var(--shadow-md);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
   }
   .sidebar.is-open { transform: translateX(0); }
-  .sidebar-toggle { display: flex; }
+  .sidebar-toggle { display: flex !important; }
   .sidebar-overlay {
     position: fixed;
-    inset: var(--topbar-height) 0 0 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 35;
-    backdrop-filter: blur(2px);
+    top: var(--topbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 95;
   }
-  .sidebar-overlay[hidden] { display: none; }
+  .sidebar-overlay[hidden] { display: none !important; }
   .main-inner { padding: var(--space-6) var(--space-4); }
   .content-title { font-size: 1.625rem; }
   .content-description { font-size: 1rem; }
@@ -2826,135 +2826,6 @@ html.dark .content-footer-meta {
 
 .edit-github-link:hover {
   color: #3b82f6 !important;
-}
-
-/* =========================================================================
-   Responsive Breakpoints & Mobile/Tablet Adaptations
-   ========================================================================= */
-
-/* Desktop Large & Normal (< 1200px) */
-@media (max-width: 1200px) {
-  .main-inner {
-    padding: var(--space-6) var(--space-4);
-    gap: var(--space-6);
-  }
-}
-
-/* Laptops & Tablets Landscape (< 1080px) */
-@media (max-width: 1080px) {
-  .main-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .toc-wrapper {
-    display: none;
-  }
-}
-
-/* Tablets & Mobile Devices (< 900px) */
-@media (max-width: 900px) {
-  .sidebar-toggle {
-    display: flex !important;
-  }
-
-  .topbar-center {
-    display: none;
-  }
-
-  .layout {
-    display: block;
-  }
-
-  .sidebar {
-    position: fixed;
-    top: var(--topbar-height);
-    left: 0;
-    bottom: 0;
-    width: 280px;
-    height: calc(100vh - var(--topbar-height));
-    z-index: 100;
-    transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: none;
-    background: var(--bg);
-  }
-
-  .sidebar.is-open {
-    transform: translateX(0);
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
-  }
-
-  .sidebar-overlay {
-    position: fixed;
-    top: var(--topbar-height);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 95;
-  }
-
-  .main-inner {
-    padding: var(--space-6) var(--space-4);
-  }
-
-  .search-trigger {
-    max-width: 200px;
-  }
-
-  .search-trigger-kbd {
-    display: none;
-  }
-}
-
-/* Mobile Phones (< 640px) */
-@media (max-width: 640px) {
-  .topbar-inner {
-    padding: 0 var(--space-3);
-    gap: var(--space-2);
-  }
-
-  .brand-version {
-    display: none;
-  }
-
-  .search-trigger {
-    padding: 0 var(--space-2);
-    width: 36px;
-    max-width: 36px;
-    justify-content: center;
-  }
-
-  .search-trigger-text {
-    display: none;
-  }
-
-  .main-inner {
-    padding: var(--space-4) var(--space-3);
-  }
-
-  .content-title {
-    font-size: 1.65rem !important;
-  }
-
-  .content-body h2 {
-    font-size: 1.35rem !important;
-  }
-
-  .content-body h3 {
-    font-size: 1.15rem !important;
-  }
-
-  .prev-next {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-3) !important;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-    text-align: center;
-  }
 }
 
 
