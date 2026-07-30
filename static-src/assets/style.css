@@ -1041,7 +1041,44 @@ html.dark .home-logo--dark { display: block; }
   .toc-wrapper { display: none; }
 }
 
+.mobile-nav-top {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  .topbar-center { display: none !important; }
+  .mobile-nav-top {
+    display: block;
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav-links {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .mobile-nav-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .mobile-nav-link:hover, .mobile-nav-link:focus {
+    background: var(--brand-subtle);
+    color: var(--brand);
+    border-color: var(--brand);
+    text-decoration: none;
+  }
+
   .layout { display: block; }
   .sidebar {
     position: fixed;

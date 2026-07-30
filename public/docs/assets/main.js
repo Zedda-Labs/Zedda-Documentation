@@ -144,9 +144,9 @@
     });
     if (overlay) overlay.addEventListener("click", closeSidebar);
 
-    // Close sidebar when a link is clicked (mobile)
+    // Close sidebar when any link is clicked (mobile)
     sidebar.addEventListener("click", (e) => {
-      if (e.target.matches("a.sidebar-link") && window.innerWidth <= 900) {
+      if (e.target.closest("a") && window.innerWidth <= 900) {
         closeSidebar();
       }
     });
