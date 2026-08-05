@@ -467,7 +467,7 @@ ${searchIndex
     title: "Page Not Found",
     description: "The page you were looking for does not exist.",
     body:
-      '<div class="not-found"><h1>404</h1><p>The page you were looking for does not exist.</p><a href="index.html" class="btn btn-primary">Back to home</a></div>',
+      '<div class="not-found"><h1>404</h1><p>The page you were looking for does not exist.</p><a href="{{BASE_HREF}}index.html" class="btn btn-primary">Back to home</a></div>',
     navTree: navigation.navigation,
     currentId: "",
     breadcrumbs: [{ label: "Home", url: "index.html" }, { label: "404", url: "./404.html" }],
