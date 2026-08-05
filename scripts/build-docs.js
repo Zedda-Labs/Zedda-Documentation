@@ -17,6 +17,7 @@ const MarkdownIt = require("markdown-it");
 const anchor = require("markdown-it-anchor");
 const linkAttributes = require("markdown-it-link-attributes");
 const hljs = require("highlight.js");
+const matter = require("gray-matter");
 
 const ROOT = path.resolve(__dirname, "..");
 const SRC = path.join(ROOT, "static-src");
@@ -78,11 +79,15 @@ md.use(linkAttributes, {
 // into proper relative links. We do this in a post-processing step.
 function rewriteInternalLinks(html) {
   // Match href="#something" where something is a known route id or anchor
-  return html.replace(/href="#([a-z0-9/-]+)"/gi, (match, frag) => {
+  return html.replace(/href="#([a-z0-9/-]+(?:#[a-z0-9-]+)?)"/gi, (match, frag) => {
+    const parts = frag.split("#");
+    const routeId = parts[0];
+    const hash = parts.length > 1 ? "#" + parts[1] : "";
+    
     // If it looks like a route id (contains / or matches our nav), link to the page
-    const route = navigation.findLeaf(frag);
+    const route = navigation.findLeaf(routeId);
     if (route) {
-      return `href="${route.url}"`;
+      return `href="{{BASE_HREF}}${route.url}${hash}"`;
     }
     // Otherwise it's an in-page anchor — leave it
     return match;
@@ -104,6 +109,7 @@ function renderLayout({
   version,
   repoUrl,
   isHome,
+  customBaseHref,
 }) {
   // Render the sidebar HTML
   const sidebarHtml = renderSidebar(navTree, currentId);
@@ -126,13 +132,14 @@ function renderLayout({
   // to the docs root. For /docs/index.html → "./", for /docs/cpp-api/simd-scanner.html → "../".
   // With <base>, all relative URLs resolve from this path.
   const subdirs = isHome ? 0 : (currentId.match(/\//g) || []).length;
-  const baseHref = subdirs === 0 ? "./" : "../".repeat(subdirs);
+  const baseHref = customBaseHref || (subdirs === 0 ? "./" : "../".repeat(subdirs));
+  const canonicalUrl = isHome ? "https://zedda.io/" : (currentId ? `https://zedda.io/${currentId}.html` : "https://zedda.io/");
 
   return layoutTemplate
     .replace(/{{TITLE}}/g, escapeHtml(fullTitle))
     .replace(/{{DESCRIPTION}}/g, escapeHtml(description || ""))
     .replace(/{{PAGE_TITLE}}/g, escapeHtml(title))
-    .replace(/{{BASE_HREF}}/g, baseHref)
+    .replace(/{{CANONICAL_URL}}/g, canonicalUrl)
     .replace("{{CONTENT_HEADER}}", contentHeader)
     .replace("{{BODY}}", body)
     .replace("{{SIDEBAR}}", sidebarHtml)
@@ -143,7 +150,8 @@ function renderLayout({
     .replace(/{{REPO_URL}}/g, repoUrl)
     .replace(/{{CURRENT_ID}}/g, currentId)
     .replace(/{{IS_HOME}}/g, isHome ? "true" : "false")
-    .replace(/{{BODY_CLASS}}/g, isHome ? "page-home" : "page-doc");
+    .replace(/{{BODY_CLASS}}/g, isHome ? "page-home" : "page-doc")
+    .replace(/{{BASE_HREF}}/g, baseHref);
 }
 
 function escapeHtml(s) {
@@ -169,7 +177,7 @@ function renderSidebarNode(node, currentId, level) {
     if (node.id === "home") return "";
     const isActive = currentId === node.id;
     const indent = `style="--depth: ${level}"`;
-    return `  <a href="${node.url}" class="sidebar-link${isActive ? " sidebar-link--active" : ""}" ${indent} aria-current="${isActive ? "page" : "false"}">${escapeHtml(node.label)}</a>\n`;
+    return `  <a href="{{BASE_HREF}}${node.url}" class="sidebar-link${isActive ? " sidebar-link--active" : ""}" ${indent} aria-current="${isActive ? "page" : "false"}">${escapeHtml(node.label)}</a>\n`;
   }
   // Group
   const hasActiveChild = navigation.groupHasLeaf(node, currentId);
@@ -205,7 +213,7 @@ function renderBreadcrumbs(breadcrumbs) {
     if (isLast) {
       html += `<span aria-current="page">${escapeHtml(crumb.label)}</span>`;
     } else {
-      html += `<a href="${crumb.url}">${escapeHtml(crumb.label)}</a>`;
+      html += `<a href="{{BASE_HREF}}${crumb.url}">${escapeHtml(crumb.label)}</a>`;
     }
     html += "</li>";
   }
@@ -217,7 +225,7 @@ function renderPrevNext(prevNext) {
   if (!prevNext || (!prevNext.prev && !prevNext.next)) return "";
   let html = '<nav class="prev-next" aria-label="Pagination">';
   if (prevNext.prev) {
-    html += `<a href="${prevNext.prev.url}" class="prev-next-card prev-next-card--prev">
+    html += `<a href="{{BASE_HREF}}${prevNext.prev.url}" class="prev-next-card prev-next-card--prev">
       <span class="prev-next-label">Previous</span>
       <span class="prev-next-title">${escapeHtml(prevNext.prev.label)}</span>
     </a>`;
@@ -225,7 +233,7 @@ function renderPrevNext(prevNext) {
     html += "<span class=\"prev-next-spacer\"></span>";
   }
   if (prevNext.next) {
-    html += `<a href="${prevNext.next.url}" class="prev-next-card prev-next-card--next">
+    html += `<a href="{{BASE_HREF}}${prevNext.next.url}" class="prev-next-card prev-next-card--next">
       <span class="prev-next-label">Next</span>
       <span class="prev-next-title">${escapeHtml(prevNext.next.label)}</span>
     </a>`;
@@ -246,7 +254,7 @@ function extractToc(html) {
     const id = m[2];
     // Strip any nested HTML (anchor permalink symbols etc.)
     const text = m[3]
-      .replace(/<a[^>]*>([\s\S]*?)<\/a>/gi, "$1")
+      .replace(/<a[^>]*class="header-anchor"[^>]*>[\s\S]*?<\/a>/gi, "")
       .replace(/<[^>]+>/g, "")
       .trim();
     if (text) {
@@ -300,20 +308,9 @@ function build() {
     }
 
     // Parse frontmatter (we use it minimally — title/description override)
-    let frontmatter = {};
-    let body = markdownSource;
-    if (markdownSource.startsWith("---")) {
-      const end = markdownSource.indexOf("---", 3);
-      if (end > 0) {
-        const fm = markdownSource.slice(3, end);
-        body = markdownSource.slice(end + 3).replace(/^\n+/, "");
-        // Simple frontmatter parse (key: value)
-        for (const line of fm.split("\n")) {
-          const m = line.match(/^(\w+):\s*(.*)$/);
-          if (m) frontmatter[m[1]] = m[2].replace(/^["']|["']$/g, "");
-        }
-      }
-    }
+    const parsed = matter(markdownSource);
+    const frontmatter = parsed.data || {};
+    let body = parsed.content;
 
     // Preprocess: convert ::::note / ::::tip / ::::warning / ::::danger blocks
     const { text: preprocessedBody, blocks: calloutBlocks } = preprocessCallouts(body);
@@ -383,28 +380,59 @@ function build() {
     const outDir = path.join(OUT, path.dirname(leaf.id === "home" ? "index" : leaf.id));
     fs.mkdirSync(outDir, { recursive: true });
     const outName = leaf.id === "home" ? "index.html" : path.basename(leaf.id) + ".html";
+    const mdOutName = leaf.id === "home" ? "index.md" : path.basename(leaf.id) + ".md";
+    
     const outPath = path.join(outDir, outName);
     fs.writeFileSync(outPath, fullHtml);
-    console.log(`✓ ${leaf.id} → ${path.relative(ROOT, outPath)}`);
+    
+    // Copy raw markdown for GEO
+    const mdOutPath = path.join(outDir, mdOutName);
+    fs.writeFileSync(mdOutPath, markdownSource);
+    
+    console.log(`✓ ${leaf.id} → ${path.relative(ROOT, outPath)} & ${mdOutName}`);
 
     // Add to search index
-    if (!isHome) {
-      // Strip HTML for the search body
-      const plainText = html
-        .replace(/<pre[^>]*>[\s\S]*?<\/pre>/gi, " ")
-        .replace(/<[^>]+>/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-      searchIndex.push({
-        id: leaf.id,
-        title,
-        description,
-        group: parentGroup ? parentGroup.label : "",
-        url: leaf.url,
-        text: plainText.slice(0, 5000),
-      });
-    }
+    const plainText = html
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    searchIndex.push({
+      id: leaf.id,
+      title,
+      description,
+      group: parentGroup ? parentGroup.label : "",
+      url: leaf.url,
+      text: plainText.slice(0, 5000),
+    });
   }
+
+  // Generate llms.txt and llms-full.txt
+  let llmsFull = "# Zedda Documentation\n\n";
+  let llmsTxt = "# Zedda Documentation\n\n> Zero Effort Data Discovery & Analytics\n\n## Content Files\n\n";
+  
+  for (const leaf of leaves) {
+    const mdOutName = leaf.id === "home" ? "index.md" : path.basename(leaf.id) + ".md";
+    const cleanDir = leaf.id === "home" ? "" : path.dirname(leaf.id);
+    const folderPrefix = (cleanDir === "." || cleanDir === "") ? "" : cleanDir + "/";
+    const cleanPath = folderPrefix + mdOutName;
+    
+    const fullUrl = `https://zedda.io/${cleanPath}`;
+    llmsTxt += `- [${leaf.title}](${fullUrl})\n`;
+    
+    const mdPath = path.join(CONTENT, `${leaf.id}.md`);
+    let markdownSource = "";
+    try { markdownSource = fs.readFileSync(mdPath, "utf8"); } catch (e) {}
+    
+    llmsFull += `\n\n=================================================================\n`;
+    llmsFull += `## [${leaf.title}](${fullUrl})\n`;
+    llmsFull += `=================================================================\n\n`;
+    llmsFull += markdownSource;
+  }
+
+  fs.writeFileSync(path.join(OUT, "llms.txt"), llmsTxt);
+  console.log("✓ llms.txt");
+  fs.writeFileSync(path.join(OUT, "llms-full.txt"), llmsFull);
+  console.log("✓ llms-full.txt");
 
   // Write search index
   fs.writeFileSync(
@@ -419,7 +447,7 @@ function build() {
 ${searchIndex
   .map(
     (e) =>
-      `  <url><loc>https://zedda.io/${e.id}.html</loc><changefreq>weekly</changefreq></url>`
+      `  <url><loc>https://zedda.io/${e.id === "home" ? "index" : e.id}.html</loc><changefreq>weekly</changefreq></url>`
   )
   .join("\n")}
 </urlset>
@@ -448,6 +476,7 @@ ${searchIndex
     version,
     repoUrl,
     isHome: false,
+    customBaseHref: "https://zedda.io/",
   });
   fs.writeFileSync(path.join(OUT, "404.html"), notFoundHtml);
   console.log("✓ 404.html");
