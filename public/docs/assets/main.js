@@ -294,9 +294,9 @@
   let searchIndexLoading = null;
 
   function loadSearchIndex() {
-    if (searchIndex) return Promise.resolve(searchIndex);
     if (searchIndexLoading) return searchIndexLoading;
-    searchIndexLoading = fetch(SEARCH_INDEX_URL)
+    if (searchIndex) return Promise.resolve(searchIndex);
+    searchIndexLoading = fetch((window.BASE_HREF || "") + "assets/search-index.json")
       .then((r) => r.json())
       .then((data) => { searchIndex = data; return data; });
     return searchIndexLoading;
@@ -386,7 +386,7 @@
       }
       resultsEl.innerHTML = results.map((r, i) => {
         const e = r.entry;
-        return `<a class="search-result" href="${e.url}" data-idx="${i}" role="option">
+        return `<a class="search-result" href="${(window.BASE_HREF || '') + e.url}" data-idx="${i}" role="option">
           <div class="search-result-title">${escapeHtml(e.title)}${e.group ? `<span class="search-result-group">${escapeHtml(e.group)}</span>` : ""}</div>
           ${e.description ? `<div class="search-result-description">${escapeHtml(e.description)}</div>` : ""}
         </a>`;
@@ -426,9 +426,9 @@
       } else if (e.key === "Enter") {
         e.preventDefault();
         if (activeIndex >= 0 && currentResults[activeIndex]) {
-          window.location.href = currentResults[activeIndex].entry.url;
+          window.location.href = (window.BASE_HREF || '') + currentResults[activeIndex].entry.url;
         } else if (currentResults.length > 0) {
-          window.location.href = currentResults[0].entry.url;
+          window.location.href = (window.BASE_HREF || '') + currentResults[0].entry.url;
         }
       }
     });
@@ -439,7 +439,7 @@
       if (item) {
         e.preventDefault();
         const idx = parseInt(item.dataset.idx, 10);
-        if (currentResults[idx]) window.location.href = currentResults[idx].entry.url;
+        if (currentResults[idx]) window.location.href = (window.BASE_HREF || '') + currentResults[idx].entry.url;
       }
     });
 
@@ -619,7 +619,8 @@
         if (!href) return;
         
         const resolvedPath = new URL(href, window.location.href).pathname;
-        if (currentUrl.endsWith(resolvedPath) || (resolvedPath.length > 5 && currentUrl.includes(resolvedPath))) {
+        const isRootMatch = currentUrl.endsWith("/") && resolvedPath.endsWith("index.html");
+        if (currentUrl.endsWith(resolvedPath) || (resolvedPath.length > 5 && currentUrl.includes(resolvedPath)) || isRootMatch) {
           links.forEach((l) => {
             l.classList.remove("sidebar-link--active");
             l.setAttribute("aria-current", "false");

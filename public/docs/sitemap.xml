@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://zedda.io/index.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/introduction.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/installation.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/quickstart.html</loc><changefreq>weekly</changefreq></url>

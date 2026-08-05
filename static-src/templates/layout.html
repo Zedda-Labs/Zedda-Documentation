@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="{{BASE_HREF}}">
   <meta name="description" content="{{DESCRIPTION}}">
   <meta name="generator" content="Zedda docs static generator">
 
@@ -13,23 +12,23 @@
   <meta name="referrer" content="no-referrer-when-downgrade">
 
   <!-- SEO & Canonical Links -->
-  <link rel="canonical" href="https://zedda.io/{{CURRENT_ID}}.html">
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64x64.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="assets/site.webmanifest">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  <link rel="icon" type="image/x-icon" href="{{BASE_HREF}}assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{BASE_HREF}}assets/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{BASE_HREF}}assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="{{BASE_HREF}}assets/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="{{BASE_HREF}}assets/favicon-64x64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{BASE_HREF}}assets/apple-touch-icon.png">
+  <link rel="manifest" href="{{BASE_HREF}}assets/site.webmanifest">
   <title>{{TITLE}}</title>
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:title" content="{{TITLE}}">
   <meta property="og:description" content="{{DESCRIPTION}}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zedda.io/{{CURRENT_ID}}.html">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:site_name" content="Zedda">
-  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:image" content="https://zedda.io/assets/logo.png">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +36,7 @@
   <meta name="twitter:creator" content="@Zeddalabs">
   <meta name="twitter:title" content="{{TITLE}}">
   <meta name="twitter:description" content="{{DESCRIPTION}}">
-  <meta name="twitter:image" content="assets/logo.png">
+  <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
   <script type="application/ld+json">
@@ -66,6 +65,28 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "{{PAGE_TITLE}}",
+    "description": "{{DESCRIPTION}}",
+    "url": "{{CANONICAL_URL}}",
+    "author": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "url": "https://github.com/Zedda-Labs/Zedda"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Zedda Labs",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://zedda.io/assets/logo.png"
+      }
+    }
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +94,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="{{BASE_HREF}}assets/style.css">
 
   <!-- Prevent theme flash: set theme class before paint -->
   <script>
@@ -102,18 +123,18 @@
             <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
-        <a href="index.html" class="brand" aria-label="Zedda home">
-          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
-          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+        <a href="{{BASE_HREF}}index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="{{BASE_HREF}}assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="{{BASE_HREF}}assets/logo-dark.png" alt="Zedda" width="120" height="28">
           <span class="brand-version">v{{VERSION}}</span>
         </a>
       </div>
 
       <div class="topbar-center">
         <nav class="topbar-nav-links" aria-label="Main Navigation">
-          <a href="introduction.html" class="topbar-nav-link">Docs</a>
-          <a href="api/overview.html" class="topbar-nav-link">API</a>
-          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+          <a href="{{BASE_HREF}}introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="{{BASE_HREF}}api/overview.html" class="topbar-nav-link">API</a>
+          <a href="{{BASE_HREF}}contributing/setup.html" class="topbar-nav-link">Contribute</a>
         </nav>
       </div>
 
@@ -152,9 +173,9 @@
       <div class="sidebar-inner">
         <div class="mobile-nav-top">
           <div class="mobile-nav-links">
-            <a href="introduction.html" class="mobile-nav-link">Docs</a>
-            <a href="api/overview.html" class="mobile-nav-link">API</a>
-            <a href="contributing/setup.html" class="mobile-nav-link">Contribute</a>
+            <a href="{{BASE_HREF}}introduction.html" class="mobile-nav-link">Docs</a>
+            <a href="{{BASE_HREF}}api/overview.html" class="mobile-nav-link">API</a>
+            <a href="{{BASE_HREF}}contributing/setup.html" class="mobile-nav-link">Contribute</a>
           </div>
         </div>
         {{SIDEBAR}}
@@ -188,9 +209,9 @@
             <span class="footer-sep" aria-hidden="true">·</span>
             <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
             <span class="footer-sep" aria-hidden="true">·</span>
-            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="{{BASE_HREF}}privacy.html" class="footer-link">Privacy Policy</a>
             <span class="footer-sep" aria-hidden="true">·</span>
-            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <a href="{{BASE_HREF}}cookies.html" class="footer-link">Cookie Policy</a>
             <span class="footer-sep" aria-hidden="true">·</span>
             <a href="{{REPO_URL}}" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
             <span class="footer-sep" aria-hidden="true">·</span>
@@ -222,6 +243,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/main.js" defer></script>
+  <script>window.BASE_HREF = "{{BASE_HREF}}";</script>
+  <script src="{{BASE_HREF}}assets/main.js" defer></script>
 </body>
 </html>

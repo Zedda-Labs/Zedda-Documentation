@@ -30,9 +30,10 @@ for (const file of files) {
   while ((em = exportRegex.exec(content)) !== null) {
     const name = em[1];
     const afterBrace = content.slice(em.index + em[0].length);
-    const bodyStart = afterBrace.indexOf("body: `");
-    if (bodyStart === -1) continue;
-    const literalStart = bodyStart + "body: ".length;
+    const bodyMatch = afterBrace.match(/body:\s*`/);
+    if (!bodyMatch) continue;
+    const bodyStart = bodyMatch.index;
+    const literalStart = bodyStart + bodyMatch[0].length - 1;
     // Scan for closing backtick (not escaped)
     let i = literalStart + 1; // skip opening backtick
     while (i < afterBrace.length) {

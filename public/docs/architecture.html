@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="./">
   <meta name="description" content="How the C++17 streaming engine works — Welford, HyperLogLog, SIMD, mmap, Arrow.">
   <meta name="generator" content="Zedda docs static generator">
 
@@ -14,13 +13,13 @@
 
   <!-- SEO & Canonical Links -->
   <link rel="canonical" href="https://zedda.io/architecture.html">
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64x64.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="assets/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="./assets/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="./assets/favicon-64x64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./assets/site.webmanifest">
   <title>Architecture — Zedda Docs</title>
 
   <!-- Open Graph & Social Cards -->
@@ -29,7 +28,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zedda.io/architecture.html">
   <meta property="og:site_name" content="Zedda">
-  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:image" content="https://zedda.io/assets/logo.png">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +36,7 @@
   <meta name="twitter:creator" content="@Zeddalabs">
   <meta name="twitter:title" content="Architecture — Zedda Docs">
   <meta name="twitter:description" content="How the C++17 streaming engine works — Welford, HyperLogLog, SIMD, mmap, Arrow.">
-  <meta name="twitter:image" content="assets/logo.png">
+  <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
   <script type="application/ld+json">
@@ -73,7 +72,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="./assets/style.css">
 
   <!-- Prevent theme flash: set theme class before paint -->
   <script>
@@ -102,18 +101,18 @@
             <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
-        <a href="index.html" class="brand" aria-label="Zedda home">
-          <img class="brand-logo brand-logo--light" src="assets/logo.png" alt="Zedda" width="120" height="28">
-          <img class="brand-logo brand-logo--dark" src="assets/logo-dark.png" alt="Zedda" width="120" height="28">
+        <a href="./index.html" class="brand" aria-label="Zedda home">
+          <img class="brand-logo brand-logo--light" src="./assets/logo.png" alt="Zedda" width="120" height="28">
+          <img class="brand-logo brand-logo--dark" src="./assets/logo-dark.png" alt="Zedda" width="120" height="28">
           <span class="brand-version">v0.4.8</span>
         </a>
       </div>
 
       <div class="topbar-center">
         <nav class="topbar-nav-links" aria-label="Main Navigation">
-          <a href="introduction.html" class="topbar-nav-link">Docs</a>
-          <a href="api/overview.html" class="topbar-nav-link">API</a>
-          <a href="contributing/setup.html" class="topbar-nav-link">Contribute</a>
+          <a href="./introduction.html" class="topbar-nav-link">Docs</a>
+          <a href="./api/overview.html" class="topbar-nav-link">API</a>
+          <a href="./contributing/setup.html" class="topbar-nav-link">Contribute</a>
         </nav>
       </div>
 
@@ -152,88 +151,88 @@
       <div class="sidebar-inner">
         <div class="mobile-nav-top">
           <div class="mobile-nav-links">
-            <a href="introduction.html" class="mobile-nav-link">Docs</a>
-            <a href="api/overview.html" class="mobile-nav-link">API</a>
-            <a href="contributing/setup.html" class="mobile-nav-link">Contribute</a>
+            <a href="./introduction.html" class="mobile-nav-link">Docs</a>
+            <a href="./api/overview.html" class="mobile-nav-link">API</a>
+            <a href="./contributing/setup.html" class="mobile-nav-link">Contribute</a>
           </div>
         </div>
         <nav class="sidebar-nav" aria-label="Documentation">
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">Getting Started</summary>
     <div class="sidebar-group-children">
-  <a href="introduction.html" class="sidebar-link" style="--depth: 1" aria-current="false">Introduction</a>
-  <a href="installation.html" class="sidebar-link" style="--depth: 1" aria-current="false">Installation</a>
-  <a href="quickstart.html" class="sidebar-link" style="--depth: 1" aria-current="false">Quick Start</a>
+  <a href="./introduction.html" class="sidebar-link" style="--depth: 1" aria-current="false">Introduction</a>
+  <a href="./installation.html" class="sidebar-link" style="--depth: 1" aria-current="false">Installation</a>
+  <a href="./quickstart.html" class="sidebar-link" style="--depth: 1" aria-current="false">Quick Start</a>
     </div>
   </details>
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">Guides</summary>
     <div class="sidebar-group-children">
-  <a href="guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
-  <a href="guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
-  <a href="guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
-  <a href="guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
-  <a href="guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
-  <a href="guides/reports.html" class="sidebar-link" style="--depth: 1" aria-current="false">HTML Reports</a>
+  <a href="./guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
+  <a href="./guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
+  <a href="./guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
+  <a href="./guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
+  <a href="./guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
+  <a href="./guides/reports.html" class="sidebar-link" style="--depth: 1" aria-current="false">HTML Reports</a>
     </div>
   </details>
-  <a href="cli.html" class="sidebar-link" style="--depth: 0" aria-current="false">CLI Reference</a>
+  <a href="./cli.html" class="sidebar-link" style="--depth: 0" aria-current="false">CLI Reference</a>
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">Python API</summary>
     <div class="sidebar-group-children">
-  <a href="api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
-  <a href="api/scan.html" class="sidebar-link" style="--depth: 1" aria-current="false">scan()</a>
-  <a href="api/profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">profile()</a>
-  <a href="api/compare.html" class="sidebar-link" style="--depth: 1" aria-current="false">compare()</a>
-  <a href="api/ml-ready.html" class="sidebar-link" style="--depth: 1" aria-current="false">ml_ready()</a>
-  <a href="api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
-  <a href="api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
-  <a href="api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
-  <a href="api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
-  <a href="api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
-  <a href="api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
-  <a href="api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
-  <a href="api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
-  <a href="api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
+  <a href="./api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="./api/scan.html" class="sidebar-link" style="--depth: 1" aria-current="false">scan()</a>
+  <a href="./api/profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">profile()</a>
+  <a href="./api/compare.html" class="sidebar-link" style="--depth: 1" aria-current="false">compare()</a>
+  <a href="./api/ml-ready.html" class="sidebar-link" style="--depth: 1" aria-current="false">ml_ready()</a>
+  <a href="./api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
+  <a href="./api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
+  <a href="./api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
+  <a href="./api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
+  <a href="./api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
+  <a href="./api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
+  <a href="./api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="./api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
+  <a href="./api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
     </div>
   </details>
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">C++ API</summary>
     <div class="sidebar-group-children">
-  <a href="cpp-api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
-  <a href="cpp-api/column-accumulator.html" class="sidebar-link" style="--depth: 1" aria-current="false">ColumnAccumulator</a>
-  <a href="cpp-api/correlation-engine.html" class="sidebar-link" style="--depth: 1" aria-current="false">CorrelationEngine</a>
-  <a href="cpp-api/profile-result.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileResult</a>
-  <a href="cpp-api/hyperloglog.html" class="sidebar-link" style="--depth: 1" aria-current="false">HyperLogLog</a>
-  <a href="cpp-api/mmap-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">MmapFile</a>
-  <a href="cpp-api/simd-scanner.html" class="sidebar-link" style="--depth: 1" aria-current="false">SimdScanner</a>
-  <a href="cpp-api/stream-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">CsvStreamReader</a>
-  <a href="cpp-api/profile-builder.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileBuilder</a>
-  <a href="cpp-api/arrow-profiler.html" class="sidebar-link" style="--depth: 1" aria-current="false">ArrowProfiler</a>
-  <a href="cpp-api/parsing-utils.html" class="sidebar-link" style="--depth: 1" aria-current="false">Parsing Utils</a>
+  <a href="./cpp-api/overview.html" class="sidebar-link" style="--depth: 1" aria-current="false">Overview</a>
+  <a href="./cpp-api/column-accumulator.html" class="sidebar-link" style="--depth: 1" aria-current="false">ColumnAccumulator</a>
+  <a href="./cpp-api/correlation-engine.html" class="sidebar-link" style="--depth: 1" aria-current="false">CorrelationEngine</a>
+  <a href="./cpp-api/profile-result.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileResult</a>
+  <a href="./cpp-api/hyperloglog.html" class="sidebar-link" style="--depth: 1" aria-current="false">HyperLogLog</a>
+  <a href="./cpp-api/mmap-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">MmapFile</a>
+  <a href="./cpp-api/simd-scanner.html" class="sidebar-link" style="--depth: 1" aria-current="false">SimdScanner</a>
+  <a href="./cpp-api/stream-reader.html" class="sidebar-link" style="--depth: 1" aria-current="false">CsvStreamReader</a>
+  <a href="./cpp-api/profile-builder.html" class="sidebar-link" style="--depth: 1" aria-current="false">ProfileBuilder</a>
+  <a href="./cpp-api/arrow-profiler.html" class="sidebar-link" style="--depth: 1" aria-current="false">ArrowProfiler</a>
+  <a href="./cpp-api/parsing-utils.html" class="sidebar-link" style="--depth: 1" aria-current="false">Parsing Utils</a>
     </div>
   </details>
-  <a href="configuration.html" class="sidebar-link" style="--depth: 0" aria-current="false">Configuration</a>
-  <a href="architecture.html" class="sidebar-link sidebar-link--active" style="--depth: 0" aria-current="page">Architecture</a>
-  <a href="examples.html" class="sidebar-link" style="--depth: 0" aria-current="false">Examples</a>
-  <a href="benchmarks.html" class="sidebar-link" style="--depth: 0" aria-current="false">Benchmarks</a>
+  <a href="./configuration.html" class="sidebar-link" style="--depth: 0" aria-current="false">Configuration</a>
+  <a href="./architecture.html" class="sidebar-link sidebar-link--active" style="--depth: 0" aria-current="page">Architecture</a>
+  <a href="./examples.html" class="sidebar-link" style="--depth: 0" aria-current="false">Examples</a>
+  <a href="./benchmarks.html" class="sidebar-link" style="--depth: 0" aria-current="false">Benchmarks</a>
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">Contributing</summary>
     <div class="sidebar-group-children">
-  <a href="contributing/setup.html" class="sidebar-link" style="--depth: 1" aria-current="false">Development Setup</a>
-  <a href="contributing/standards.html" class="sidebar-link" style="--depth: 1" aria-current="false">Coding Standards</a>
-  <a href="contributing/structure.html" class="sidebar-link" style="--depth: 1" aria-current="false">Project Structure</a>
-  <a href="contributing/security.html" class="sidebar-link" style="--depth: 1" aria-current="false">Security</a>
-  <a href="contributing/releasing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Releasing</a>
+  <a href="./contributing/setup.html" class="sidebar-link" style="--depth: 1" aria-current="false">Development Setup</a>
+  <a href="./contributing/standards.html" class="sidebar-link" style="--depth: 1" aria-current="false">Coding Standards</a>
+  <a href="./contributing/structure.html" class="sidebar-link" style="--depth: 1" aria-current="false">Project Structure</a>
+  <a href="./contributing/security.html" class="sidebar-link" style="--depth: 1" aria-current="false">Security</a>
+  <a href="./contributing/releasing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Releasing</a>
     </div>
   </details>
-  <a href="changelog.html" class="sidebar-link" style="--depth: 0" aria-current="false">Changelog</a>
-  <a href="license.html" class="sidebar-link" style="--depth: 0" aria-current="false">License &amp; Notices</a>
+  <a href="./changelog.html" class="sidebar-link" style="--depth: 0" aria-current="false">Changelog</a>
+  <a href="./license.html" class="sidebar-link" style="--depth: 0" aria-current="false">License &amp; Notices</a>
   <details class="sidebar-group sidebar-group--open" open>
     <summary class="sidebar-group-title">Legal Policies</summary>
     <div class="sidebar-group-children">
-  <a href="privacy.html" class="sidebar-link" style="--depth: 1" aria-current="false">Privacy Policy</a>
-  <a href="cookies.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cookie Policy</a>
+  <a href="./privacy.html" class="sidebar-link" style="--depth: 1" aria-current="false">Privacy Policy</a>
+  <a href="./cookies.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cookie Policy</a>
     </div>
   </details>
 </nav>
@@ -244,7 +243,7 @@
     <main class="main" id="main" role="main">
       <div class="main-inner">
         <div class="main-content-area">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Architecture</span></li></ol></nav>
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="./index.html">Home</a></li><li><span aria-current="page">Architecture</span></li></ol></nav>
 
           <article class="content">
             <header class="content-header">
@@ -304,23 +303,23 @@ Rich terminal report  OR  HTML report  OR  structured warnings
 </code></pre>
 <h2 id="the-five-core-techniques" tabindex="-1"><a class="header-anchor" href="#the-five-core-techniques" aria-hidden="true">#</a> The five core techniques</h2>
 <h3 id="1-welfords-online-algorithm" tabindex="-1"><a class="header-anchor" href="#1-welfords-online-algorithm" aria-hidden="true">#</a> 1. Welford’s online algorithm</h3>
-<p>Per <a href="cpp-api/column-accumulator.html"><code>ColumnAccumulator</code></a>. Mean, variance, skewness, and kurtosis are computed in a single pass with constant memory. The M3 / M4 extensions (from Pébay 2008) give skewness and excess kurtosis without storing the data.</p>
+<p>Per <a href="./cpp-api/column-accumulator.html"><code>ColumnAccumulator</code></a>. Mean, variance, skewness, and kurtosis are computed in a single pass with constant memory. The M3 / M4 extensions (from Pébay 2008) give skewness and excess kurtosis without storing the data.</p>
 <p>Parallel merge uses the Chan / Pébay parallel Welford formula — each worker thread processes a chunk independently, and the per-chunk accumulators are merged at the end. This is what lets Zedda scale linearly across CPU cores.</p>
 <h3 id="2-hyperloglog" tabindex="-1"><a class="header-anchor" href="#2-hyperloglog" aria-hidden="true">#</a> 2. HyperLogLog</h3>
-<p>Per <a href="cpp-api/hyperloglog.html"><code>HyperLogLog</code></a>. 14-bit HLL → 16,384 registers → 16 KB per column, regardless of cardinality. Estimates unique counts with ~0.8% relative error — well below the noise floor of EDA use cases.</p>
+<p>Per <a href="./cpp-api/hyperloglog.html"><code>HyperLogLog</code></a>. 14-bit HLL → 16,384 registers → 16 KB per column, regardless of cardinality. Estimates unique counts with ~0.8% relative error — well below the noise floor of EDA use cases.</p>
 <p>A <code>DISTINCT</code> count on a column with 1 billion unique values would require ~32 GB in a hash set. HLL uses 16 KB — a 2,000,000× reduction.</p>
 <h3 id="3-pearson-correlation" tabindex="-1"><a class="header-anchor" href="#3-pearson-correlation" aria-hidden="true">#</a> 3. Pearson correlation</h3>
-<p>Per <a href="cpp-api/correlation-engine.html">Correlation Engine</a>. Same Welford approach as single-column stats, but for covariance. Constant memory regardless of column length.</p>
+<p>Per <a href="./cpp-api/correlation-engine.html">Correlation Engine</a>. Same Welford approach as single-column stats, but for covariance. Constant memory regardless of column length.</p>
 <p>Two safety caps:</p>
 <ul>
 <li><strong>CSV path:</strong> correlation is skipped when numeric cols &gt; 50 and <code>correlate=False</code> (default). Override with <code>correlate=True</code>.</li>
 <li><strong>Arrow path:</strong> correlation is always skipped above <code>MAX_CORR_COLS = 1000</code> numeric columns (SEC-C01).</li>
 </ul>
 <h3 id="4-simd-csv-scanner" tabindex="-1"><a class="header-anchor" href="#4-simd-csv-scanner" aria-hidden="true">#</a> 4. SIMD CSV scanner</h3>
-<p>Per <a href="cpp-api/simd-scanner.html">SIMD Scanner</a>. Three implementations — scalar, AVX2 (32 bytes/iter), AVX-512 (64 bytes/iter) — selected at runtime via CPU feature detection.</p>
-<p>The scanner finds the next delimiter or quote character in the buffer. With AVX-512, Zedda processes a 1M-row CSV in ~120ms on a modern x86 CPU — see <a href="benchmarks.html">Benchmarks</a>.</p>
+<p>Per <a href="./cpp-api/simd-scanner.html">SIMD Scanner</a>. Three implementations — scalar, AVX2 (32 bytes/iter), AVX-512 (64 bytes/iter) — selected at runtime via CPU feature detection.</p>
+<p>The scanner finds the next delimiter or quote character in the buffer. With AVX-512, Zedda processes a 1M-row CSV in ~120ms on a modern x86 CPU — see <a href="./benchmarks.html">Benchmarks</a>.</p>
 <h3 id="5-memory-mapped-file-io" tabindex="-1"><a class="header-anchor" href="#5-memory-mapped-file-io" aria-hidden="true">#</a> 5. Memory-mapped file I/O</h3>
-<p>Per <a href="cpp-api/mmap-reader.html"><code>MmapFile</code></a>. The CSV reader uses <code>mmap(2)</code> (POSIX) or <code>CreateFileMapping</code> (Win32) to map the file into the process address space. The kernel handles paging; userspace never copies the bytes.</p>
+<p>Per <a href="./cpp-api/mmap-reader.html"><code>MmapFile</code></a>. The CSV reader uses <code>mmap(2)</code> (POSIX) or <code>CreateFileMapping</code> (Win32) to map the file into the process address space. The kernel handles paging; userspace never copies the bytes.</p>
 <p>Combined with the constant-memory accumulators, this means Zedda’s RSS stays at ~2 MB regardless of file size.</p>
 <h2 id="memory-model" tabindex="-1"><a class="header-anchor" href="#memory-model" aria-hidden="true">#</a> Memory model</h2>
 <table>
@@ -366,7 +365,7 @@ Rich terminal report  OR  HTML report  OR  structured warnings
 </table>
 <p>For a typical 1M-row, 50-column CSV, total working memory is ~2 MB. The pandas equivalent would be ~800 MB.</p>
 <h2 id="sampling-strategy" tabindex="-1"><a class="header-anchor" href="#sampling-strategy" aria-hidden="true">#</a> Sampling strategy</h2>
-<p>If a file is larger than 1 GB and <code>sample_size</code> is not set, Zedda auto-samples 2,000,000 rows. The resulting <a href="api/dataset-profile.html"><code>DatasetProfile</code></a> has <code>is_sampled = True</code>, and the terminal report prints a yellow <code>SAMPLED</code> badge.</p>
+<p>If a file is larger than 1 GB and <code>sample_size</code> is not set, Zedda auto-samples 2,000,000 rows. The resulting <a href="./api/dataset-profile.html"><code>DatasetProfile</code></a> has <code>is_sampled = True</code>, and the terminal report prints a yellow <code>SAMPLED</code> badge.</p>
 <p>You can force a smaller or larger sample:</p>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
 
@@ -385,17 +384,17 @@ result = zd.scan(<span class="hljs-string">&quot;huge.parquet&quot;</span>, samp
 <h2 id="the-python-layer" tabindex="-1"><a class="header-anchor" href="#the-python-layer" aria-hidden="true">#</a> The Python layer</h2>
 <p>The Python layer in <code>python/zedda/__init__.py</code> is ~4,300 lines and handles:</p>
 <ul>
-<li>Input resolution (path / DataFrame → file via <a href="api/overview.html"><code>_resolve</code></a>)</li>
+<li>Input resolution (path / DataFrame → file via <a href="./api/overview.html"><code>_resolve</code></a>)</li>
 <li>Calling <code>fasteda_core.profile()</code></li>
 <li>Rich terminal rendering (quality bar, per-column table, warnings, correlations)</li>
-<li>HTML report generation (<a href="api/report.html"><code>report.py</code></a>)</li>
-<li>Offline AI pattern matching (<a href="api/overview.html"><code>_ask</code></a>)</li>
-<li>Warnings detection and ranking (<a href="api/overview.html"><code>_warnings</code></a>)</li>
-<li>Fix code generation (<a href="api/overview.html"><code>_fix</code></a>)</li>
-<li>Auto-clean with backup and audit (<a href="api/overview.html"><code>_clean</code></a>)</li>
-<li>Merge with schema check and duplicate detection (<a href="api/overview.html"><code>_merge</code></a>)</li>
-<li>ML readiness scoring (<a href="api/overview.html"><code>_ml_ready</code></a>)</li>
-<li>Distribution shift detection (<a href="api/overview.html"><code>_compare</code></a>)</li>
+<li>HTML report generation (<a href="./api/report.html"><code>report.py</code></a>)</li>
+<li>Offline AI pattern matching (<a href="./api/overview.html"><code>_ask</code></a>)</li>
+<li>Warnings detection and ranking (<a href="./api/overview.html"><code>_warnings</code></a>)</li>
+<li>Fix code generation (<a href="./api/overview.html"><code>_fix</code></a>)</li>
+<li>Auto-clean with backup and audit (<a href="./api/overview.html"><code>_clean</code></a>)</li>
+<li>Merge with schema check and duplicate detection (<a href="./api/overview.html"><code>_merge</code></a>)</li>
+<li>ML readiness scoring (<a href="./api/overview.html"><code>_ml_ready</code></a>)</li>
+<li>Distribution shift detection (<a href="./api/overview.html"><code>_compare</code></a>)</li>
 </ul>
 <p>The layer is thin — the heavy lifting (scanning, statistics, correlation, cardinality) is in C++.</p>
 <h2 id="security-hardening" tabindex="-1"><a class="header-anchor" href="#security-hardening" aria-hidden="true">#</a> Security hardening</h2>
@@ -446,23 +445,23 @@ result = zd.scan(<span class="hljs-string">&quot;huge.parquet&quot;</span>, samp
 </tr>
 </tbody>
 </table>
-<p>See <a href="contributing/security.html">Security</a> for the full policy.</p>
+<p>See <a href="./contributing/security.html">Security</a> for the full policy.</p>
 <h2 id="build-system" tabindex="-1"><a class="header-anchor" href="#build-system" aria-hidden="true">#</a> Build system</h2>
 <p>The C++ extension is built by CMake ≥ 3.21 with C++17, scikit-build-core, and nanobind. LTO is enabled in Release builds via <code>check_ipo_supported()</code> (15–25% expected speedup, PERF-2).</p>
-<p>See <a href="contributing/setup.html">Development Setup</a> for the full build instructions and <a href="contributing/structure.html">Project Structure</a> for the directory layout.</p>
+<p>See <a href="./contributing/setup.html">Development Setup</a> for the full build instructions and <a href="./contributing/structure.html">Project Structure</a> for the directory layout.</p>
 <h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See also</h2>
 <ul>
-<li><a href="cpp-api/overview.html">C++ API</a> — every header.</li>
-<li><a href="benchmarks.html">Benchmarks</a> — measured throughput.</li>
-<li><a href="contributing/setup.html">Contributing</a> — how to build and modify the engine.</li>
+<li><a href="./cpp-api/overview.html">C++ API</a> — every header.</li>
+<li><a href="./benchmarks.html">Benchmarks</a> — measured throughput.</li>
+<li><a href="./contributing/setup.html">Contributing</a> — how to build and modify the engine.</li>
 </ul>
 
             </div>
 
-            <nav class="prev-next" aria-label="Pagination"><a href="configuration.html" class="prev-next-card prev-next-card--prev">
+            <nav class="prev-next" aria-label="Pagination"><a href="./configuration.html" class="prev-next-card prev-next-card--prev">
       <span class="prev-next-label">Previous</span>
       <span class="prev-next-title">Configuration</span>
-    </a><a href="examples.html" class="prev-next-card prev-next-card--next">
+    </a><a href="./examples.html" class="prev-next-card prev-next-card--next">
       <span class="prev-next-label">Next</span>
       <span class="prev-next-title">Examples</span>
     </a></nav>
@@ -473,20 +472,20 @@ result = zd.scan(<span class="hljs-string">&quot;huge.parquet&quot;</span>, samp
           <nav class="toc" aria-label="On this page">
   <p class="toc-title">On this page</p>
   <ul class="toc-list">
-    <li class="toc-item toc-item--h2"><a href="#high-level-data-flow" class="toc-link"># High-level data flow</a></li>
-    <li class="toc-item toc-item--h2"><a href="#the-five-core-techniques" class="toc-link"># The five core techniques</a></li>
-    <li class="toc-item toc-item--h3"><a href="#1-welfords-online-algorithm" class="toc-link"># 1. Welford’s online algorithm</a></li>
-    <li class="toc-item toc-item--h3"><a href="#2-hyperloglog" class="toc-link"># 2. HyperLogLog</a></li>
-    <li class="toc-item toc-item--h3"><a href="#3-pearson-correlation" class="toc-link"># 3. Pearson correlation</a></li>
-    <li class="toc-item toc-item--h3"><a href="#4-simd-csv-scanner" class="toc-link"># 4. SIMD CSV scanner</a></li>
-    <li class="toc-item toc-item--h3"><a href="#5-memory-mapped-file-io" class="toc-link"># 5. Memory-mapped file I/O</a></li>
-    <li class="toc-item toc-item--h2"><a href="#memory-model" class="toc-link"># Memory model</a></li>
-    <li class="toc-item toc-item--h2"><a href="#sampling-strategy" class="toc-link"># Sampling strategy</a></li>
-    <li class="toc-item toc-item--h2"><a href="#threading-model" class="toc-link"># Threading model</a></li>
-    <li class="toc-item toc-item--h2"><a href="#the-python-layer" class="toc-link"># The Python layer</a></li>
-    <li class="toc-item toc-item--h2"><a href="#security-hardening" class="toc-link"># Security hardening</a></li>
-    <li class="toc-item toc-item--h2"><a href="#build-system" class="toc-link"># Build system</a></li>
-    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link"># See also</a></li>
+    <li class="toc-item toc-item--h2"><a href="#high-level-data-flow" class="toc-link">High-level data flow</a></li>
+    <li class="toc-item toc-item--h2"><a href="#the-five-core-techniques" class="toc-link">The five core techniques</a></li>
+    <li class="toc-item toc-item--h3"><a href="#1-welfords-online-algorithm" class="toc-link">1. Welford’s online algorithm</a></li>
+    <li class="toc-item toc-item--h3"><a href="#2-hyperloglog" class="toc-link">2. HyperLogLog</a></li>
+    <li class="toc-item toc-item--h3"><a href="#3-pearson-correlation" class="toc-link">3. Pearson correlation</a></li>
+    <li class="toc-item toc-item--h3"><a href="#4-simd-csv-scanner" class="toc-link">4. SIMD CSV scanner</a></li>
+    <li class="toc-item toc-item--h3"><a href="#5-memory-mapped-file-io" class="toc-link">5. Memory-mapped file I/O</a></li>
+    <li class="toc-item toc-item--h2"><a href="#memory-model" class="toc-link">Memory model</a></li>
+    <li class="toc-item toc-item--h2"><a href="#sampling-strategy" class="toc-link">Sampling strategy</a></li>
+    <li class="toc-item toc-item--h2"><a href="#threading-model" class="toc-link">Threading model</a></li>
+    <li class="toc-item toc-item--h2"><a href="#the-python-layer" class="toc-link">The Python layer</a></li>
+    <li class="toc-item toc-item--h2"><a href="#security-hardening" class="toc-link">Security hardening</a></li>
+    <li class="toc-item toc-item--h2"><a href="#build-system" class="toc-link">Build system</a></li>
+    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link">See also</a></li>
   </ul>
 </nav>
 
@@ -500,9 +499,9 @@ result = zd.scan(<span class="hljs-string">&quot;huge.parquet&quot;</span>, samp
             <span class="footer-sep" aria-hidden="true">·</span>
             <a href="mailto:zeddalabs@gmail.com" class="footer-link" title="Contact Us via Email">Contact Us</a>
             <span class="footer-sep" aria-hidden="true">·</span>
-            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="./privacy.html" class="footer-link">Privacy Policy</a>
             <span class="footer-sep" aria-hidden="true">·</span>
-            <a href="cookies.html" class="footer-link">Cookie Policy</a>
+            <a href="./cookies.html" class="footer-link">Cookie Policy</a>
             <span class="footer-sep" aria-hidden="true">·</span>
             <a href="https://github.com/Zedda-Labs/Zedda" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
             <span class="footer-sep" aria-hidden="true">·</span>
@@ -534,6 +533,7 @@ result = zd.scan(<span class="hljs-string">&quot;huge.parquet&quot;</span>, samp
   </div>
 
   <!-- Scripts -->
-  <script src="assets/main.js" defer></script>
+  <script>window.BASE_HREF = "./";</script>
+  <script src="./assets/main.js" defer></script>
 </body>
 </html>
