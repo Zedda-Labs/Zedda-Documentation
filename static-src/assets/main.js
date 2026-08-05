@@ -511,20 +511,38 @@
       revealElements.forEach((el) => el.classList.add("is-visible"));
     }
 
-    // 4. Count-up Animation for Stat Numbers & Live PyPI Fetcher
-    const liveDownloadEl = document.getElementById("live-pypi-downloads");
-    if (liveDownloadEl) {
-      fetch("https://pypistats.org/api/packages/zedda/recent")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data.data && data.data.last_month) {
-            liveDownloadEl.setAttribute("data-target", data.data.last_month.toString());
-          }
-        })
-        .catch(() => {});
+    // 4. Count-up Animation for Stat Numbers & 10s Live Auto-Polling
+    const statValues = document.querySelectorAll(".stat-value");
+    
+    // Smooth CountUp Animation helper
+    function animateCountValue(el, fromVal, toVal, suffix, duration = 1000) {
+      if (fromVal === toVal) {
+        el.textContent = toVal.toLocaleString() + suffix;
+        return;
+      }
+
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // easeOutExpo curve for super smooth natural deceleration
+        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = Math.floor(fromVal + easeProgress * (toVal - fromVal));
+
+        el.textContent = currentVal.toLocaleString() + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = toVal.toLocaleString() + suffix;
+        }
+      }
+
+      requestAnimationFrame(update);
     }
 
-    const statValues = document.querySelectorAll(".stat-value");
+    // Scroll reveal intersection observer for initial countup
     if (statValues.length > 0 && "IntersectionObserver" in window) {
       const statsObserver = new IntersectionObserver(
         (entries) => {
@@ -536,27 +554,7 @@
 
               const target = parseInt(el.getAttribute("data-target"), 10) || 0;
               const suffix = el.getAttribute("data-suffix") || "";
-              const duration = 1200; // ms
-              const startTime = performance.now();
-
-              function updateCount(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // easeOutExpo curve for fast initial count up
-                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-                const currentVal = Math.floor(easeProgress * target);
-
-                el.textContent = currentVal.toLocaleString() + suffix;
-
-                if (progress < 1) {
-                  requestAnimationFrame(updateCount);
-                } else {
-                  el.textContent = target.toLocaleString() + suffix;
-                }
-              }
-
-              requestAnimationFrame(updateCount);
+              animateCountValue(el, 0, target, suffix, 1200);
             }
           });
         },
@@ -566,12 +564,32 @@
       statValues.forEach((el) => statsObserver.observe(el));
     }
 
-    // 4b. Production Live PyPI Stats Fetcher (5-Minute Refresh, No Fake Increases)
+    // Live Stats Fetcher & 10-Second Auto-Polling (No Refresh Needed)
     const downloadsEl = document.getElementById("live-pypi-downloads");
     const installsEl = document.getElementById("live-pypi-installs");
 
     if (downloadsEl || installsEl) {
       const numberFormatter = new Intl.NumberFormat("en-US");
+
+      // 4a. Read LocalStorage cache for instantaneous load
+      try {
+        const cached = localStorage.getItem("zedda_live_stats");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed.downloads && downloadsEl) {
+            downloadsEl.setAttribute("data-target", parsed.downloads);
+            if (!downloadsEl.dataset.animated) {
+              downloadsEl.textContent = numberFormatter.format(parsed.downloads) + "+";
+            }
+          }
+          if (parsed.installs && installsEl) {
+            installsEl.setAttribute("data-target", parsed.installs);
+            if (!installsEl.dataset.animated) {
+              installsEl.textContent = numberFormatter.format(parsed.installs) + "+";
+            }
+          }
+        }
+      } catch (e) {}
 
       async function syncPyPIApi() {
         try {
@@ -587,24 +605,46 @@
                 if (row.category === "without_mirrors") totalWithoutMirrors += row.downloads;
               });
 
-              if (totalWithMirrors > 0 && downloadsEl) {
-                downloadsEl.setAttribute("data-target", totalWithMirrors);
-                downloadsEl.textContent = numberFormatter.format(totalWithMirrors) + "+";
-              }
-              if (totalWithoutMirrors > 0 && installsEl) {
-                installsEl.setAttribute("data-target", totalWithoutMirrors);
-                installsEl.textContent = numberFormatter.format(totalWithoutMirrors) + "+";
-              }
+              // Helper to smoothly trigger live update if value changed
+              const applyLiveUpdate = (el, newVal) => {
+                if (!el) return;
+                const currentTarget = parseInt(el.getAttribute("data-target"), 10) || 0;
+                const suffix = el.getAttribute("data-suffix") || "+";
+
+                if (newVal !== currentTarget) {
+                  el.setAttribute("data-target", newVal);
+                  // Animate count smoothly from currentTarget to newVal without refresh!
+                  animateCountValue(el, currentTarget, newVal, suffix, 1000);
+
+                  // Flash glow effect on card
+                  const card = el.closest(".stat-card");
+                  if (card) {
+                    card.classList.add("stat-card-pulse");
+                    setTimeout(() => card.classList.remove("stat-card-pulse"), 1200);
+                  }
+                }
+              };
+
+              if (totalWithMirrors > 0) applyLiveUpdate(downloadsEl, totalWithMirrors);
+              if (totalWithoutMirrors > 0) applyLiveUpdate(installsEl, totalWithoutMirrors);
+
+              // Cache fresh values
+              try {
+                localStorage.setItem(
+                  "zedda_live_stats",
+                  JSON.stringify({ downloads: totalWithMirrors, installs: totalWithoutMirrors, time: Date.now() })
+                );
+              } catch (e) {}
             }
           }
         } catch (e) {
-          // Graceful fallback to static target
+          // Graceful fallback: maintain existing targets
         }
       }
 
-      // Initial PyPI Sync & Automatic Refresh every 5 minutes (300,000 ms)
+      // Initial Sync & Automatic Refresh every 10 seconds (10,000 ms)
       syncPyPIApi();
-      setInterval(syncPyPIApi, 300000);
+      setInterval(syncPyPIApi, 10000);
     }
 
     // 5. Dynamic Active Sidebar Link Highlight & Scroll Preservation
