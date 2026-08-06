@@ -135,19 +135,19 @@ is_home: true
 <section class="stats-section">
 <div class="stats-grid">
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-downloads" data-target="48067" data-suffix="+">0</div>
-<div class="stat-label">Total downloads <span class="live-dot-badge"><span class="live-pulse"></span>Live</span></div>
+<div class="stat-value" id="live-pypi-downloads" data-target="51188" data-suffix="+">51,188+</div>
+<div class="stat-label">Total downloads</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-installs" data-target="16692" data-suffix="+">0</div>
+<div class="stat-value" id="live-pypi-installs" data-target="17025" data-suffix="+">17,025+</div>
 <div class="stat-label">PyPI installs</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" data-target="10">0</div>
+<div class="stat-value" data-target="10">10</div>
 <div class="stat-label">One-call functions</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" data-target="3">0</div>
+<div class="stat-value" data-target="3">3</div>
 <div class="stat-label">Builders behind it</div>
 </div>
 </div>

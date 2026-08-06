@@ -320,12 +320,12 @@ html.dark .brand-logo--dark { display: block; }
 
 .brand-version {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  padding: 0.1rem 0.4rem;
-  background: var(--surface-3);
+  font-weight: 600;
+  color: var(--brand);
+  padding: 0.1rem 0.45rem;
+  background: var(--brand-subtle);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(59, 130, 246, 0.25);
 }
 
 /* Search trigger */
@@ -336,10 +336,10 @@ html.dark .brand-logo--dark { display: block; }
   width: 100%;
   max-width: 420px;
   height: 36px;
-  padding: 0 var(--space-3);
+  padding: 0.375rem 0.875rem;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: 9999px;
   color: var(--text-muted);
   text-align: left;
   transition: border-color 0.15s, background 0.15s;
@@ -1216,15 +1216,7 @@ html.dark .page-home .content {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.page-home .topbar.topbar-scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border) !important;
 }
 
 /* Topbar Nav Links */
@@ -2444,80 +2436,13 @@ html.dark .landing-footer .brand-logo--dark {
   width: auto;
 }
 
-.page-home .brand-version {
-  background: rgba(37, 99, 235, 0.08) !important;
-  color: #2563eb !important;
-  border: 1px solid rgba(37, 99, 235, 0.2) !important;
-}
-
-/* Light mode search trigger & install pill */
-html:not(.dark) .page-home .search-trigger {
-  background: #f1f5f9 !important;
-  border: 1px solid #e2e8f0 !important;
-  color: #64748b !important;
-  border-radius: 9999px !important;
-  padding: 0.375rem 0.875rem !important;
-}
-
-html:not(.dark) .page-home .search-trigger-text {
-  color: #64748b !important;
-}
-
-html:not(.dark) .page-home .search-trigger-kbd {
-  background: #ffffff !important;
-  color: #64748b !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-html:not(.dark) .page-home .hero-left code,
-html:not(.dark) .page-home .hero-left .install-cmd {
-  background: transparent !important;
-  border: none !important;
-  color: #0f172a !important;
-  font-weight: 600 !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-}
-
-/* Explicit CTA Install Pill Rule for Light & Dark Mode */
-html:not(.dark) .page-home .cta-install-pill code,
-html:not(.dark) .page-home .cta-install-pill .install-cmd,
-html.dark .page-home .cta-install-pill code,
-html.dark .page-home .cta-install-pill .install-cmd {
-  color: #ffffff !important;
-  background: transparent !important;
-}
-
 /* Dark mode landing page overrides */
-html.dark .page-home .topbar {
-  background: rgba(21, 22, 26, 0.9) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
 html.dark .page-home .topbar-nav-link {
   color: #ffffff !important;
 }
 
 html.dark .page-home .topbar-nav-link:hover {
   color: #3b82f6 !important;
-}
-
-html.dark .page-home .search-trigger {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: #ffffff !important;
-  border-radius: 9999px !important;
-  padding: 0.375rem 0.875rem !important;
-}
-
-html.dark .page-home .search-trigger-text {
-  color: #f8fafc !important;
-}
-
-html.dark .page-home .search-trigger-kbd {
-  background: rgba(255, 255, 255, 0.12) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
 }
 
 html.dark .page-home .theme-toggle,
@@ -2883,6 +2808,45 @@ html.dark .content-footer-meta {
 
 .stat-card-pulse {
   animation: statCardLivePulse 1.2s ease-in-out;
+}
+
+/* Slot Machine / Odometer Reel Styles */
+.slot-number {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.digit-reel {
+  display: inline-block;
+  height: 1em;
+  line-height: 1em;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+}
+
+.digit-reel-strip {
+  display: flex;
+  flex-direction: column;
+  height: 10em;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.digit-reel-number {
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-static-char {
+  display: inline-block;
+  line-height: 1em;
 }
 
 
