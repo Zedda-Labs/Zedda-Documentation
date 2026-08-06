@@ -511,9 +511,6 @@
       revealElements.forEach((el) => el.classList.add("is-visible"));
     }
 
-    // 4. Count-up Animation for Stat Numbers & 10s Live Auto-Polling
-    const statValues = document.querySelectorAll(".stat-value");
-    
     // Smooth CountUp Animation helper
     function animateCountValue(el, fromVal, toVal, suffix, duration = 1000) {
       if (fromVal === toVal) {
@@ -526,7 +523,6 @@
       function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // easeOutExpo curve for super smooth natural deceleration
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const currentVal = Math.floor(fromVal + easeProgress * (toVal - fromVal));
 
@@ -542,56 +538,80 @@
       requestAnimationFrame(update);
     }
 
-    // Scroll reveal intersection observer for initial countup
-    if (statValues.length > 0 && "IntersectionObserver" in window) {
-      const statsObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const el = entry.target;
-              if (el.dataset.animated) return;
-              el.dataset.animated = "true";
-
-              const target = parseInt(el.getAttribute("data-target"), 10) || 0;
-              const suffix = el.getAttribute("data-suffix") || "";
-              animateCountValue(el, 0, target, suffix, 1200);
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-
-      statValues.forEach((el) => statsObserver.observe(el));
-    }
-
-    // Live Stats Fetcher & 10-Second Auto-Polling (No Refresh Needed)
+    // Live Stats Fetcher: Syncs directly with Pepy.tech & PyPIStats on real data change only
     const downloadsEl = document.getElementById("live-pypi-downloads");
     const installsEl = document.getElementById("live-pypi-installs");
 
     if (downloadsEl || installsEl) {
       const numberFormatter = new Intl.NumberFormat("en-US");
 
-      // 4a. Read LocalStorage cache for instantaneous load
+      // 4a. Read LocalStorage cache for instantaneous load if available
       try {
         const cached = localStorage.getItem("zedda_live_stats");
         if (cached) {
           const parsed = JSON.parse(cached);
           if (parsed.downloads && downloadsEl) {
             downloadsEl.setAttribute("data-target", parsed.downloads);
-            if (!downloadsEl.dataset.animated) {
-              downloadsEl.textContent = numberFormatter.format(parsed.downloads) + "+";
-            }
+            downloadsEl.textContent = numberFormatter.format(parsed.downloads) + "+";
           }
           if (parsed.installs && installsEl) {
             installsEl.setAttribute("data-target", parsed.installs);
-            if (!installsEl.dataset.animated) {
-              installsEl.textContent = numberFormatter.format(parsed.installs) + "+";
-            }
+            installsEl.textContent = numberFormatter.format(parsed.installs) + "+";
           }
         }
       } catch (e) {}
 
+      // Helper to smoothly trigger live update if real backend value changed
+      const applyLiveUpdate = (el, newVal) => {
+        if (!el) return;
+        const currentTarget = parseInt(el.getAttribute("data-target"), 10) || 0;
+        const suffix = el.getAttribute("data-suffix") || "+";
+
+        if (newVal !== currentTarget) {
+          el.setAttribute("data-target", newVal);
+          // Animate count smoothly from currentTarget to newVal without refresh!
+          animateCountValue(el, currentTarget, newVal, suffix, 1000);
+
+          // Flash glow effect on card
+          const card = el.closest(".stat-card");
+          if (card) {
+            card.classList.add("stat-card-pulse");
+            setTimeout(() => card.classList.remove("stat-card-pulse"), 1200);
+          }
+        }
+      };
+
       async function syncPyPIApi() {
+        // 1. Try Pepy.tech for real-time lifetime total downloads
+        try {
+          const pepyRes = await fetch("https://pepy.tech/projects/zedda");
+          if (pepyRes.ok) {
+            const raw = await pepyRes.text();
+            const html = raw.replace(/<!--\s*-->/g, "");
+            const totalMatch = html.match(/downloaded\s+([\d,]+)\s+times in total/i);
+            const monthMatch = html.match(/including\s+([\d,]+)\s+in the last 30 days/i);
+
+            let realTotal = totalMatch ? parseInt(totalMatch[1].replace(/,/g, ""), 10) : 0;
+            let realMonth = monthMatch ? parseInt(monthMatch[1].replace(/,/g, ""), 10) : 0;
+
+            if (realTotal > 0) {
+              applyLiveUpdate(downloadsEl, realTotal);
+              if (realMonth > 0) applyLiveUpdate(installsEl, realMonth);
+
+              try {
+                localStorage.setItem(
+                  "zedda_live_stats",
+                  JSON.stringify({ downloads: realTotal, installs: realMonth, time: Date.now() })
+                );
+              } catch (e) {}
+              return; // Pepy sync successful!
+            }
+          }
+        } catch (e) {
+          // Pepy fallback to PyPIStats
+        }
+
+        // 2. Fallback to PyPIStats
         try {
           const res = await fetch("https://pypistats.org/api/packages/zedda/overall");
           if (res.ok) {
@@ -605,30 +625,9 @@
                 if (row.category === "without_mirrors") totalWithoutMirrors += row.downloads;
               });
 
-              // Helper to smoothly trigger live update if value changed
-              const applyLiveUpdate = (el, newVal) => {
-                if (!el) return;
-                const currentTarget = parseInt(el.getAttribute("data-target"), 10) || 0;
-                const suffix = el.getAttribute("data-suffix") || "+";
-
-                if (newVal !== currentTarget) {
-                  el.setAttribute("data-target", newVal);
-                  // Animate count smoothly from currentTarget to newVal without refresh!
-                  animateCountValue(el, currentTarget, newVal, suffix, 1000);
-
-                  // Flash glow effect on card
-                  const card = el.closest(".stat-card");
-                  if (card) {
-                    card.classList.add("stat-card-pulse");
-                    setTimeout(() => card.classList.remove("stat-card-pulse"), 1200);
-                  }
-                }
-              };
-
               if (totalWithMirrors > 0) applyLiveUpdate(downloadsEl, totalWithMirrors);
               if (totalWithoutMirrors > 0) applyLiveUpdate(installsEl, totalWithoutMirrors);
 
-              // Cache fresh values
               try {
                 localStorage.setItem(
                   "zedda_live_stats",
@@ -642,9 +641,9 @@
         }
       }
 
-      // Initial Sync & Automatic Refresh every 10 seconds (10,000 ms)
+      // Initial Sync & Real-time polling every 20 seconds
       syncPyPIApi();
-      setInterval(syncPyPIApi, 10000);
+      setInterval(syncPyPIApi, 20000);
     }
 
     // 5. Dynamic Active Sidebar Link Highlight & Scroll Preservation
