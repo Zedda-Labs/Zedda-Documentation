@@ -277,6 +277,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   backdrop-filter: saturate(180%) blur(8px);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 .topbar-inner {
