@@ -2488,22 +2488,22 @@ html.dark .landing-footer .brand-logo--dark {
   width: auto;
 }
 
-/* Dark mode landing page overrides */
-html.dark .page-home .topbar-nav-link {
+/* Dark mode topbar overrides */
+html.dark .topbar-nav-link {
   color: #ffffff !important;
 }
 
-html.dark .page-home .topbar-nav-link:hover {
+html.dark .topbar-nav-link:hover {
   color: #3b82f6 !important;
 }
 
-html.dark .page-home .theme-toggle,
-html.dark .page-home .topbar-link {
+html.dark .theme-toggle,
+html.dark .topbar-link {
   color: #ffffff !important;
 }
 
-html.dark .page-home .theme-toggle:hover,
-html.dark .page-home .topbar-link:hover {
+html.dark .theme-toggle:hover,
+html.dark .topbar-link:hover {
   background: rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
 }
