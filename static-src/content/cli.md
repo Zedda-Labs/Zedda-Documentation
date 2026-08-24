@@ -27,6 +27,7 @@ Running `zedda` with no subcommand prints an ASCII-art banner (in the brand oran
 | [`zedda merge`](#zedda-merge)     | `PATHS... [-o combined.csv]`              | Merge multiple files |
 | [`zedda report`](#zedda-report)   | `PATH [-o report.html]`                   | Export HTML report |
 | [`zedda ask`](#zedda-ask)         | `PATH QUESTION`                           | Plain-English Q&A |
+| [`zedda validate`](#zedda-validate) | `PATH --rules RULES [--fail/--no-fail]` | Validate data contract rules |
 | [`zedda info`](#zedda-info)       | `PATH`                                    | Instant file metadata (no full scan) |
 | [`zedda version`](#zedda-version) | _(none)_                                   | Print installed version |
 
@@ -157,6 +158,25 @@ Example:
 ```bash
 zedda ask data.csv "any nulls here?"
 zedda ask data.csv "which columns should I drop?"
+```
+
+## zedda validate
+
+```bash
+zedda validate PATH --rules RULES [--fail/--no-fail]
+```
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `-r, --rules` | path | _(required)_ | Path to JSON or YAML data contract rules file. |
+| `--fail / --no-fail` | bool flag | `--fail` | Exit with non-zero status code if rules fail (useful for CI/CD pipelines). |
+
+Validate a dataset against declarative quality contract rules in CI/CD. See [Python API: validate()](#api/validate).
+
+Example:
+
+```bash
+zedda validate data.csv --rules contract.json --fail
 ```
 
 ## zedda info
