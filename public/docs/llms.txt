@@ -27,6 +27,8 @@
 - [zedda.merge()](https://zedda.io/api/merge.md)
 - [zedda.ask()](https://zedda.io/api/ask.md)
 - [zedda.report()](https://zedda.io/api/report.md)
+- [zedda.export()](https://zedda.io/api/export.md)
+- [zedda.validate()](https://zedda.io/api/validate.md)
 - [ZeddaError](https://zedda.io/api/zedda-error.md)
 - [DatasetProfile](https://zedda.io/api/dataset-profile.md)
 - [C++ API Overview](https://zedda.io/cpp-api/overview.md)
