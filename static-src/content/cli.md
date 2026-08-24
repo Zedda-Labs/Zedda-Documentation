@@ -1,6 +1,6 @@
 # CLI Reference
 
-Zedda ships a `zedda` command-line tool with 11 subcommands. It is built with [Typer](https://typer.tiangolo.com/) and installed automatically by `pip install zedda`.
+Zedda ships a `zedda` command-line tool with 14 subcommands. It is built with [Typer](https://typer.tiangolo.com/) and installed automatically by `pip install zedda`.
 
 The entry point is defined in `pyproject.toml` as `zedda = "zedda.cli:app"`. The Typer app has `add_completion=False` and `rich_markup_mode="rich"`.
 
