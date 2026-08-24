@@ -214,6 +214,8 @@
   <a href="./api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
   <a href="./api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
   <a href="./api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="./api/export.html" class="sidebar-link" style="--depth: 1" aria-current="false">export()</a>
+  <a href="./api/validate.html" class="sidebar-link" style="--depth: 1" aria-current="false">validate()</a>
   <a href="./api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
   <a href="./api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
     </div>
@@ -280,10 +282,12 @@
 <hr>
 <h2 id="2-zero-telemetry-dataset-processing" tabindex="-1"><a class="header-anchor" href="#2-zero-telemetry-dataset-processing" aria-hidden="true">#</a> 2. Zero-Telemetry Dataset Processing</h2>
 <ul>
-<li><strong>100% Local Execution:</strong> Zedda processes your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster.</li>
-<li><strong>No External Data Transmissions:</strong> Zero dataset contents, sample rows, summary metrics, or column names leave your machine.</li>
+<li><strong>100% Local Execution:</strong> Core profiling, scanning, comparison, and cleaning process your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster.</li>
+<li><strong>No External Data Transmissions:</strong> Zero dataset contents, raw data rows, or telemetry beacons leave your machine during standard EDA operations.</li>
 <li><strong>No Usage Tracking:</strong> The core <code>zedda</code> package contains no telemetry, analytics beacons, or remote reporting code.</li>
 </ul>
+<h3 id="optional-ai-qa-features" tabindex="-1"><a class="header-anchor" href="#optional-ai-qa-features" aria-hidden="true">#</a> Optional AI Q&amp;A Features</h3>
+<p>If you explicitly opt in to AI Q&amp;A by providing an API key (<code>ZEDDA_AI_KEY</code>), offline regex patterns are attempted first locally. If offline heuristics do not match your question, metadata and aggregated summary statistics (such as column names, data types, null rates, and top correlations — <strong>never raw data rows</strong>) are transmitted over HTTPS to your configured AI inference endpoint.</p>
 <hr>
 <h2 id="3-website-documentation-usage" tabindex="-1"><a class="header-anchor" href="#3-website-documentation-usage" aria-hidden="true">#</a> 3. Website &amp; Documentation Usage</h2>
 <p>When visiting our documentation website (<code>public/docs</code> / web portal):</p>
@@ -321,6 +325,7 @@
   <ul class="toc-list">
     <li class="toc-item toc-item--h2"><a href="#1-overview-commitment-to-privacy" class="toc-link">1. Overview &amp;amp; Commitment to Privacy</a></li>
     <li class="toc-item toc-item--h2"><a href="#2-zero-telemetry-dataset-processing" class="toc-link">2. Zero-Telemetry Dataset Processing</a></li>
+    <li class="toc-item toc-item--h3"><a href="#optional-ai-qa-features" class="toc-link">Optional AI Q&amp;amp;A Features</a></li>
     <li class="toc-item toc-item--h2"><a href="#3-website-documentation-usage" class="toc-link">3. Website &amp;amp; Documentation Usage</a></li>
     <li class="toc-item toc-item--h2"><a href="#4-contact-us-support-communications" class="toc-link">4. Contact Us &amp;amp; Support Communications</a></li>
     <li class="toc-item toc-item--h2"><a href="#5-contact-information" class="toc-link">5. Contact Information</a></li>
