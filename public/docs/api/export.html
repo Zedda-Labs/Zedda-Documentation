@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Auto-clean a dataset with backup, audit trail, and one-call undo.">
+  <meta name="description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta name="generator" content="Zedda docs static generator">
 
   <!-- Production Security Headers -->
@@ -12,7 +12,7 @@
   <meta name="referrer" content="no-referrer-when-downgrade">
 
   <!-- SEO & Canonical Links -->
-  <link rel="canonical" href="https://zedda.io/api/clean.html">
+  <link rel="canonical" href="https://zedda.io/api/export.html">
   <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -20,13 +20,13 @@
   <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64x64.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
   <link rel="manifest" href="../assets/site.webmanifest">
-  <title>zedda.clean() — Zedda Docs</title>
+  <title>zedda.export() — Zedda Docs</title>
 
   <!-- Open Graph & Social Cards -->
-  <meta property="og:title" content="zedda.clean() — Zedda Docs">
-  <meta property="og:description" content="Auto-clean a dataset with backup, audit trail, and one-call undo.">
+  <meta property="og:title" content="zedda.export() — Zedda Docs">
+  <meta property="og:description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zedda.io/api/clean.html">
+  <meta property="og:url" content="https://zedda.io/api/export.html">
   <meta property="og:site_name" content="Zedda">
   <meta property="og:image" content="https://zedda.io/assets/logo.png">
 
@@ -34,8 +34,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Zeddalabs">
   <meta name="twitter:creator" content="@Zeddalabs">
-  <meta name="twitter:title" content="zedda.clean() — Zedda Docs">
-  <meta name="twitter:description" content="Auto-clean a dataset with backup, audit trail, and one-call undo.">
+  <meta name="twitter:title" content="zedda.export() — Zedda Docs">
+  <meta name="twitter:description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
@@ -69,9 +69,9 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "zedda.clean()",
-    "description": "Auto-clean a dataset with backup, audit trail, and one-call undo.",
-    "url": "https://zedda.io/api/clean.html",
+    "headline": "zedda.export()",
+    "description": "Top-level alias for report() — generate a self-contained offline HTML EDA report.",
+    "url": "https://zedda.io/api/export.html",
     "author": {
       "@type": "Organization",
       "name": "Zedda Labs",
@@ -110,7 +110,7 @@
     })();
   </script>
 </head>
-<body class="page-doc" data-current-id="api/clean">
+<body class="page-doc" data-current-id="api/export">
   <!-- Skip link for accessibility -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -210,11 +210,11 @@
   <a href="../api/warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">warnings()</a>
   <a href="../api/collect-warnings.html" class="sidebar-link" style="--depth: 1" aria-current="false">collect_warnings()</a>
   <a href="../api/fix.html" class="sidebar-link" style="--depth: 1" aria-current="false">fix()</a>
-  <a href="../api/clean.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">clean()</a>
+  <a href="../api/clean.html" class="sidebar-link" style="--depth: 1" aria-current="false">clean()</a>
   <a href="../api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
   <a href="../api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
   <a href="../api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
-  <a href="../api/export.html" class="sidebar-link" style="--depth: 1" aria-current="false">export()</a>
+  <a href="../api/export.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">export()</a>
   <a href="../api/validate.html" class="sidebar-link" style="--depth: 1" aria-current="false">validate()</a>
   <a href="../api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
   <a href="../api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
@@ -267,21 +267,23 @@
     <main class="main" id="main" role="main">
       <div class="main-inner">
         <div class="main-content-area">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../api/clean.html">Python API</a></li><li><span aria-current="page">clean()</span></li></ol></nav>
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../api/export.html">Python API</a></li><li><span aria-current="page">export()</span></li></ol></nav>
 
           <article class="content">
             <header class="content-header">
-         <h1 class="content-title">zedda.clean()</h1>
-         <p class="content-description">Auto-clean a dataset with backup, audit trail, and one-call undo.</p>
+         <h1 class="content-title">zedda.export()</h1>
+         <p class="content-description">Top-level alias for report() — generate a self-contained offline HTML EDA report.</p>
        </header>
             <div class="content-body">
-              <pre class="hljs code-block-pre" tabindex="0"><code class="language-python">zedda.clean(
-    path,
-    output=<span class="hljs-literal">None</span>,
-    sample_size=<span class="hljs-literal">None</span>,
-) -&gt; pandas.DataFrame | <span class="hljs-literal">None</span>
+              <pre class="hljs code-block-pre" tabindex="0"><code class="language-python">zedda.export(
+    data,
+    output: <span class="hljs-built_in">str</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+    title: <span class="hljs-built_in">str</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+    dark_mode: <span class="hljs-built_in">bool</span> = <span class="hljs-literal">True</span>,
+    sample_size: <span class="hljs-built_in">int</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+) -&gt; <span class="hljs-built_in">str</span>
 </code></pre>
-<p>Auto-clean a dataset with backup, audit trail, and one-call undo. This is the safe, autonomous variant of <a href="../api/fix.html"><code>fix(apply=True)</code></a>.</p>
+<p>Top-level alias of <a href="../api/report.html"><code>zedda.report()</code></a>. Generates and saves a standalone, zero-network-request HTML EDA report for a dataset.</p>
 <h2 id="arguments" tabindex="-1"><a class="header-anchor" href="#arguments" aria-hidden="true">#</a> Arguments</h2>
 <table>
 <thead>
@@ -294,96 +296,60 @@
 </thead>
 <tbody>
 <tr>
-<td><code>path</code></td>
+<td><code>data</code></td>
 <td><code>str</code> / <code>Path</code> / <code>DataFrame</code></td>
 <td><em>(required)</em></td>
-<td>Input dataset</td>
+<td>Input dataset path or in-memory DataFrame</td>
 </tr>
 <tr>
 <td><code>output</code></td>
 <td><code>str</code> / <code>Path</code> or <code>None</code></td>
 <td><code>None</code></td>
-<td>Where to write the cleaned file. <code>None</code> = overwrite the input path (after backup). For DataFrame input with <code>output=None</code>, no file is written.</td>
+<td>Output HTML path (defaults to <code>{stem}_report.html</code> in current directory)</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>str</code> or <code>None</code></td>
+<td><code>None</code></td>
+<td>Custom report title</td>
+</tr>
+<tr>
+<td><code>dark_mode</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Render report in dark theme</td>
 </tr>
 <tr>
 <td><code>sample_size</code></td>
 <td><code>int</code> or <code>None</code></td>
 <td><code>None</code></td>
-<td>Sample size in rows for the underlying scan</td>
+<td>Max rows to sample</td>
 </tr>
 </tbody>
 </table>
 <h2 id="returns" tabindex="-1"><a class="header-anchor" href="#returns" aria-hidden="true">#</a> Returns</h2>
-<ul>
-<li>File input, <code>output</code> set     → <code>None</code> (file written to <code>output</code>)</li>
-<li>File input, <code>output=None</code> → <code>None</code> (input file overwritten after backup)</li>
-<li>DataFrame input, <code>output=None</code> → <code>pandas.DataFrame</code> (cleaned, no file written)</li>
-<li>DataFrame input, <code>output</code> set     → <code>pandas.DataFrame</code> (cleaned, file also written)</li>
-</ul>
-<h2 id="lifecycle" tabindex="-1"><a class="header-anchor" href="#lifecycle" aria-hidden="true">#</a> Lifecycle</h2>
-<ol>
-<li><strong>Backup.</strong> Writes <code>{path}.zedda-backup</code> next to the original. Idempotent — if a backup already exists, Zedda uses the existing one.</li>
-<li><strong>Profile.</strong> Runs a full scan to detect every auto-fixable warning.</li>
-<li><strong>Apply fixes.</strong> Same logic as <code>fix(apply=True)</code>, plus optional fuzzy typo clustering if <code>[clean]</code> extra is installed.</li>
-<li><strong>Write cleaned file.</strong> (Unless input was a DataFrame and <code>output=None</code>.)</li>
-<li><strong>Write audit trail.</strong> JSON file at <code>{output_dir}/{stem}_cleaning_audit.json</code>. Audit-path traversal is checked — the audit file must live in the same directory as the output.</li>
-<li><strong>Return.</strong> <code>None</code> or <code>DataFrame</code> per the rules above.</li>
-</ol>
-<h2 id="zdcleanundo" tabindex="-1"><a class="header-anchor" href="#zdcleanundo" aria-hidden="true">#</a> zd.clean.undo()</h2>
-<pre class="hljs code-block-pre" tabindex="0"><code class="language-python">zedda.clean.undo(path)
-</code></pre>
-<p>Restores from the <code>.zedda-backup</code>. Raises <a href="../api/zedda-error.html"><code>ZeddaError</code></a> if no backup exists. Also importable as <code>zedda._clean_undo(path)</code>.</p>
+<p><code>str</code> — The absolute or relative path to the generated <code>.html</code> report.</p>
 <h2 id="example" tabindex="-1"><a class="header-anchor" href="#example" aria-hidden="true">#</a> Example</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
 
-<span class="hljs-comment"># Clean a file in place (backup written automatically)</span>
-zd.clean(<span class="hljs-string">&quot;data.csv&quot;</span>)
-<span class="hljs-comment"># data.csv is now cleaned; data.csv.zedda-backup holds the original</span>
-
-<span class="hljs-comment"># Restore</span>
-zd.clean.undo(<span class="hljs-string">&quot;data.csv&quot;</span>)
-
-<span class="hljs-comment"># Custom output path</span>
-zd.clean(<span class="hljs-string">&quot;data.csv&quot;</span>, output=<span class="hljs-string">&quot;clean.csv&quot;</span>)
-<span class="hljs-comment"># clean.csv is the cleaned version; clean_cleaning_audit.json records every fix</span>
-
-<span class="hljs-comment"># Clean a DataFrame</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-df = pd.read_csv(<span class="hljs-string">&quot;data.csv&quot;</span>)
-cleaned = zd.clean(df)
-<span class="hljs-built_in">print</span>(cleaned.shape)
+<span class="hljs-comment"># Generate HTML report</span>
+report_path = zd.export(<span class="hljs-string">&quot;data.csv&quot;</span>, output=<span class="hljs-string">&quot;eda_report.html&quot;</span>, title=<span class="hljs-string">&quot;Q3 Customer Analysis&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Report saved to <span class="hljs-subst">{report_path}</span>&quot;</span>)
 </code></pre>
-<h2 id="the-audit-trail" tabindex="-1"><a class="header-anchor" href="#the-audit-trail" aria-hidden="true">#</a> The audit trail</h2>
-<p><code>{stem}_cleaning_audit.json</code> records, for every fix applied:</p>
+<h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See Also</h2>
 <ul>
-<li>Column name</li>
-<li>Issue category (e.g. <code>missing_values</code>, <code>outliers</code>, <code>id_column</code>)</li>
-<li>Action taken (e.g. <code>fillna_median</code>, <code>clip_99th_percentile</code>, <code>drop</code>)</li>
-<li>Count of affected rows</li>
-<li>Timestamp</li>
-</ul>
-<h2 id="what-clean-does-not-do" tabindex="-1"><a class="header-anchor" href="#what-clean-does-not-do" aria-hidden="true">#</a> What <code>clean()</code> does not do</h2>
-<ul>
-<li>It does not deduplicate rows.</li>
-<li>It does not join columns from other datasets.</li>
-<li>It does not infer or fix datetime parsing errors.</li>
-<li>It does not run the <code>[ai]</code> LLM. Install <code>[clean]</code> for fuzzy typo clustering only.</li>
-</ul>
-<h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See also</h2>
-<ul>
-<li><a href="../guides/cleaning.html">Cleaning &amp; Fixing guide</a> — practical walkthrough.</li>
-<li><a href="../api/fix.html"><code>fix()</code></a> — generate code only, no mutation.</li>
-<li><a href="../api/collect-warnings.html"><code>collect_warnings()</code></a> — see what <code>clean()</code> will fix before running it.</li>
+<li><a href="../api/report.html"><code>zedda.report()</code></a> — Full details on HTML report sections, sparklines, and zero-request offline architecture.</li>
+<li><a href="../guides/reports.html">HTML Reports Guide</a> — In-depth guide with browser previews.</li>
 </ul>
 
             </div>
 
-            <nav class="prev-next" aria-label="Pagination"><a href="../api/fix.html" class="prev-next-card prev-next-card--prev">
+            <nav class="prev-next" aria-label="Pagination"><a href="../api/report.html" class="prev-next-card prev-next-card--prev">
       <span class="prev-next-label">Previous</span>
-      <span class="prev-next-title">fix()</span>
-    </a><a href="../api/merge.html" class="prev-next-card prev-next-card--next">
+      <span class="prev-next-title">report()</span>
+    </a><a href="../api/validate.html" class="prev-next-card prev-next-card--next">
       <span class="prev-next-label">Next</span>
-      <span class="prev-next-title">merge()</span>
+      <span class="prev-next-title">validate()</span>
     </a></nav>
           </article>
         </div>
@@ -394,12 +360,8 @@ cleaned = zd.clean(df)
   <ul class="toc-list">
     <li class="toc-item toc-item--h2"><a href="#arguments" class="toc-link">Arguments</a></li>
     <li class="toc-item toc-item--h2"><a href="#returns" class="toc-link">Returns</a></li>
-    <li class="toc-item toc-item--h2"><a href="#lifecycle" class="toc-link">Lifecycle</a></li>
-    <li class="toc-item toc-item--h2"><a href="#zdcleanundo" class="toc-link">zd.clean.undo()</a></li>
     <li class="toc-item toc-item--h2"><a href="#example" class="toc-link">Example</a></li>
-    <li class="toc-item toc-item--h2"><a href="#the-audit-trail" class="toc-link">The audit trail</a></li>
-    <li class="toc-item toc-item--h2"><a href="#what-clean-does-not-do" class="toc-link">What clean() does not do</a></li>
-    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link">See also</a></li>
+    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link">See Also</a></li>
   </ul>
 </nav>
 

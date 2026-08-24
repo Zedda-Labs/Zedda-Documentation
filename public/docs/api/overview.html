@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
+  <meta name="description" content="The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
   <meta name="generator" content="Zedda docs static generator">
 
   <!-- Production Security Headers -->
@@ -24,7 +24,7 @@
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:title" content="Python API Overview — Zedda Docs">
-  <meta property="og:description" content="The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
+  <meta property="og:description" content="The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zedda.io/api/overview.html">
   <meta property="og:site_name" content="Zedda">
@@ -35,7 +35,7 @@
   <meta name="twitter:site" content="@Zeddalabs">
   <meta name="twitter:creator" content="@Zeddalabs">
   <meta name="twitter:title" content="Python API Overview — Zedda Docs">
-  <meta name="twitter:description" content="The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
+  <meta name="twitter:description" content="The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.">
   <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
@@ -70,7 +70,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Python API Overview",
-    "description": "The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.",
+    "description": "The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.",
     "url": "https://zedda.io/api/overview.html",
     "author": {
       "@type": "Organization",
@@ -214,6 +214,8 @@
   <a href="../api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
   <a href="../api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
   <a href="../api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="../api/export.html" class="sidebar-link" style="--depth: 1" aria-current="false">export()</a>
+  <a href="../api/validate.html" class="sidebar-link" style="--depth: 1" aria-current="false">validate()</a>
   <a href="../api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
   <a href="../api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
     </div>
@@ -270,7 +272,7 @@
           <article class="content">
             <header class="content-header">
          <h1 class="content-title">Python API Overview</h1>
-         <p class="content-description">The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.</p>
+         <p class="content-description">The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.</p>
        </header>
             <div class="content-body">
               <p>The Zedda Python package exposes a small, flat API. Every public function is a top-level attribute of <code>zedda</code> (typically imported as <code>zd</code>).</p>
@@ -279,7 +281,7 @@
 <h2 id="public-api-surface" tabindex="-1"><a class="header-anchor" href="#public-api-surface" aria-hidden="true">#</a> Public API surface</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-python">__all__ = [
     <span class="hljs-string">&quot;profile&quot;</span>, <span class="hljs-string">&quot;scan&quot;</span>, <span class="hljs-string">&quot;compare&quot;</span>, <span class="hljs-string">&quot;ml_ready&quot;</span>, <span class="hljs-string">&quot;warnings&quot;</span>, <span class="hljs-string">&quot;fix&quot;</span>, <span class="hljs-string">&quot;clean&quot;</span>,
-    <span class="hljs-string">&quot;merge&quot;</span>, <span class="hljs-string">&quot;ask&quot;</span>, <span class="hljs-string">&quot;report&quot;</span>, <span class="hljs-string">&quot;export&quot;</span>, <span class="hljs-string">&quot;collect_warnings&quot;</span>,
+    <span class="hljs-string">&quot;merge&quot;</span>, <span class="hljs-string">&quot;ask&quot;</span>, <span class="hljs-string">&quot;report&quot;</span>, <span class="hljs-string">&quot;export&quot;</span>, <span class="hljs-string">&quot;collect_warnings&quot;</span>, <span class="hljs-string">&quot;validate&quot;</span>,
     <span class="hljs-string">&quot;ZeddaError&quot;</span>, <span class="hljs-string">&quot;__version__&quot;</span>,
 ]
 </code></pre>
@@ -360,10 +362,16 @@
 <td>Self-contained HTML report</td>
 </tr>
 <tr>
-<td><a href="../api/report.html"><code>export</code></a></td>
+<td><a href="../api/export.html"><code>export()</code></a></td>
 <td><code>str</code> (path)</td>
 <td>No</td>
-<td>Alias of <code>report()</code></td>
+<td>Top-level alias of <code>report()</code></td>
+</tr>
+<tr>
+<td><a href="../api/validate.html"><code>validate()</code></a></td>
+<td><code>ValidationReport</code></td>
+<td>Configurable</td>
+<td>Declarative data contract validation</td>
 </tr>
 </tbody>
 </table>
