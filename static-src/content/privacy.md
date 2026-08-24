@@ -17,9 +17,12 @@ Whether you use our Python library, C++ core, or browse our documentation, your 
 
 ## 2. Zero-Telemetry Dataset Processing
 
-- **100% Local Execution:** Zedda processes your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster. 
-- **No External Data Transmissions:** Zero dataset contents, sample rows, summary metrics, or column names leave your machine.
+- **100% Local Execution:** Core profiling, scanning, comparison, and cleaning process your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster.
+- **No External Data Transmissions:** Zero dataset contents, raw data rows, or telemetry beacons leave your machine during standard EDA operations.
 - **No Usage Tracking:** The core `zedda` package contains no telemetry, analytics beacons, or remote reporting code.
+
+### Optional AI Q&A Features
+If you explicitly opt in to AI Q&A by providing an API key (`ZEDDA_AI_KEY`), offline regex patterns are attempted first locally. If offline heuristics do not match your question, metadata and aggregated summary statistics (such as column names, data types, null rates, and top correlations — **never raw data rows**) are transmitted over HTTPS to your configured AI inference endpoint.
 
 ---
 
