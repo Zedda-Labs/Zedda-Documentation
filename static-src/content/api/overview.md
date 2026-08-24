@@ -11,7 +11,7 @@ import zedda as zd
 ```python
 __all__ = [
     "profile", "scan", "compare", "ml_ready", "warnings", "fix", "clean",
-    "merge", "ask", "report", "export", "collect_warnings",
+    "merge", "ask", "report", "export", "collect_warnings", "validate",
     "ZeddaError", "__version__",
 ]
 ```
@@ -29,7 +29,8 @@ __all__ = [
 | [`merge()`](#api/merge)           | `DataFrame`               | Yes     | Combine multiple files |
 | [`ask()`](#api/ask)               | `str` or `None`           | Configurable | Plain-English Q&A |
 | [`report()`](#api/report)         | `str` (path)               | No      | Self-contained HTML report |
-| [`export`](#api/report)           | `str` (path)               | No      | Alias of `report()` |
+| [`export()`](#api/export)         | `str` (path)               | No      | Top-level alias of `report()` |
+| [`validate()`](#api/validate)     | `ValidationReport`         | Configurable | Declarative data contract validation |
 
 ## Module constants
 
