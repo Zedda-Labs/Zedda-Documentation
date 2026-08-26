@@ -477,10 +477,11 @@ pip install "zedda[parquet]"
 ## 2. Profile a file
 
 ```bash
-python -c "import zedda as zd; zd.profile('https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv')"
+# Profile an online dataset via pandas:
+python -c "import pandas as pd, zedda as zd; df = pd.read_csv('https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'); zd.profile(df)"
 ```
 
-Or, in a script:
+Or, in a script with a local file:
 
 ```python
 import zedda as zd
@@ -1239,7 +1240,7 @@ The report makes **no outbound network requests** — verified by an integration
 
 # CLI Reference
 
-Zedda ships a `zedda` command-line tool with 11 subcommands. It is built with [Typer](https://typer.tiangolo.com/) and installed automatically by `pip install zedda`.
+Zedda ships a `zedda` command-line tool with 14 subcommands. It is built with [Typer](https://typer.tiangolo.com/) and installed automatically by `pip install zedda`.
 
 The entry point is defined in `pyproject.toml` as `zedda = "zedda.cli:app"`. The Typer app has `add_completion=False` and `rich_markup_mode="rich"`.
 
@@ -1266,6 +1267,7 @@ Running `zedda` with no subcommand prints an ASCII-art banner (in the brand oran
 | [`zedda merge`](#zedda-merge)     | `PATHS... [-o combined.csv]`              | Merge multiple files |
 | [`zedda report`](#zedda-report)   | `PATH [-o report.html]`                   | Export HTML report |
 | [`zedda ask`](#zedda-ask)         | `PATH QUESTION`                           | Plain-English Q&A |
+| [`zedda validate`](#zedda-validate) | `PATH --rules RULES [--fail/--no-fail]` | Validate data contract rules |
 | [`zedda info`](#zedda-info)       | `PATH`                                    | Instant file metadata (no full scan) |
 | [`zedda version`](#zedda-version) | _(none)_                                   | Print installed version |
 
@@ -1398,6 +1400,25 @@ zedda ask data.csv "any nulls here?"
 zedda ask data.csv "which columns should I drop?"
 ```
 
+## zedda validate
+
+```bash
+zedda validate PATH --rules RULES [--fail/--no-fail]
+```
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `-r, --rules` | path | _(required)_ | Path to JSON or YAML data contract rules file. |
+| `--fail / --no-fail` | bool flag | `--fail` | Exit with non-zero status code if rules fail (useful for CI/CD pipelines). |
+
+Validate a dataset against declarative quality contract rules in CI/CD. See [Python API: validate()](#api/validate).
+
+Example:
+
+```bash
+zedda validate data.csv --rules contract.json --fail
+```
+
 ## zedda info
 
 ```bash
@@ -1442,7 +1463,7 @@ import zedda as zd
 ```python
 __all__ = [
     "profile", "scan", "compare", "ml_ready", "warnings", "fix", "clean",
-    "merge", "ask", "report", "export", "collect_warnings",
+    "merge", "ask", "report", "export", "collect_warnings", "validate",
     "ZeddaError", "__version__",
 ]
 ```
@@ -1460,7 +1481,8 @@ __all__ = [
 | [`merge()`](#api/merge)           | `DataFrame`               | Yes     | Combine multiple files |
 | [`ask()`](#api/ask)               | `str` or `None`           | Configurable | Plain-English Q&A |
 | [`report()`](#api/report)         | `str` (path)               | No      | Self-contained HTML report |
-| [`export`](#api/report)           | `str` (path)               | No      | Alias of `report()` |
+| [`export()`](#api/export)         | `str` (path)               | No      | Top-level alias of `report()` |
+| [`validate()`](#api/validate)     | `ValidationReport`         | Configurable | Declarative data contract validation |
 
 ## Module constants
 
@@ -2390,6 +2412,146 @@ zedda.export("data.csv", output="rep.html")
 - [HTML Reports guide](#guides/reports) — practical walkthrough.
 - [CLI: zedda report](#cli) — the command-line equivalent.
 - [`profile()`](#api/profile) — the terminal equivalent.
+
+
+=================================================================
+## [zedda.export()](https://zedda.io/api/export.md)
+=================================================================
+
+# zedda.export()
+
+```python
+zedda.export(
+    data,
+    output: str | None = None,
+    title: str | None = None,
+    dark_mode: bool = True,
+    sample_size: int | None = None,
+) -> str
+```
+
+Top-level alias of [`zedda.report()`](#api/report). Generates and saves a standalone, zero-network-request HTML EDA report for a dataset.
+
+## Arguments
+
+| Argument | Type | Default | Description |
+|---|---|---|---|
+| `data` | `str` / `Path` / `DataFrame` | _(required)_ | Input dataset path or in-memory DataFrame |
+| `output` | `str` / `Path` or `None` | `None` | Output HTML path (defaults to `{stem}_report.html` in current directory) |
+| `title` | `str` or `None` | `None` | Custom report title |
+| `dark_mode` | `bool` | `True` | Render report in dark theme |
+| `sample_size` | `int` or `None` | `None` | Max rows to sample |
+
+## Returns
+
+`str` — The absolute or relative path to the generated `.html` report.
+
+## Example
+
+```python
+import zedda as zd
+
+# Generate HTML report
+report_path = zd.export("data.csv", output="eda_report.html", title="Q3 Customer Analysis")
+print(f"Report saved to {report_path}")
+```
+
+## See Also
+
+- [`zedda.report()`](#api/report) — Full details on HTML report sections, sparklines, and zero-request offline architecture.
+- [HTML Reports Guide](#guides/reports) — In-depth guide with browser previews.
+
+
+=================================================================
+## [zedda.validate()](https://zedda.io/api/validate.md)
+=================================================================
+
+# zedda.validate()
+
+```python
+zedda.validate(
+    data,
+    rules: dict[str, dict[str, Any]],
+    profile=None,
+    fail_on_error: bool = False,
+) -> ValidationReport
+```
+
+Validate a dataset against a declarative data quality contract. Evaluates column existence, null thresholds, value ranges, allowed types, and cardinality constraints.
+
+## Arguments
+
+| Argument | Type | Default | Description |
+|---|---|---|---|
+| `data` | `str` / `Path` / `DataFrame` | _(required)_ | Input dataset path or in-memory DataFrame |
+| `rules` | `dict[str, dict[str, Any]]` | _(required)_ | Declarative column validation rules dictionary |
+| `profile` | `DatasetProfile` or `None` | `None` | Pre-computed profile. If `None`, `zd.scan(data)` is run automatically |
+| `fail_on_error` | `bool` | `False` | If `True`, raises `ZeddaError` if any critical rule fails |
+
+## Supported Rule Specifications
+
+Rules are defined as a mapping from column name to constraint dictionary:
+
+```python
+rules = {
+    "age": {
+        "max_null_pct": 5.0,        # Maximum allowed null percentage
+        "min_val": 0,                # Minimum allowed numeric value
+        "max_val": 120,              # Maximum allowed numeric value
+        "allowed_types": ["int", "float"], # Allowed data types
+    },
+    "email": {
+        "max_null_pct": 0.0,
+        "min_unique": 10,            # Minimum unique values
+    },
+}
+```
+
+| Rule | Type | Description |
+|---|---|---|
+| `max_null_pct` | `float` | Maximum null percentage allowed (0.0 to 100.0) |
+| `min_val` | `float` / `int` | Lower bound for numeric columns |
+| `max_val` | `float` / `int` | Upper bound for numeric columns |
+| `allowed_types` | `list[str]` | Allowed type strings (e.g. `["int", "float", "str", "bool"]`) |
+| `min_unique` | `int` | Minimum unique count (via HyperLogLog / exact count) |
+| `max_unique` | `int` | Maximum unique count |
+
+## Returns
+
+A `ValidationReport` object containing:
+
+- `is_valid` (`bool`): `True` if all rules passed with zero breaches.
+- `passed_rules` (`int`): Count of rules satisfied.
+- `failed_rules` (`int`): Count of rules breached.
+- `columns` (`list`): Per-column breach breakdown.
+- `summary()` (`str`): Multi-line formatted terminal summary.
+
+## Raises
+
+[`ZeddaError`](#api/zedda-error) if `fail_on_error=True` and one or more validation rules fail.
+
+## Example
+
+```python
+import zedda as zd
+
+contract = {
+    "fare": {"min_val": 0.0, "max_null_pct": 1.0},
+    "survived": {"allowed_types": ["int", "bool"]},
+}
+
+report = zd.validate("titanic.csv", rules=contract)
+
+if not report.is_valid:
+    print(f"Validation failed: {report.failed_rules} breaches detected")
+    print(report.summary())
+```
+
+## CLI Equivalent
+
+```bash
+zedda validate data.csv --rules contract.json --fail
+```
 
 
 =================================================================
@@ -5043,9 +5205,12 @@ Whether you use our Python library, C++ core, or browse our documentation, your 
 
 ## 2. Zero-Telemetry Dataset Processing
 
-- **100% Local Execution:** Zedda processes your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster. 
-- **No External Data Transmissions:** Zero dataset contents, sample rows, summary metrics, or column names leave your machine.
+- **100% Local Execution:** Core profiling, scanning, comparison, and cleaning process your datasets (CSV, Parquet, Arrow, JSON) locally on your workstation, laptop, or compute cluster.
+- **No External Data Transmissions:** Zero dataset contents, raw data rows, or telemetry beacons leave your machine during standard EDA operations.
 - **No Usage Tracking:** The core `zedda` package contains no telemetry, analytics beacons, or remote reporting code.
+
+### Optional AI Q&A Features
+If you explicitly opt in to AI Q&A by providing an API key (`ZEDDA_AI_KEY`), offline regex patterns are attempted first locally. If offline heuristics do not match your question, metadata and aggregated summary statistics (such as column names, data types, null rates, and top correlations — **never raw data rows**) are transmitted over HTTPS to your configured AI inference endpoint.
 
 ---
 

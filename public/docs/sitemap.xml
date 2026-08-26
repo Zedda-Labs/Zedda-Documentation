@@ -23,6 +23,8 @@
   <url><loc>https://zedda.io/api/merge.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/api/ask.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/api/report.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://zedda.io/api/export.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://zedda.io/api/validate.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/api/zedda-error.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/api/dataset-profile.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://zedda.io/cpp-api/overview.html</loc><changefreq>weekly</changefreq></url>

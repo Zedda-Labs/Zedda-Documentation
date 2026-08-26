@@ -214,6 +214,8 @@
   <a href="./api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
   <a href="./api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
   <a href="./api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
+  <a href="./api/export.html" class="sidebar-link" style="--depth: 1" aria-current="false">export()</a>
+  <a href="./api/validate.html" class="sidebar-link" style="--depth: 1" aria-current="false">validate()</a>
   <a href="./api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
   <a href="./api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
     </div>
@@ -273,7 +275,7 @@
          <p class="content-description">The zedda command-line tool — 11 subcommands for profiling, scanning, fixing, cleaning, merging, and more.</p>
        </header>
             <div class="content-body">
-              <p>Zedda ships a <code>zedda</code> command-line tool with 11 subcommands. It is built with <a href="https://typer.tiangolo.com/" target="_blank" rel="noopener noreferrer">Typer</a> and installed automatically by <code>pip install zedda</code>.</p>
+              <p>Zedda ships a <code>zedda</code> command-line tool with 14 subcommands. It is built with <a href="https://typer.tiangolo.com/" target="_blank" rel="noopener noreferrer">Typer</a> and installed automatically by <code>pip install zedda</code>.</p>
 <p>The entry point is defined in <code>pyproject.toml</code> as <code>zedda = &quot;zedda.cli:app&quot;</code>. The Typer app has <code>add_completion=False</code> and <code>rich_markup_mode=&quot;rich&quot;</code>.</p>
 <h2 id="synopsis" tabindex="-1"><a class="header-anchor" href="#synopsis" aria-hidden="true">#</a> Synopsis</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda [--<span class="hljs-built_in">help</span>] [--version] &lt;<span class="hljs-built_in">command</span>&gt; [args]
@@ -343,6 +345,11 @@
 <td><a href="#zedda-ask"><code>zedda ask</code></a></td>
 <td><code>PATH QUESTION</code></td>
 <td>Plain-English Q&amp;A</td>
+</tr>
+<tr>
+<td><a href="#zedda-validate"><code>zedda validate</code></a></td>
+<td><code>PATH --rules RULES [--fail/--no-fail]</code></td>
+<td>Validate data contract rules</td>
 </tr>
 <tr>
 <td><a href="#zedda-info"><code>zedda info</code></a></td>
@@ -499,6 +506,37 @@
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda ask data.csv <span class="hljs-string">&quot;any nulls here?&quot;</span>
 zedda ask data.csv <span class="hljs-string">&quot;which columns should I drop?&quot;</span>
 </code></pre>
+<h2 id="zedda-validate" tabindex="-1"><a class="header-anchor" href="#zedda-validate" aria-hidden="true">#</a> zedda validate</h2>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda validate PATH --rules RULES [--fail/--no-fail]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-r, --rules</code></td>
+<td>path</td>
+<td><em>(required)</em></td>
+<td>Path to JSON or YAML data contract rules file.</td>
+</tr>
+<tr>
+<td><code>--fail / --no-fail</code></td>
+<td>bool flag</td>
+<td><code>--fail</code></td>
+<td>Exit with non-zero status code if rules fail (useful for CI/CD pipelines).</td>
+</tr>
+</tbody>
+</table>
+<p>Validate a dataset against declarative quality contract rules in CI/CD. See <a href="./api/validate.html">Python API: validate()</a>.</p>
+<p>Example:</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda validate data.csv --rules contract.json --fail
+</code></pre>
 <h2 id="zedda-info" tabindex="-1"><a class="header-anchor" href="#zedda-info" aria-hidden="true">#</a> zedda info</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda info PATH
 </code></pre>
@@ -545,6 +583,7 @@ zedda ask data.csv <span class="hljs-string">&quot;which columns should I drop?&
     <li class="toc-item toc-item--h2"><a href="#zedda-merge" class="toc-link">zedda merge</a></li>
     <li class="toc-item toc-item--h2"><a href="#zedda-report" class="toc-link">zedda report</a></li>
     <li class="toc-item toc-item--h2"><a href="#zedda-ask" class="toc-link">zedda ask</a></li>
+    <li class="toc-item toc-item--h2"><a href="#zedda-validate" class="toc-link">zedda validate</a></li>
     <li class="toc-item toc-item--h2"><a href="#zedda-info" class="toc-link">zedda info</a></li>
     <li class="toc-item toc-item--h2"><a href="#zedda-version" class="toc-link">zedda version</a></li>
     <li class="toc-item toc-item--h2"><a href="#exit-codes" class="toc-link">Exit codes</a></li>

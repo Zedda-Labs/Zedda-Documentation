@@ -124,7 +124,7 @@ const navigation = [
         id: "api/overview",
         label: "Overview",
         title: "Python API Overview",
-        description: "The 11 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.",
+        description: "The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.",
         get url() { return "api/overview.html"; },
       },
       {
@@ -214,6 +214,22 @@ const navigation = [
         title: "zedda.report()",
         description: "Generate a self-contained offline HTML EDA report.",
         get url() { return "api/report.html"; },
+      },
+      {
+        type: "leaf",
+        id: "api/export",
+        label: "export()",
+        title: "zedda.export()",
+        description: "Top-level alias for report() — generate a self-contained offline HTML EDA report.",
+        get url() { return "api/export.html"; },
+      },
+      {
+        type: "leaf",
+        id: "api/validate",
+        label: "validate()",
+        title: "zedda.validate()",
+        description: "Validate a dataset against declarative quality contract rules.",
+        get url() { return "api/validate.html"; },
       },
       {
         type: "leaf",

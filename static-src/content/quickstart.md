@@ -17,10 +17,11 @@ pip install "zedda[parquet]"
 ## 2. Profile a file
 
 ```bash
-python -c "import zedda as zd; zd.profile('https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv')"
+# Profile an online dataset via pandas:
+python -c "import pandas as pd, zedda as zd; df = pd.read_csv('https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'); zd.profile(df)"
 ```
 
-Or, in a script:
+Or, in a script with a local file:
 
 ```python
 import zedda as zd

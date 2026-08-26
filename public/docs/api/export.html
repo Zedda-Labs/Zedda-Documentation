@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Detect schema drift, distribution shift, and missing columns between two datasets.">
+  <meta name="description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta name="generator" content="Zedda docs static generator">
 
   <!-- Production Security Headers -->
@@ -12,7 +12,7 @@
   <meta name="referrer" content="no-referrer-when-downgrade">
 
   <!-- SEO & Canonical Links -->
-  <link rel="canonical" href="https://zedda.io/guides/comparing.html">
+  <link rel="canonical" href="https://zedda.io/api/export.html">
   <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -20,13 +20,13 @@
   <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64x64.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
   <link rel="manifest" href="../assets/site.webmanifest">
-  <title>Comparing Datasets — Zedda Docs</title>
+  <title>zedda.export() — Zedda Docs</title>
 
   <!-- Open Graph & Social Cards -->
-  <meta property="og:title" content="Comparing Datasets — Zedda Docs">
-  <meta property="og:description" content="Detect schema drift, distribution shift, and missing columns between two datasets.">
+  <meta property="og:title" content="zedda.export() — Zedda Docs">
+  <meta property="og:description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zedda.io/guides/comparing.html">
+  <meta property="og:url" content="https://zedda.io/api/export.html">
   <meta property="og:site_name" content="Zedda">
   <meta property="og:image" content="https://zedda.io/assets/logo.png">
 
@@ -34,8 +34,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Zeddalabs">
   <meta name="twitter:creator" content="@Zeddalabs">
-  <meta name="twitter:title" content="Comparing Datasets — Zedda Docs">
-  <meta name="twitter:description" content="Detect schema drift, distribution shift, and missing columns between two datasets.">
+  <meta name="twitter:title" content="zedda.export() — Zedda Docs">
+  <meta name="twitter:description" content="Top-level alias for report() — generate a self-contained offline HTML EDA report.">
   <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
@@ -69,9 +69,9 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "Comparing Datasets",
-    "description": "Detect schema drift, distribution shift, and missing columns between two datasets.",
-    "url": "https://zedda.io/guides/comparing.html",
+    "headline": "zedda.export()",
+    "description": "Top-level alias for report() — generate a self-contained offline HTML EDA report.",
+    "url": "https://zedda.io/api/export.html",
     "author": {
       "@type": "Organization",
       "name": "Zedda Labs",
@@ -110,7 +110,7 @@
     })();
   </script>
 </head>
-<body class="page-doc" data-current-id="guides/comparing">
+<body class="page-doc" data-current-id="api/export">
   <!-- Skip link for accessibility -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -191,7 +191,7 @@
     <summary class="sidebar-group-title">Guides</summary>
     <div class="sidebar-group-children">
   <a href="../guides/profiling.html" class="sidebar-link" style="--depth: 1" aria-current="false">Profiling Datasets</a>
-  <a href="../guides/comparing.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">Comparing Datasets</a>
+  <a href="../guides/comparing.html" class="sidebar-link" style="--depth: 1" aria-current="false">Comparing Datasets</a>
   <a href="../guides/cleaning.html" class="sidebar-link" style="--depth: 1" aria-current="false">Cleaning &amp; Fixing</a>
   <a href="../guides/ml-readiness.html" class="sidebar-link" style="--depth: 1" aria-current="false">ML Readiness</a>
   <a href="../guides/ai-qa.html" class="sidebar-link" style="--depth: 1" aria-current="false">AI Q&amp;A</a>
@@ -214,7 +214,7 @@
   <a href="../api/merge.html" class="sidebar-link" style="--depth: 1" aria-current="false">merge()</a>
   <a href="../api/ask.html" class="sidebar-link" style="--depth: 1" aria-current="false">ask()</a>
   <a href="../api/report.html" class="sidebar-link" style="--depth: 1" aria-current="false">report()</a>
-  <a href="../api/export.html" class="sidebar-link" style="--depth: 1" aria-current="false">export()</a>
+  <a href="../api/export.html" class="sidebar-link sidebar-link--active" style="--depth: 1" aria-current="page">export()</a>
   <a href="../api/validate.html" class="sidebar-link" style="--depth: 1" aria-current="false">validate()</a>
   <a href="../api/zedda-error.html" class="sidebar-link" style="--depth: 1" aria-current="false">ZeddaError</a>
   <a href="../api/dataset-profile.html" class="sidebar-link" style="--depth: 1" aria-current="false">DatasetProfile</a>
@@ -267,100 +267,89 @@
     <main class="main" id="main" role="main">
       <div class="main-inner">
         <div class="main-content-area">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../guides/comparing.html">Guides</a></li><li><span aria-current="page">Comparing Datasets</span></li></ol></nav>
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../api/export.html">Python API</a></li><li><span aria-current="page">export()</span></li></ol></nav>
 
           <article class="content">
             <header class="content-header">
-         <h1 class="content-title">Comparing Datasets</h1>
-         <p class="content-description">Detect schema drift, distribution shift, and missing columns between two datasets.</p>
+         <h1 class="content-title">zedda.export()</h1>
+         <p class="content-description">Top-level alias for report() — generate a self-contained offline HTML EDA report.</p>
        </header>
             <div class="content-body">
-              <p><a href="../api/compare.html"><code>zd.compare(path_a, path_b)</code></a> detects drift between two snapshots of a dataset. It is the right tool for train/test validation, recurring pipeline checks, and detecting silent schema changes.</p>
-<h2 id="what-it-checks" tabindex="-1"><a class="header-anchor" href="#what-it-checks" aria-hidden="true">#</a> What it checks</h2>
-<p>A comparison runs five checks in order and prints a Rich comparison table:</p>
-<ol>
-<li><strong>Schema diff</strong> — columns present in A but missing in B, and vice versa. Also flags type mismatches on columns present in both.</li>
-<li><strong>Null-rate changes</strong> — for each shared column, the delta in null percentage from A to B.</li>
-<li><strong>Distribution shift</strong> — for each shared numeric column, the relative shift in mean from A to B. Stable if |shift| &lt; 5%, shift if |shift| ≥ 10%. ID-like and binary-target columns are skipped.</li>
-<li><strong>New categories</strong> — for each shared string column, categories present in B but not in A.</li>
-<li><strong>Verdict</strong> — <code>PASS</code>, <code>REVIEW</code>, or <code>FAIL</code>.</li>
-</ol>
-<h2 id="the-verdict-logic" tabindex="-1"><a class="header-anchor" href="#the-verdict-logic" aria-hidden="true">#</a> The verdict logic</h2>
-<p>The verdict is the bottom-line signal you can assert on in CI:</p>
+              <pre class="hljs code-block-pre" tabindex="0"><code class="language-python">zedda.export(
+    data,
+    output: <span class="hljs-built_in">str</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+    title: <span class="hljs-built_in">str</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+    dark_mode: <span class="hljs-built_in">bool</span> = <span class="hljs-literal">True</span>,
+    sample_size: <span class="hljs-built_in">int</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>,
+) -&gt; <span class="hljs-built_in">str</span>
+</code></pre>
+<p>Top-level alias of <a href="../api/report.html"><code>zedda.report()</code></a>. Generates and saves a standalone, zero-network-request HTML EDA report for a dataset.</p>
+<h2 id="arguments" tabindex="-1"><a class="header-anchor" href="#arguments" aria-hidden="true">#</a> Arguments</h2>
 <table>
 <thead>
 <tr>
-<th>Verdict</th>
-<th>Triggered when</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>FAIL</code></td>
-<td>Any column missing in B that is not target-like, or any type mismatch</td>
+<td><code>data</code></td>
+<td><code>str</code> / <code>Path</code> / <code>DataFrame</code></td>
+<td><em>(required)</em></td>
+<td>Input dataset path or in-memory DataFrame</td>
 </tr>
 <tr>
-<td><code>REVIEW</code></td>
-<td>Any distribution shift on a shared numeric column, or any new category in a string column</td>
+<td><code>output</code></td>
+<td><code>str</code> / <code>Path</code> or <code>None</code></td>
+<td><code>None</code></td>
+<td>Output HTML path (defaults to <code>{stem}_report.html</code> in current directory)</td>
 </tr>
 <tr>
-<td><code>PASS</code></td>
-<td>None of the above</td>
+<td><code>title</code></td>
+<td><code>str</code> or <code>None</code></td>
+<td><code>None</code></td>
+<td>Custom report title</td>
+</tr>
+<tr>
+<td><code>dark_mode</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Render report in dark theme</td>
+</tr>
+<tr>
+<td><code>sample_size</code></td>
+<td><code>int</code> or <code>None</code></td>
+<td><code>None</code></td>
+<td>Max rows to sample</td>
 </tr>
 </tbody>
 </table>
-<h3 id="target-like-columns" tabindex="-1"><a class="header-anchor" href="#target-like-columns" aria-hidden="true">#</a> Target-like columns</h3>
-<p>If a column name starts with <code>survived</code>, <code>target</code>, <code>label</code>, <code>y</code>, <code>class</code>, <code>outcome</code>, <code>is_</code>, or <code>has_</code>, it is treated as target-like. A target-like column missing in B is downgraded from a <code>FAIL</code> trigger to a <code>REVIEW</code> trigger — the assumption is that you are comparing train (with target) to test (without target).</p>
-<h2 id="example-train-vs-test" tabindex="-1"><a class="header-anchor" href="#example-train-vs-test" aria-hidden="true">#</a> Example: train vs. test</h2>
+<h2 id="returns" tabindex="-1"><a class="header-anchor" href="#returns" aria-hidden="true">#</a> Returns</h2>
+<p><code>str</code> — The absolute or relative path to the generated <code>.html</code> report.</p>
+<h2 id="example" tabindex="-1"><a class="header-anchor" href="#example" aria-hidden="true">#</a> Example</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
 
-zd.compare(<span class="hljs-string">&quot;train.csv&quot;</span>, <span class="hljs-string">&quot;test.csv&quot;</span>)
+<span class="hljs-comment"># Generate HTML report</span>
+report_path = zd.export(<span class="hljs-string">&quot;data.csv&quot;</span>, output=<span class="hljs-string">&quot;eda_report.html&quot;</span>, title=<span class="hljs-string">&quot;Q3 Customer Analysis&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Report saved to <span class="hljs-subst">{report_path}</span>&quot;</span>)
 </code></pre>
-<p>Typical output for a healthy train/test split:</p>
+<h2 id="see-also" tabindex="-1"><a class="header-anchor" href="#see-also" aria-hidden="true">#</a> See Also</h2>
 <ul>
-<li>Schema: <code>PASS</code> (same columns)</li>
-<li>Null-rate delta: small (&lt; 1%) on every shared column</li>
-<li>Distribution shift: stable on every shared numeric column</li>
-<li>New categories: none in categorical columns</li>
-<li>Verdict: <code>PASS</code></li>
-</ul>
-<p>Typical output for a problematic split:</p>
-<ul>
-<li>Schema: <code>FAIL</code> — column <code>age</code> is missing in test.csv</li>
-<li>Distribution shift: shift on <code>fare</code> (mean went from 32 to 58)</li>
-<li>New categories: <code>cabin</code> has 47 new categories in test</li>
-<li>Verdict: <code>FAIL</code></li>
-</ul>
-<h2 id="comparing-dataframes" tabindex="-1"><a class="header-anchor" href="#comparing-dataframes" aria-hidden="true">#</a> Comparing DataFrames</h2>
-<p><code>compare()</code> accepts DataFrames too:</p>
-<pre class="hljs code-block-pre" tabindex="0"><code class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> zedda <span class="hljs-keyword">as</span> zd
-
-train = pd.read_csv(<span class="hljs-string">&quot;train.csv&quot;</span>)
-test  = pd.read_csv(<span class="hljs-string">&quot;test.csv&quot;</span>)
-zd.compare(train, test)
-</code></pre>
-<h2 id="forcing-correlation" tabindex="-1"><a class="header-anchor" href="#forcing-correlation" aria-hidden="true">#</a> Forcing correlation</h2>
-<p>Like <code>profile()</code>, <code>compare()</code> accepts a <code>correlate=False</code> default that skips O(N²) correlation on wide datasets. Set <code>correlate=True</code> to force it.</p>
-<pre class="hljs code-block-pre" tabindex="0"><code class="language-python">zd.compare(<span class="hljs-string">&quot;train.csv&quot;</span>, <span class="hljs-string">&quot;test.csv&quot;</span>, correlate=<span class="hljs-literal">True</span>)
-</code></pre>
-<h2 id="programmatic-use" tabindex="-1"><a class="header-anchor" href="#programmatic-use" aria-hidden="true">#</a> Programmatic use</h2>
-<p><code>compare()</code> returns <code>None</code> — it is a print-first function. For CI, wrap it in a script that captures the printed output, or use <a href="../api/scan.html"><code>scan()</code></a> on both files and compute your own diff using the <a href="../api/overview.html"><code>_compare</code> module’s helpers</a> (<code>compute_schema_diff</code>, <code>compute_distribution_shift</code>, <code>compute_verdict</code>).</p>
-<h2 id="next-steps" tabindex="-1"><a class="header-anchor" href="#next-steps" aria-hidden="true">#</a> Next steps</h2>
-<ul>
-<li><a href="../api/compare.html">Python API: compare()</a> — full argument reference.</li>
-<li><a href="../guides/ml-readiness.html">ML Readiness</a> — score whether a dataset is ready to train on.</li>
-<li><a href="../architecture.html">Architecture</a> — the engine internals.</li>
+<li><a href="../api/report.html"><code>zedda.report()</code></a> — Full details on HTML report sections, sparklines, and zero-request offline architecture.</li>
+<li><a href="../guides/reports.html">HTML Reports Guide</a> — In-depth guide with browser previews.</li>
 </ul>
 
             </div>
 
-            <nav class="prev-next" aria-label="Pagination"><a href="../guides/profiling.html" class="prev-next-card prev-next-card--prev">
+            <nav class="prev-next" aria-label="Pagination"><a href="../api/report.html" class="prev-next-card prev-next-card--prev">
       <span class="prev-next-label">Previous</span>
-      <span class="prev-next-title">Profiling Datasets</span>
-    </a><a href="../guides/cleaning.html" class="prev-next-card prev-next-card--next">
+      <span class="prev-next-title">report()</span>
+    </a><a href="../api/validate.html" class="prev-next-card prev-next-card--next">
       <span class="prev-next-label">Next</span>
-      <span class="prev-next-title">Cleaning &amp; Fixing</span>
+      <span class="prev-next-title">validate()</span>
     </a></nav>
           </article>
         </div>
@@ -369,14 +358,10 @@ zd.compare(train, test)
           <nav class="toc" aria-label="On this page">
   <p class="toc-title">On this page</p>
   <ul class="toc-list">
-    <li class="toc-item toc-item--h2"><a href="#what-it-checks" class="toc-link">What it checks</a></li>
-    <li class="toc-item toc-item--h2"><a href="#the-verdict-logic" class="toc-link">The verdict logic</a></li>
-    <li class="toc-item toc-item--h3"><a href="#target-like-columns" class="toc-link">Target-like columns</a></li>
-    <li class="toc-item toc-item--h2"><a href="#example-train-vs-test" class="toc-link">Example: train vs. test</a></li>
-    <li class="toc-item toc-item--h2"><a href="#comparing-dataframes" class="toc-link">Comparing DataFrames</a></li>
-    <li class="toc-item toc-item--h2"><a href="#forcing-correlation" class="toc-link">Forcing correlation</a></li>
-    <li class="toc-item toc-item--h2"><a href="#programmatic-use" class="toc-link">Programmatic use</a></li>
-    <li class="toc-item toc-item--h2"><a href="#next-steps" class="toc-link">Next steps</a></li>
+    <li class="toc-item toc-item--h2"><a href="#arguments" class="toc-link">Arguments</a></li>
+    <li class="toc-item toc-item--h2"><a href="#returns" class="toc-link">Returns</a></li>
+    <li class="toc-item toc-item--h2"><a href="#example" class="toc-link">Example</a></li>
+    <li class="toc-item toc-item--h2"><a href="#see-also" class="toc-link">See Also</a></li>
   </ul>
 </nav>
 
