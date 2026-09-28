@@ -10,8 +10,15 @@
 const fs = require("fs");
 const path = require("path");
 
-const SRC = "/home/z/my-project/src/lib/docs/content";
-const OUT = "/home/z/my-project/static-src/content";
+const ROOT = path.resolve(__dirname, "..");
+const SRC = path.join(ROOT, "src", "lib", "docs", "content");
+const OUT = path.join(ROOT, "static-src", "content");
+
+if (!fs.existsSync(SRC)) {
+  console.log("No TypeScript docs source found to extract. Content is maintained in static-src/content/.");
+  process.exit(0);
+}
+
 fs.mkdirSync(OUT, { recursive: true });
 
 // Read all content files
