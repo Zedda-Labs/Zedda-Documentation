@@ -1182,7 +1182,6 @@ html.dark .page-home .content {
 .page-home .sidebar:not(.is-open),
 .page-home .toc-wrapper,
 .page-home .breadcrumbs,
-.page-home .skip-link,
 .page-home .footer:not(.landing-footer),
 .page-home .content-header {
   display: none !important;
@@ -2436,24 +2435,55 @@ html.dark .landing-footer .brand-logo--dark {
   width: auto;
 }
 
-/* Dark mode landing page overrides */
-html.dark .page-home .topbar-nav-link {
+/* Universal dark mode topbar navigation overrides */
+html.dark .topbar-nav-link {
   color: #ffffff !important;
 }
 
-html.dark .page-home .topbar-nav-link:hover {
+html.dark .topbar-nav-link:hover {
   color: #3b82f6 !important;
 }
 
-html.dark .page-home .theme-toggle,
-html.dark .page-home .topbar-link {
+html.dark .theme-toggle,
+html.dark .topbar-link {
   color: #ffffff !important;
 }
 
-html.dark .page-home .theme-toggle:hover,
-html.dark .page-home .topbar-link:hover {
+html.dark .theme-toggle:hover,
+html.dark .topbar-link:hover {
   background: rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
+}
+
+/* Content banner logo dual-theme switching */
+.content-banner-logo {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: 1.5rem auto;
+  text-align: center;
+}
+.content-banner-logo .brand-logo--light {
+  display: block !important;
+  width: 100%;
+  height: auto;
+}
+.content-banner-logo .brand-logo--dark {
+  display: none !important;
+  width: 100%;
+  height: auto;
+}
+html.dark .content-banner-logo .brand-logo--light {
+  display: none !important;
+}
+html.dark .content-banner-logo .brand-logo--dark {
+  display: block !important;
+}
+
+/* Fallback for any raw logo-dark image in content in light mode */
+html:not(.dark) .content-body img[src*="logo-dark.png"],
+html:not(.dark) .content-body picture source[srcset*="logo-dark.png"] ~ img {
+  filter: invert(0.9) hue-rotate(180deg);
 }
 
 html.dark .page-home .hero-badge {
