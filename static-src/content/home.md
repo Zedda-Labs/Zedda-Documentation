@@ -127,15 +127,15 @@ is_home: true
 <section class="stats-section">
 <div class="stats-grid">
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-downloads" data-target="51188" data-suffix="+">51,188+</div>
+<div class="stat-value" id="live-pypi-downloads" data-target="64309" data-suffix="+">64,309+</div>
 <div class="stat-label">Total downloads</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-installs" data-target="17025" data-suffix="+">17,025+</div>
+<div class="stat-value" id="live-pypi-installs" data-target="19833" data-suffix="+">19,833+</div>
 <div class="stat-label">PyPI installs</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" data-target="10">10</div>
+<div class="stat-value" data-target="13">13</div>
 <div class="stat-label">One-call functions</div>
 </div>
 <div class="stat-card scroll-reveal">
