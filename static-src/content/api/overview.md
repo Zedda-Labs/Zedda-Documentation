@@ -35,7 +35,7 @@ __all__ = [
 ## Module constants
 
 ```python
-zedda.__version__   # "0.4.8"
+zedda.__version__   # "0.4.9"
 zedda.__author__    # "zedda contributors"
 ```
 
