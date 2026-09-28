@@ -128,19 +128,20 @@ The build output in `public/docs/` is pure static HTML. Copy it to:
 
 ## What's included
 
-### Documentation content (46 pages, zero hallucination)
+### Documentation content (51 pages, zero hallucination)
 
-Every page is grounded in a full audit of the Zedda repository at v0.4.8:
+Every page is grounded in a full audit of the Zedda repository at v0.4.9:
 
 - **Home** — compact, fits one viewport, uses the actual Zedda logos
 - **Getting Started**: Introduction, Installation, Quick Start
 - **Guides**: Profiling, Comparing, Cleaning & Fixing, ML Readiness, AI Q&A, HTML Reports
-- **CLI Reference** — all 11 `zedda` subcommands
-- **Python API** (14 pages): Overview + `scan`, `profile`, `compare`, `ml_ready`, `warnings`, `collect_warnings`, `fix`, `clean`, `merge`, `ask`, `report`, `ZeddaError`, `DatasetProfile`
+- **CLI Reference** — all 14 `zedda` subcommands
+- **Python API** (16 pages): Overview + `scan`, `profile`, `compare`, `ml_ready`, `warnings`, `collect_warnings`, `fix`, `clean`, `merge`, `ask`, `report`, `export`, `validate`, `ZeddaError`, `DatasetProfile`
 - **C++ API** (11 pages): Overview + `ColumnAccumulator`, `CorrelationEngine`, `ProfileResult`, `HyperLogLog`, `MmapFile`, `SimdScanner`, `CsvStreamReader`, `ProfileBuilder`, `ArrowProfiler`, `ParsingUtils`
 - **Configuration, Architecture, Examples, Benchmarks**
 - **Contributing** (5 pages): Setup, Standards, Structure, Security, Releasing
-- **Changelog** (full 0.1.0 → 0.4.8), **License & Third-Party Notices**
+- **Changelog** (full 0.1.0 → 0.4.9), **License & Third-Party Notices**
+- **Legal Policies** (2 pages): Privacy Policy, Cookie Policy
 
 ### Design system (original, MkDocs-inspired)
 
