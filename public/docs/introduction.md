@@ -2,11 +2,11 @@
 
 **Zedda** is a C++17-powered EDA and data cleaning engine for Python. It profiles, cleans, and validates datasets from a single Python call, streaming data in constant memory so the same API scales from a 900-row CSV to a terabyte-scale Parquet file.
 
-The project lives at [github.com/Zedda-Labs/Zedda](https://github.com/Zedda-Labs/Zedda) and is published on [PyPI](https://pypi.org/project/zedda) under the MIT license. The current release is **0.4.8**.
+The project lives at [github.com/Zedda-Labs/Zedda](https://github.com/Zedda-Labs/Zedda) and is published on [PyPI](https://pypi.org/project/zedda) under the MIT license. The current release is **0.4.9**.
 
 ## What Zedda does
 
-Zedda gives you ten top-level functions, each focused on one job:
+Zedda gives you 13 top-level functions, each focused on one job:
 
 | Function | Job |
 |---|---|
@@ -21,6 +21,8 @@ Zedda gives you ten top-level functions, each focused on one job:
 | `zd.merge()` | Safely combine multiple files |
 | `zd.ask()` | Plain-English dataset Q&A (offline patterns + optional LLM) |
 | `zd.report()` | Export a self-contained offline HTML report |
+| `zd.export()` | Top-level alias of `report()` for quick export |
+| `zd.validate()` | Assert declarative data contract rules on schema & nulls |
 
 Every function accepts a file path **or** a pandas / polars `DataFrame` directly — a file path is never required.
 

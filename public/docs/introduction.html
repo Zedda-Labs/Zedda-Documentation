@@ -126,7 +126,7 @@
         <a href="./index.html" class="brand" aria-label="Zedda home">
           <img class="brand-logo brand-logo--light" src="./assets/logo.png" alt="Zedda" width="120" height="28">
           <img class="brand-logo brand-logo--dark" src="./assets/logo-dark.png" alt="Zedda" width="120" height="28">
-          <span class="brand-version">v0.4.8</span>
+          <span class="brand-version">v0.4.9</span>
         </a>
       </div>
 
@@ -276,9 +276,9 @@
        </header>
             <div class="content-body">
               <p><strong>Zedda</strong> is a C++17-powered EDA and data cleaning engine for Python. It profiles, cleans, and validates datasets from a single Python call, streaming data in constant memory so the same API scales from a 900-row CSV to a terabyte-scale Parquet file.</p>
-<p>The project lives at <a href="https://github.com/Zedda-Labs/Zedda" target="_blank" rel="noopener noreferrer">github.com/Zedda-Labs/Zedda</a> and is published on <a href="https://pypi.org/project/zedda" target="_blank" rel="noopener noreferrer">PyPI</a> under the MIT license. The current release is <strong>0.4.8</strong>.</p>
+<p>The project lives at <a href="https://github.com/Zedda-Labs/Zedda" target="_blank" rel="noopener noreferrer">github.com/Zedda-Labs/Zedda</a> and is published on <a href="https://pypi.org/project/zedda" target="_blank" rel="noopener noreferrer">PyPI</a> under the MIT license. The current release is <strong>0.4.9</strong>.</p>
 <h2 id="what-zedda-does" tabindex="-1"><a class="header-anchor" href="#what-zedda-does" aria-hidden="true">#</a> What Zedda does</h2>
-<p>Zedda gives you ten top-level functions, each focused on one job:</p>
+<p>Zedda gives you 13 top-level functions, each focused on one job:</p>
 <table>
 <thead>
 <tr>
@@ -330,6 +330,14 @@
 <tr>
 <td><code>zd.report()</code></td>
 <td>Export a self-contained offline HTML report</td>
+</tr>
+<tr>
+<td><code>zd.export()</code></td>
+<td>Top-level alias of <code>report()</code> for quick export</td>
+</tr>
+<tr>
+<td><code>zd.validate()</code></td>
+<td>Assert declarative data contract rules on schema &amp; nulls</td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +416,7 @@
             <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
           </div>
           <div class="footer-right">
-            <span class="footer-version">v0.4.8</span>
+            <span class="footer-version">v0.4.9</span>
           </div>
         </div>
       </footer>
