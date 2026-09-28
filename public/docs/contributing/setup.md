@@ -37,8 +37,22 @@ pip install cmake ninja
 ## Editable install with dev extras
 
 ```bash
+# Standard editable install:
 pip install -e ".[dev]"
+
+# Fast incremental rebuild (builds C++ extension directly via CMake + scikit-build-core):
+pip install --no-build-isolation -e .
+
+# Windows (Release build, optimized runtime):
+pip install --no-build-isolation -e . --config-settings="cmake.build-type=Release"
 ```
+
+> [!TIP]
+> If pip tries to fetch build dependencies from PyPI and fails behind a proxy/firewall, pre-install `scikit-build-core`, `nanobind`, `cmake`, and `ninja`, then run with `--no-build-isolation`:
+> ```bash
+> pip install scikit-build-core nanobind cmake ninja
+> pip install --no-build-isolation -e .
+> ```
 
 The `[dev]` extra installs:
 
