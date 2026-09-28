@@ -126,7 +126,7 @@
         <a href="../index.html" class="brand" aria-label="Zedda home">
           <img class="brand-logo brand-logo--light" src="../assets/logo.png" alt="Zedda" width="120" height="28">
           <img class="brand-logo brand-logo--dark" src="../assets/logo-dark.png" alt="Zedda" width="120" height="28">
-          <span class="brand-version">v0.4.8</span>
+          <span class="brand-version">v0.4.9</span>
         </a>
       </div>
 
@@ -295,18 +295,18 @@
 <td>New features, backwards-compatible</td>
 </tr>
 <tr>
-<td>Patch (0.4.7 → 0.4.8)</td>
+<td>Patch (0.4.8 → 0.4.9)</td>
 <td>Bug fixes only</td>
 </tr>
 </tbody>
 </table>
-<p>The current version is <strong>0.4.8</strong>.</p>
-<p>Version is single-sourced from <code>python/zedda/__init__.py:93</code> (<code>__version__ = &quot;0.4.8&quot;</code>) and consumed via <code>scikit_build_core.metadata.regex</code> provider in <code>pyproject.toml</code> (SEC-PKG01). It is mirrored in:</p>
+<p>The current version is <strong>0.4.9</strong>.</p>
+<p>Version is single-sourced from <code>python/zedda/__init__.py</code> (<code>__version__ = &quot;0.4.9&quot;</code>) and consumed via <code>scikit_build_core.metadata.regex</code> provider in <code>pyproject.toml</code> (SEC-PKG01). It is mirrored in:</p>
 <ul>
-<li><code>CMakeLists.txt:11</code> — <code>project(zedda VERSION 0.4.8 ...)</code></li>
-<li><code>CITATION.cff:7</code> — <code>version: 0.4.8</code></li>
-<li><code>python/zedda/cli.py:34</code> — CLI fallback string</li>
-<li><code>python/zedda/report.py:714</code> — HTML report footer</li>
+<li><code>CMakeLists.txt:11</code> — <code>project(zedda VERSION 0.4.9 ...)</code></li>
+<li><code>CITATION.cff:7</code> — <code>version: 0.4.9</code></li>
+<li><code>python/zedda/cli.py</code> — CLI fallback string</li>
+<li><code>python/zedda/report.py</code> — HTML report footer</li>
 </ul>
 <div class="callout callout--warning">
       <div class="callout-title">Warning</div>
@@ -316,7 +316,7 @@
 <h2 id="the-6-step-release-process" tabindex="-1"><a class="header-anchor" href="#the-6-step-release-process" aria-hidden="true">#</a> The 6-step release process</h2>
 <h3 id="1-bump-the-version" tabindex="-1"><a class="header-anchor" href="#1-bump-the-version" aria-hidden="true">#</a> 1. Bump the version</h3>
 <p>Use the <code>bump.py</code> helper:</p>
-<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">python bump.py 0.4.8 0.4.9
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">python bump.py 0.4.9 0.4.10
 </code></pre>
 <p>This sed-replaces the version string in 5 files:</p>
 <ul>
@@ -439,7 +439,7 @@ git push origin main --tags
             <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
           </div>
           <div class="footer-right">
-            <span class="footer-version">v0.4.8</span>
+            <span class="footer-version">v0.4.9</span>
           </div>
         </div>
       </footer>
