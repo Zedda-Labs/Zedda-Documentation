@@ -110,7 +110,7 @@ const navigation = [
     id: "cli",
     label: "CLI Reference",
     title: "CLI Reference",
-    description: "The zedda command-line tool — 11 subcommands for profiling, scanning, fixing, cleaning, merging, and more.",
+    description: "The zedda command-line tool — 14 subcommands for profiling, scanning, fixing, cleaning, merging, validating, and more.",
     get url() { return "cli.html"; },
   },
   {
@@ -124,7 +124,7 @@ const navigation = [
         id: "api/overview",
         label: "Overview",
         title: "Python API Overview",
-        description: "The 13 public functions in zedda, plus ZeddaError and DatasetProfileWrapper.",
+        description: "The 13 public functions in zedda, plus ZeddaError and DatasetProfile.",
         get url() { return "api/overview.html"; },
       },
       {
@@ -430,7 +430,7 @@ const navigation = [
     id: "changelog",
     label: "Changelog",
     title: "Changelog",
-    description: "All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.",
+    description: "All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.",
     get url() { return "changelog.html"; },
   },
   {
