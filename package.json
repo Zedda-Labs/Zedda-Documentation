@@ -1,4 +1,12 @@
 {
+  "name": "zedda-documentation",
+  "version": "0.4.9",
+  "description": "Zedda static documentation portal",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-docs.js",
+    "serve": "npx serve public/docs"
+  },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
