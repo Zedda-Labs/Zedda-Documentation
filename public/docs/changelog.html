@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta name="description" content="All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.">
   <meta name="generator" content="Zedda docs static generator">
 
   <!-- Production Security Headers -->
@@ -24,7 +24,7 @@
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:title" content="Changelog — Zedda Docs">
-  <meta property="og:description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta property="og:description" content="All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zedda.io/changelog.html">
   <meta property="og:site_name" content="Zedda">
@@ -35,7 +35,7 @@
   <meta name="twitter:site" content="@Zeddalabs">
   <meta name="twitter:creator" content="@Zeddalabs">
   <meta name="twitter:title" content="Changelog — Zedda Docs">
-  <meta name="twitter:description" content="All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.">
+  <meta name="twitter:description" content="All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.">
   <meta name="twitter:image" content="https://zedda.io/assets/logo.png">
 
   <!-- JSON-LD Structured Data Schema -->
@@ -70,7 +70,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Changelog",
-    "description": "All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.",
+    "description": "All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.",
     "url": "https://zedda.io/changelog.html",
     "author": {
       "@type": "Organization",
@@ -126,7 +126,7 @@
         <a href="./index.html" class="brand" aria-label="Zedda home">
           <img class="brand-logo brand-logo--light" src="./assets/logo.png" alt="Zedda" width="120" height="28">
           <img class="brand-logo brand-logo--dark" src="./assets/logo-dark.png" alt="Zedda" width="120" height="28">
-          <span class="brand-version">v0.4.8</span>
+          <span class="brand-version">v0.4.9</span>
         </a>
       </div>
 
@@ -272,12 +272,25 @@
           <article class="content">
             <header class="content-header">
          <h1 class="content-title">Changelog</h1>
-         <p class="content-description">All Zedda releases from 0.1.0 to 0.4.8 — Keep-a-Changelog format.</p>
+         <p class="content-description">All Zedda releases from 0.1.0 to 0.4.9 — Keep-a-Changelog format.</p>
        </header>
             <div class="content-body">
               <p>All notable changes to Zedda are documented in <a href="https://github.com/Zedda-Labs/Zedda/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer"><code>CHANGELOG.md</code></a> in <a href="https://keepachangelog.com/en/1.1.0/" target="_blank" rel="noopener noreferrer">Keep-a-Changelog</a> 1.1.0 format. This page mirrors that file.</p>
 <h2 id="unreleased" tabindex="-1"><a class="header-anchor" href="#unreleased" aria-hidden="true">#</a> [Unreleased]</h2>
 <p><em>No unreleased changes.</em></p>
+<h2 id="049-2026-09-12-post-audit-stability-release" tabindex="-1"><a class="header-anchor" href="#049-2026-09-12-post-audit-stability-release" aria-hidden="true">#</a> [0.4.9] — 2026-09-12 — Post-Audit Stability Release</h2>
+<h3 id="fixed" tabindex="-1"><a class="header-anchor" href="#fixed" aria-hidden="true">#</a> Fixed</h3>
+<ul>
+<li><strong>Core Stability:</strong> Fixed P0 crash in <code>profile()</code> when passing dataframes containing only datetime columns.</li>
+<li><strong>Type Safety:</strong> Resolved P1 <code>FutureWarning</code> during <code>astype(float)</code> casting of boolean inputs in <code>fix()</code> operations.</li>
+<li><strong>API Clarifications:</strong>
+<ul>
+<li><code>merge()</code> raises a clear <code>TypeError</code> explaining it requires a list of paths if a DataFrame is passed to <code>output</code>.</li>
+<li><code>validate()</code> now accepts both <code>rules=</code> and <code>schema=</code> as kwargs for backward compatibility.</li>
+<li>Enhanced docstrings for <code>merge()</code> and <code>validate()</code> to reflect standard usage.</li>
+</ul>
+</li>
+</ul>
 <h2 id="048-2026-07-25-pre-release-audit-cicd-hardening" tabindex="-1"><a class="header-anchor" href="#048-2026-07-25-pre-release-audit-cicd-hardening" aria-hidden="true">#</a> [0.4.8] — 2026-07-25 — Pre-Release Audit &amp; CI/CD Hardening</h2>
 <h3 id="fixed-release-cicd" tabindex="-1"><a class="header-anchor" href="#fixed-release-cicd" aria-hidden="true">#</a> Fixed — Release &amp; CI/CD</h3>
 <ul>
@@ -387,7 +400,7 @@
 <li><strong>(Batch 61-63):</strong> 33 more tests + L-20 fix. <code>_resolve.py</code> 21%→93%, <code>_scan.py</code> count_lines 0%→100%, <code>cli.py</code> 0%→52% (10 CLI smoke tests). L-20: <code>_ask_zedda_ai</code> except cascade now includes exception type. Total tests: 222 (was 189). Coverage: 66.9%.</li>
 </ul>
 <h2 id="046-2026-07-10" tabindex="-1"><a class="header-anchor" href="#046-2026-07-10" aria-hidden="true">#</a> [0.4.6] — 2026-07-10</h2>
-<h3 id="fixed" tabindex="-1"><a class="header-anchor" href="#fixed" aria-hidden="true">#</a> Fixed</h3>
+<h3 id="fixed-1" tabindex="-1"><a class="header-anchor" href="#fixed-1" aria-hidden="true">#</a> Fixed</h3>
 <ul>
 <li><strong>Installation:</strong> Bumped the <code>pyarrow</code> upper bound constraint from <code>&lt;20</code> to <code>&lt;27</code> (allowing up to pyarrow 26.x). This resolves a severe installation failure on Python 3.14 (and newer) where pip would fall back to a source build due to missing wheels in older pyarrow versions.</li>
 </ul>
@@ -396,7 +409,7 @@
 <li><strong>BREAKING CHANGE:</strong> <code>pyarrow</code> is no longer a core dependency, making the base installation significantly faster and smaller for CSV-only users. If you rely on Parquet files, Arrow IPC, or pandas DataFrame inputs, you must now explicitly install the parquet extra: <code>pip install &quot;zedda[parquet]&quot;</code>.</li>
 </ul>
 <h2 id="045-2026-07-09" tabindex="-1"><a class="header-anchor" href="#045-2026-07-09" aria-hidden="true">#</a> [0.4.5] — 2026-07-09</h2>
-<h3 id="fixed-1" tabindex="-1"><a class="header-anchor" href="#fixed-1" aria-hidden="true">#</a> Fixed</h3>
+<h3 id="fixed-2" tabindex="-1"><a class="header-anchor" href="#fixed-2" aria-hidden="true">#</a> Fixed</h3>
 <ul>
 <li><strong>BUG 1:</strong> Fixed an issue where <code>zd.scan(df)</code> and <code>zd.profile(df)</code> would silently swallow <code>ImportError</code> if <code>pyarrow</code> was missing, incorrectly throwing an <code>Unsupported input type</code> error.</li>
 <li><strong>BUG 2:</strong> Fixed <code>zd.clean()</code> and <code>zd.fix(apply=True)</code> crashing on numeric columns containing non-numeric garbage values by coercing them using <code>pd.to_numeric(errors='coerce')</code> prior to aggregations.</li>
@@ -445,7 +458,7 @@
 <li><code>docker_publish.yml</code>: Added GHCR, smoke test, multi-arch on tag pushes only.</li>
 <li><code>.gitignore</code>: Deduplicated (was doubled) and added missing entries.</li>
 </ul>
-<h3 id="fixed-2" tabindex="-1"><a class="header-anchor" href="#fixed-2" aria-hidden="true">#</a> Fixed</h3>
+<h3 id="fixed-3" tabindex="-1"><a class="header-anchor" href="#fixed-3" aria-hidden="true">#</a> Fixed</h3>
 <ul>
 <li>Fixed bug where <code>zd.fix()</code> applied <code>fillna</code> instead of <code>drop</code> to string columns &gt;50% null.</li>
 <li>Fixed bug where <code>zd.profile()</code> smart warnings icons were failing to render due to <code>x/!/i</code> char mismatch.</li>
@@ -506,6 +519,8 @@
   <p class="toc-title">On this page</p>
   <ul class="toc-list">
     <li class="toc-item toc-item--h2"><a href="#unreleased" class="toc-link">[Unreleased]</a></li>
+    <li class="toc-item toc-item--h2"><a href="#049-2026-09-12-post-audit-stability-release" class="toc-link">[0.4.9] — 2026-09-12 — Post-Audit Stability Release</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed" class="toc-link">Fixed</a></li>
     <li class="toc-item toc-item--h2"><a href="#048-2026-07-25-pre-release-audit-cicd-hardening" class="toc-link">[0.4.8] — 2026-07-25 — Pre-Release Audit &amp;amp; CI/CD Hardening</a></li>
     <li class="toc-item toc-item--h3"><a href="#fixed-release-cicd" class="toc-link">Fixed — Release &amp;amp; CI/CD</a></li>
     <li class="toc-item toc-item--h2"><a href="#045-2026-07-15-audit-remediation-patch-release" class="toc-link">[0.4.5] — 2026-07-15 — Audit Remediation Patch Release</a></li>
@@ -517,15 +532,15 @@
     <li class="toc-item toc-item--h3"><a href="#refactor" class="toc-link">Refactor</a></li>
     <li class="toc-item toc-item--h3"><a href="#tests" class="toc-link">Tests</a></li>
     <li class="toc-item toc-item--h2"><a href="#046-2026-07-10" class="toc-link">[0.4.6] — 2026-07-10</a></li>
-    <li class="toc-item toc-item--h3"><a href="#fixed" class="toc-link">Fixed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-1" class="toc-link">Fixed</a></li>
     <li class="toc-item toc-item--h3"><a href="#changed-1" class="toc-link">Changed</a></li>
     <li class="toc-item toc-item--h2"><a href="#045-2026-07-09" class="toc-link">[0.4.5] — 2026-07-09</a></li>
-    <li class="toc-item toc-item--h3"><a href="#fixed-1" class="toc-link">Fixed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-2" class="toc-link">Fixed</a></li>
     <li class="toc-item toc-item--h3"><a href="#changed-2" class="toc-link">Changed</a></li>
     <li class="toc-item toc-item--h2"><a href="#044-2026-07-05" class="toc-link">[0.4.4] — 2026-07-05</a></li>
     <li class="toc-item toc-item--h3"><a href="#added" class="toc-link">Added</a></li>
     <li class="toc-item toc-item--h3"><a href="#changed-3" class="toc-link">Changed</a></li>
-    <li class="toc-item toc-item--h3"><a href="#fixed-2" class="toc-link">Fixed</a></li>
+    <li class="toc-item toc-item--h3"><a href="#fixed-3" class="toc-link">Fixed</a></li>
     <li class="toc-item toc-item--h2"><a href="#020-2026-06-28" class="toc-link">[0.2.0] — 2026-06-28</a></li>
     <li class="toc-item toc-item--h3"><a href="#added-1" class="toc-link">Added</a></li>
     <li class="toc-item toc-item--h2"><a href="#010-2026-06-15" class="toc-link">[0.1.0] — 2026-06-15</a></li>
@@ -553,7 +568,7 @@
             <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
           </div>
           <div class="footer-right">
-            <span class="footer-version">v0.4.8</span>
+            <span class="footer-version">v0.4.9</span>
           </div>
         </div>
       </footer>
