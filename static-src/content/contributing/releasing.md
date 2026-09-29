@@ -10,16 +10,16 @@ Zedda follows [Semantic Versioning](https://semver.org/):
 |---|---|
 | Major (0.x → 1.0)    | Breaking API changes |
 | Minor (0.4.x → 0.5.0) | New features, backwards-compatible |
-| Patch (0.4.7 → 0.4.8) | Bug fixes only |
+| Patch (0.4.8 → 0.4.9) | Bug fixes only |
 
-The current version is **0.4.8**.
+The current version is **0.4.9**.
 
-Version is single-sourced from `python/zedda/__init__.py:93` (`__version__ = "0.4.8"`) and consumed via `scikit_build_core.metadata.regex` provider in `pyproject.toml` (SEC-PKG01). It is mirrored in:
+Version is single-sourced from `python/zedda/__init__.py` (`__version__ = "0.4.9"`) and consumed via `scikit_build_core.metadata.regex` provider in `pyproject.toml` (SEC-PKG01). It is mirrored in:
 
-- `CMakeLists.txt:11` — `project(zedda VERSION 0.4.8 ...)`
-- `CITATION.cff:7` — `version: 0.4.8`
-- `python/zedda/cli.py:34` — CLI fallback string
-- `python/zedda/report.py:714` — HTML report footer
+- `CMakeLists.txt:11` — `project(zedda VERSION 0.4.9 ...)`
+- `CITATION.cff:7` — `version: 0.4.9`
+- `python/zedda/cli.py` — CLI fallback string
+- `python/zedda/report.py` — HTML report footer
 
 ::::warning
 `conda-recipe/meta.yaml` is at version `0.4.5` — out of sync. The recipe's SHA256 is also a placeholder. This needs to be bumped manually before the next conda release.
@@ -32,7 +32,7 @@ Version is single-sourced from `python/zedda/__init__.py:93` (`__version__ = "0.
 Use the `bump.py` helper:
 
 ```bash
-python bump.py 0.4.8 0.4.9
+python bump.py 0.4.9 0.4.10
 ```
 
 This sed-replaces the version string in 5 files:

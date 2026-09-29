@@ -135,15 +135,15 @@ is_home: true
 <section class="stats-section">
 <div class="stats-grid">
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-downloads" data-target="51188" data-suffix="+">51,188+</div>
+<div class="stat-value" id="live-pypi-downloads" data-target="64309" data-suffix="+">64,309+</div>
 <div class="stat-label">Total downloads</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" id="live-pypi-installs" data-target="17025" data-suffix="+">17,025+</div>
+<div class="stat-value" id="live-pypi-installs" data-target="19833" data-suffix="+">19,833+</div>
 <div class="stat-label">PyPI installs</div>
 </div>
 <div class="stat-card scroll-reveal">
-<div class="stat-value" data-target="10">10</div>
+<div class="stat-value" data-target="13">13</div>
 <div class="stat-label">One-call functions</div>
 </div>
 <div class="stat-card scroll-reveal">
@@ -267,11 +267,11 @@ Contact Us
 
 **Zedda** is a C++17-powered EDA and data cleaning engine for Python. It profiles, cleans, and validates datasets from a single Python call, streaming data in constant memory so the same API scales from a 900-row CSV to a terabyte-scale Parquet file.
 
-The project lives at [github.com/Zedda-Labs/Zedda](https://github.com/Zedda-Labs/Zedda) and is published on [PyPI](https://pypi.org/project/zedda) under the MIT license. The current release is **0.4.8**.
+The project lives at [github.com/Zedda-Labs/Zedda](https://github.com/Zedda-Labs/Zedda) and is published on [PyPI](https://pypi.org/project/zedda) under the MIT license. The current release is **0.4.9**.
 
 ## What Zedda does
 
-Zedda gives you ten top-level functions, each focused on one job:
+Zedda gives you 13 top-level functions, each focused on one job:
 
 | Function | Job |
 |---|---|
@@ -286,6 +286,8 @@ Zedda gives you ten top-level functions, each focused on one job:
 | `zd.merge()` | Safely combine multiple files |
 | `zd.ask()` | Plain-English dataset Q&A (offline patterns + optional LLM) |
 | `zd.report()` | Export a self-contained offline HTML report |
+| `zd.export()` | Top-level alias of `report()` for quick export |
+| `zd.validate()` | Assert declarative data contract rules on schema & nulls |
 
 Every function accepts a file path **or** a pandas / polars `DataFrame` directly — a file path is never required.
 
@@ -393,10 +395,18 @@ pip install zedda
 zedda version
 ```
 
-You should see `0.4.8` (or the version you installed). To make sure the native extension loaded, run:
+You should see `0.4.9` (or the version you installed). To make sure the native extension loaded, run:
 
 ```bash
 python -c "import zedda as zd; print(zd.__version__)"
+```
+
+### High-Performance Builds (x86-64-v3 / AVX2)
+
+Prebuilt wheels on PyPI support all 64-bit x86 CPUs with runtime AVX2/AVX-512 dispatch in the scanner. For full compiler auto-vectorization across the entire C++ engine on modern CPUs (Intel Haswell+, AMD Zen+):
+
+```bash
+CMAKE_ARGS="-DZEDDA_TARGET_X86_64_V3=ON -DZEDDA_ENABLE_LTO=ON" pip install --no-binary zedda zedda
 ```
 
 ## Install from source
@@ -429,7 +439,7 @@ A multi-arch Docker image (`linux/amd64` and `linux/arm64`) is published on ever
 The runtime image is ~200 MB, runs as a non-root user (`zedda`, uid 1000), and includes a 5-minute health check.
 
 ```bash
-docker run --rm -v "$PWD:/data" ghcr.io/zedda-labs/zedda:0.4.8 \
+docker run --rm -v "$PWD:/data" ghcr.io/zedda-labs/zedda:0.4.9 \
   zedda run /data/titanic.csv
 ```
 
@@ -451,7 +461,7 @@ Install the `[parquet]` extra: `pip install "zedda[parquet]"`. The error message
 
 - [Quick Start](#quickstart) — profile your first dataset in 30 seconds.
 - [CLI Reference](#cli) — every `zedda` subcommand.
-- [Python API](#api/overview) — the 11 public functions.
+- [Python API](#api/overview) — the 13 public functions.
 
 
 =================================================================
@@ -1487,7 +1497,7 @@ __all__ = [
 ## Module constants
 
 ```python
-zedda.__version__   # "0.4.8"
+zedda.__version__   # "0.4.9"
 zedda.__author__    # "zedda contributors"
 ```
 
@@ -4200,8 +4210,22 @@ pip install cmake ninja
 ## Editable install with dev extras
 
 ```bash
+# Standard editable install:
 pip install -e ".[dev]"
+
+# Fast incremental rebuild (builds C++ extension directly via CMake + scikit-build-core):
+pip install --no-build-isolation -e .
+
+# Windows (Release build, optimized runtime):
+pip install --no-build-isolation -e . --config-settings="cmake.build-type=Release"
 ```
+
+> [!TIP]
+> If pip tries to fetch build dependencies from PyPI and fails behind a proxy/firewall, pre-install `scikit-build-core`, `nanobind`, `cmake`, and `ninja`, then run with `--no-build-isolation`:
+> ```bash
+> pip install scikit-build-core nanobind cmake ninja
+> pip install --no-build-isolation -e .
+> ```
 
 The `[dev]` extra installs:
 
@@ -4736,16 +4760,16 @@ Zedda follows [Semantic Versioning](https://semver.org/):
 |---|---|
 | Major (0.x → 1.0)    | Breaking API changes |
 | Minor (0.4.x → 0.5.0) | New features, backwards-compatible |
-| Patch (0.4.7 → 0.4.8) | Bug fixes only |
+| Patch (0.4.8 → 0.4.9) | Bug fixes only |
 
-The current version is **0.4.8**.
+The current version is **0.4.9**.
 
-Version is single-sourced from `python/zedda/__init__.py:93` (`__version__ = "0.4.8"`) and consumed via `scikit_build_core.metadata.regex` provider in `pyproject.toml` (SEC-PKG01). It is mirrored in:
+Version is single-sourced from `python/zedda/__init__.py` (`__version__ = "0.4.9"`) and consumed via `scikit_build_core.metadata.regex` provider in `pyproject.toml` (SEC-PKG01). It is mirrored in:
 
-- `CMakeLists.txt:11` — `project(zedda VERSION 0.4.8 ...)`
-- `CITATION.cff:7` — `version: 0.4.8`
-- `python/zedda/cli.py:34` — CLI fallback string
-- `python/zedda/report.py:714` — HTML report footer
+- `CMakeLists.txt:11` — `project(zedda VERSION 0.4.9 ...)`
+- `CITATION.cff:7` — `version: 0.4.9`
+- `python/zedda/cli.py` — CLI fallback string
+- `python/zedda/report.py` — HTML report footer
 
 ::::warning
 `conda-recipe/meta.yaml` is at version `0.4.5` — out of sync. The recipe's SHA256 is also a placeholder. This needs to be bumped manually before the next conda release.
@@ -4758,7 +4782,7 @@ Version is single-sourced from `python/zedda/__init__.py:93` (`__version__ = "0.
 Use the `bump.py` helper:
 
 ```bash
-python bump.py 0.4.8 0.4.9
+python bump.py 0.4.9 0.4.10
 ```
 
 This sed-replaces the version string in 5 files:
@@ -4857,6 +4881,16 @@ All notable changes to Zedda are documented in [`CHANGELOG.md`](https://github.c
 ## [Unreleased]
 
 _No unreleased changes._
+
+## [0.4.9] — 2026-09-12 — Post-Audit Stability Release
+
+### Fixed
+- **Core Stability:** Fixed P0 crash in `profile()` when passing dataframes containing only datetime columns.
+- **Type Safety:** Resolved P1 `FutureWarning` during `astype(float)` casting of boolean inputs in `fix()` operations.
+- **API Clarifications:** 
+  - `merge()` raises a clear `TypeError` explaining it requires a list of paths if a DataFrame is passed to `output`.
+  - `validate()` now accepts both `rules=` and `schema=` as kwargs for backward compatibility.
+  - Enhanced docstrings for `merge()` and `validate()` to reflect standard usage.
 
 ## [0.4.8] — 2026-07-25 — Pre-Release Audit & CI/CD Hardening
 
@@ -5167,7 +5201,7 @@ If you use Zedda in academic work, cite it using the metadata in [`CITATION.cff`
 ```bibtex
 @software{zedda,
   title       = {Zedda: Zero Effort Data Analysis},
-  version     = {0.4.8},
+  version     = {0.4.9},
   year        = {2026},
   url         = {https://github.com/Zedda-Labs/Zedda}
 }

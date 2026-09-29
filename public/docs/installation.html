@@ -126,7 +126,7 @@
         <a href="./index.html" class="brand" aria-label="Zedda home">
           <img class="brand-logo brand-logo--light" src="./assets/logo.png" alt="Zedda" width="120" height="28">
           <img class="brand-logo brand-logo--dark" src="./assets/logo-dark.png" alt="Zedda" width="120" height="28">
-          <span class="brand-version">v0.4.8</span>
+          <span class="brand-version">v0.4.9</span>
         </a>
       </div>
 
@@ -381,8 +381,12 @@ pip install zedda
 <h2 id="verify-the-install" tabindex="-1"><a class="header-anchor" href="#verify-the-install" aria-hidden="true">#</a> Verify the install</h2>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">zedda version
 </code></pre>
-<p>You should see <code>0.4.8</code> (or the version you installed). To make sure the native extension loaded, run:</p>
+<p>You should see <code>0.4.9</code> (or the version you installed). To make sure the native extension loaded, run:</p>
 <pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">python -c <span class="hljs-string">&quot;import zedda as zd; print(zd.__version__)&quot;</span>
+</code></pre>
+<h3 id="high-performance-builds-x86-64-v3-avx2" tabindex="-1"><a class="header-anchor" href="#high-performance-builds-x86-64-v3-avx2" aria-hidden="true">#</a> High-Performance Builds (x86-64-v3 / AVX2)</h3>
+<p>Prebuilt wheels on PyPI support all 64-bit x86 CPUs with runtime AVX2/AVX-512 dispatch in the scanner. For full compiler auto-vectorization across the entire C++ engine on modern CPUs (Intel Haswell+, AMD Zen+):</p>
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">CMAKE_ARGS=<span class="hljs-string">&quot;-DZEDDA_TARGET_X86_64_V3=ON -DZEDDA_ENABLE_LTO=ON&quot;</span> pip install --no-binary zedda zedda
 </code></pre>
 <h2 id="install-from-source" tabindex="-1"><a class="header-anchor" href="#install-from-source" aria-hidden="true">#</a> Install from source</h2>
 <p>Use this if you are contributing, debugging, or building for an unsupported platform. C++17 build tools (<code>cmake</code> and <code>ninja</code>) are required.</p>
@@ -406,7 +410,7 @@ pytest tests/
 <li><code>docker.io/zeddalabs/zedda</code> (Docker Hub)</li>
 </ul>
 <p>The runtime image is ~200 MB, runs as a non-root user (<code>zedda</code>, uid 1000), and includes a 5-minute health check.</p>
-<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">docker run --<span class="hljs-built_in">rm</span> -v <span class="hljs-string">&quot;<span class="hljs-variable">$PWD</span>:/data&quot;</span> ghcr.io/zedda-labs/zedda:0.4.8 \
+<pre class="hljs code-block-pre" tabindex="0"><code class="language-bash">docker run --<span class="hljs-built_in">rm</span> -v <span class="hljs-string">&quot;<span class="hljs-variable">$PWD</span>:/data&quot;</span> ghcr.io/zedda-labs/zedda:0.4.9 \
   zedda run /data/titanic.csv
 </code></pre>
 <h2 id="troubleshooting" tabindex="-1"><a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a> Troubleshooting</h2>
@@ -420,7 +424,7 @@ pytest tests/
 <ul>
 <li><a href="./quickstart.html">Quick Start</a> — profile your first dataset in 30 seconds.</li>
 <li><a href="./cli.html">CLI Reference</a> — every <code>zedda</code> subcommand.</li>
-<li><a href="./api/overview.html">Python API</a> — the 11 public functions.</li>
+<li><a href="./api/overview.html">Python API</a> — the 13 public functions.</li>
 </ul>
 
             </div>
@@ -445,6 +449,7 @@ pytest tests/
     <li class="toc-item toc-item--h2"><a href="#platform-support" class="toc-link">Platform support</a></li>
     <li class="toc-item toc-item--h2"><a href="#conda-users" class="toc-link">Conda users</a></li>
     <li class="toc-item toc-item--h2"><a href="#verify-the-install" class="toc-link">Verify the install</a></li>
+    <li class="toc-item toc-item--h3"><a href="#high-performance-builds-x86-64-v3-avx2" class="toc-link">High-Performance Builds (x86-64-v3 / AVX2)</a></li>
     <li class="toc-item toc-item--h2"><a href="#install-from-source" class="toc-link">Install from source</a></li>
     <li class="toc-item toc-item--h2"><a href="#docker" class="toc-link">Docker</a></li>
     <li class="toc-item toc-item--h2"><a href="#troubleshooting" class="toc-link">Troubleshooting</a></li>
@@ -474,7 +479,7 @@ pytest tests/
             <a href="https://pypi.org/project/zedda" class="footer-link" target="_blank" rel="noopener noreferrer">PyPI</a>
           </div>
           <div class="footer-right">
-            <span class="footer-version">v0.4.8</span>
+            <span class="footer-version">v0.4.9</span>
           </div>
         </div>
       </footer>

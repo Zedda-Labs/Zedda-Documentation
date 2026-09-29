@@ -88,7 +88,7 @@ If you use Zedda in academic work, cite it using the metadata in [`CITATION.cff`
 ```bibtex
 @software{zedda,
   title       = {Zedda: Zero Effort Data Analysis},
-  version     = {0.4.8},
+  version     = {0.4.9},
   year        = {2026},
   url         = {https://github.com/Zedda-Labs/Zedda}
 }

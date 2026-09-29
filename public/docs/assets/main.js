@@ -216,14 +216,19 @@
       copyBtn.setAttribute("aria-label", "Copy code");
       copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span>';
       copyBtn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(text);
+        const markCopied = () => {
           copyBtn.classList.add("copied");
-          copyBtn.querySelector("span").textContent = "Copied";
+          const span = copyBtn.querySelector("span");
+          if (span) span.textContent = "Copied";
           setTimeout(() => {
             copyBtn.classList.remove("copied");
-            copyBtn.querySelector("span").textContent = "Copy";
+            if (span) span.textContent = "Copy";
           }, 1500);
+        };
+
+        try {
+          await navigator.clipboard.writeText(text);
+          markCopied();
         } catch (e) {
           // Fallback for non-secure contexts
           const ta = document.createElement("textarea");
@@ -232,7 +237,10 @@
           ta.style.opacity = "0";
           document.body.appendChild(ta);
           ta.select();
-          try { document.execCommand("copy"); } catch (e2) {}
+          try {
+            document.execCommand("copy");
+            markCopied();
+          } catch (e2) {}
           document.body.removeChild(ta);
         }
       });
@@ -247,44 +255,7 @@
   });
 
   // -----------------------------------------------------------------------
-  // TOC scroll-spy
-  // -----------------------------------------------------------------------
-  document.addEventListener("DOMContentLoaded", () => {
-    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
-    if (tocLinks.length === 0) return;
 
-    const headings = tocLinks
-      .map((link) => {
-        const id = link.getAttribute("href").slice(1);
-        return document.getElementById(id);
-      })
-      .filter(Boolean);
-
-    if (headings.length === 0) return;
-
-    let activeLink = null;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find the topmost heading currently visible
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          const id = visible[0].target.id;
-          const newActive = tocLinks.find((l) => l.getAttribute("href") === "#" + id);
-          if (newActive && newActive !== activeLink) {
-            if (activeLink) activeLink.classList.remove("active");
-            newActive.classList.add("active");
-            activeLink = newActive;
-          }
-        }
-      },
-      { rootMargin: "-80px 0px -70% 0px", threshold: [0, 1] }
-    );
-
-    headings.forEach((h) => observer.observe(h));
-  });
 
   // -----------------------------------------------------------------------
   // Search
@@ -303,7 +274,14 @@
   }
 
   function tokenize(s) {
-    return s.toLowerCase().split(/[^a-z0-9_]+/i).filter((t) => t.length > 1);
+    if (!s) return [];
+    const normalized = s.toLowerCase().replace(/c\+\+/g, "cpp");
+    const rawTokens = normalized.split(/[^a-z0-9_]+/i).filter((t) => t.length > 0);
+    if (/c\+\+/i.test(s)) {
+      rawTokens.push("cpp");
+      rawTokens.push("c++");
+    }
+    return rawTokens.filter((t) => t.length > 1 || t === "c" || t === "r");
   }
 
   function search(query, limit) {
@@ -437,6 +415,7 @@
     resultsEl.addEventListener("click", (e) => {
       const item = e.target.closest(".search-result");
       if (item) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
         e.preventDefault();
         const idx = parseInt(item.dataset.idx, 10);
         if (currentResults[idx]) window.location.href = (window.BASE_HREF || '') + currentResults[idx].entry.url;
@@ -501,6 +480,13 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("is-visible");
+              const statVal = entry.target.querySelector(".stat-value[data-target]") || (entry.target.classList.contains("stat-value") && entry.target.hasAttribute("data-target") ? entry.target : null);
+              if (statVal && !statVal.dataset.animated) {
+                statVal.dataset.animated = "true";
+                const target = parseInt(statVal.getAttribute("data-target"), 10) || 0;
+                const suffix = statVal.getAttribute("data-suffix") || "";
+                animateCountValue(statVal, 0, target, suffix, 1200);
+              }
             }
           });
         },
@@ -582,36 +568,27 @@
       };
 
       async function syncPyPIApi() {
-        // 1. Try Pepy.tech for real-time lifetime total downloads
+        // 1. Fetch live generated stats endpoint (same-origin, zero CORS issues)
         try {
-          const pepyRes = await fetch("https://pepy.tech/projects/zedda");
-          if (pepyRes.ok) {
-            const raw = await pepyRes.text();
-            const html = raw.replace(/<!--\s*-->/g, "");
-            const totalMatch = html.match(/downloaded\s+([\d,]+)\s+times in total/i);
-            const monthMatch = html.match(/including\s+([\d,]+)\s+in the last 30 days/i);
-
-            let realTotal = totalMatch ? parseInt(totalMatch[1].replace(/,/g, ""), 10) : 0;
-            let realMonth = monthMatch ? parseInt(monthMatch[1].replace(/,/g, ""), 10) : 0;
-
-            if (realTotal > 0) {
-              applyLiveUpdate(downloadsEl, realTotal);
-              if (realMonth > 0) applyLiveUpdate(installsEl, realMonth);
+          const statsRes = await fetch((window.BASE_HREF || "") + "assets/pypi-stats.json");
+          if (statsRes.ok) {
+            const data = await statsRes.json();
+            if (data && data.downloads) {
+              applyLiveUpdate(downloadsEl, data.downloads);
+              if (data.installs) applyLiveUpdate(installsEl, data.installs);
 
               try {
                 localStorage.setItem(
                   "zedda_live_stats",
-                  JSON.stringify({ downloads: realTotal, installs: realMonth, time: Date.now() })
+                  JSON.stringify({ downloads: data.downloads, installs: data.installs, time: Date.now() })
                 );
               } catch (e) {}
-              return; // Pepy sync successful!
+              return;
             }
           }
-        } catch (e) {
-          // Pepy fallback to PyPIStats
-        }
+        } catch (e) {}
 
-        // 2. Fallback to PyPIStats
+        // 2. Direct fallback to PyPIStats if accessible
         try {
           const res = await fetch("https://pypistats.org/api/packages/zedda/overall");
           if (res.ok) {
@@ -708,9 +685,13 @@
         }
       }
 
-      // Save scroll position on user scroll
+      // Save scroll position on user scroll (debounced to avoid blocking main thread)
+      let scrollTimer = null;
       sidebar.addEventListener("scroll", () => {
-        sessionStorage.setItem("zedda-sidebar-scroll", sidebar.scrollTop.toString());
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          sessionStorage.setItem("zedda-sidebar-scroll", sidebar.scrollTop.toString());
+        }, 150);
       }, { passive: true });
     }
 
@@ -741,7 +722,7 @@
           cmd: "pip install zedda",
           outputs: [
             { text: "Downloading wheels...", cls: "term-cyan" },
-            { text: "✓ Successfully installed zedda-v0.4.8", cls: "term-success" }
+            { text: "✓ Successfully installed zedda-v0.4.9", cls: "term-success" }
           ]
         },
         {

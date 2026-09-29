@@ -60,10 +60,18 @@ pip install zedda
 zedda version
 ```
 
-You should see `0.4.8` (or the version you installed). To make sure the native extension loaded, run:
+You should see `0.4.9` (or the version you installed). To make sure the native extension loaded, run:
 
 ```bash
 python -c "import zedda as zd; print(zd.__version__)"
+```
+
+### High-Performance Builds (x86-64-v3 / AVX2)
+
+Prebuilt wheels on PyPI support all 64-bit x86 CPUs with runtime AVX2/AVX-512 dispatch in the scanner. For full compiler auto-vectorization across the entire C++ engine on modern CPUs (Intel Haswell+, AMD Zen+):
+
+```bash
+CMAKE_ARGS="-DZEDDA_TARGET_X86_64_V3=ON -DZEDDA_ENABLE_LTO=ON" pip install --no-binary zedda zedda
 ```
 
 ## Install from source
@@ -96,7 +104,7 @@ A multi-arch Docker image (`linux/amd64` and `linux/arm64`) is published on ever
 The runtime image is ~200 MB, runs as a non-root user (`zedda`, uid 1000), and includes a 5-minute health check.
 
 ```bash
-docker run --rm -v "$PWD:/data" ghcr.io/zedda-labs/zedda:0.4.8 \
+docker run --rm -v "$PWD:/data" ghcr.io/zedda-labs/zedda:0.4.9 \
   zedda run /data/titanic.csv
 ```
 
@@ -118,4 +126,4 @@ Install the `[parquet]` extra: `pip install "zedda[parquet]"`. The error message
 
 - [Quick Start](#quickstart) — profile your first dataset in 30 seconds.
 - [CLI Reference](#cli) — every `zedda` subcommand.
-- [Python API](#api/overview) — the 11 public functions.
+- [Python API](#api/overview) — the 13 public functions.

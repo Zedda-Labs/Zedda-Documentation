@@ -75,6 +75,17 @@ md.use(linkAttributes, {
   },
 });
 
+function rewriteContentLogos(html) {
+  // Transform raw <picture> logos into theme-aware dual-logo elements
+  const pictureRegex = /<picture>[\s\S]*?logo-dark\.png[\s\S]*?<\/picture>/gi;
+  return html.replace(pictureRegex, () => {
+    return `<div class="content-banner-logo">
+      <img class="brand-logo brand-logo--light" src="{{BASE_HREF}}assets/logo.png" alt="Zedda" width="100%">
+      <img class="brand-logo brand-logo--dark" src="{{BASE_HREF}}assets/logo-dark.png" alt="Zedda" width="100%">
+    </div>`;
+  });
+}
+
 // Custom renderer: convert internal doc links like [text](#installation)
 // into proper relative links. We do this in a post-processing step.
 function rewriteInternalLinks(html) {
@@ -271,11 +282,63 @@ function extractDescription(html) {
   return m[1].replace(/<[^>]+>/g, "").trim().slice(0, 200);
 }
 
+// --- Live PyPI Stats Fetcher ---
+async function fetchPyPiStats() {
+  try {
+    const res = await fetch("https://pypistats.org/api/packages/zedda/overall", {
+      headers: { "User-Agent": "zedda-docs-builder/1.0" }
+    });
+    if (res.ok) {
+      const json = await res.json();
+      if (json && Array.isArray(json.data)) {
+        let totalWithMirrors = 0;
+        let totalWithoutMirrors = 0;
+        json.data.forEach((row) => {
+          if (row.category === "with_mirrors") totalWithMirrors += row.downloads;
+          if (row.category === "without_mirrors") totalWithoutMirrors += row.downloads;
+        });
+        if (totalWithMirrors > 0) {
+          return {
+            downloads: totalWithMirrors,
+            installs: totalWithoutMirrors,
+            updated: new Date().toISOString()
+          };
+        }
+      }
+    }
+  } catch (e) {
+    console.warn("Could not fetch fresh PyPI stats at build time:", e.message);
+  }
+  return { downloads: 64309, installs: 19833, updated: new Date().toISOString() };
+}
+
+// --- Dynamic version detection ---
+function detectVersion() {
+  // 1. Try reading from synced zedda source if present
+  const initPyPath = path.join(ROOT, "zedda-source", "python", "zedda", "__init__.py");
+  if (fs.existsSync(initPyPath)) {
+    try {
+      const content = fs.readFileSync(initPyPath, "utf8");
+      const m = content.match(/__version__\s*=\s*["']([^"']+)["']/);
+      if (m && m[1]) return m[1];
+    } catch (e) {}
+  }
+  // 2. Try reading from package.json
+  const pkgPath = path.join(ROOT, "package.json");
+  if (fs.existsSync(pkgPath)) {
+    try {
+      const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+      if (pkg.version) return pkg.version;
+    } catch (e) {}
+  }
+  return "0.4.9";
+}
+
 // --- Search index ---
 const searchIndex = [];
 
 // --- Build ---
-function build() {
+async function build() {
   // Clean output
   if (fs.existsSync(OUT)) {
     fs.rmSync(OUT, { recursive: true, force: true });
@@ -290,11 +353,21 @@ function build() {
   if (fs.existsSync(rootFavicon)) {
     fs.copyFileSync(rootFavicon, path.join(OUT, "favicon.ico"));
   }
-  // Also copy any page-specific subdirectories
-  copyDir(CONTENT, path.join(OUT, "_content"), { onlyFiles: false, filter: (f) => !f.endsWith(".md") });
+
+  // Fetch and write live PyPI stats
+  const pypiStats = await fetchPyPiStats();
+  fs.writeFileSync(
+    path.join(OUT, "assets", "pypi-stats.json"),
+    JSON.stringify(pypiStats, null, 2)
+  );
+  fs.writeFileSync(
+    path.join(ASSETS_SRC, "pypi-stats.json"),
+    JSON.stringify(pypiStats, null, 2)
+  );
+  console.log(`✓ assets/pypi-stats.json (${pypiStats.downloads.toLocaleString()} downloads)`);
 
   const leaves = navigation.flattenLeaves();
-  const version = "0.4.8";
+  const version = detectVersion();
   const repoUrl = "https://github.com/Zedda-Labs/Zedda";
 
   for (const leaf of leaves) {
@@ -321,8 +394,9 @@ function build() {
     // Post-process: substitute callout placeholders with rendered callout HTML
     html = postprocessCallouts(html, calloutBlocks);
 
-    // Rewrite internal links
+    // Rewrite internal links & content logos
     html = rewriteInternalLinks(html);
+    html = rewriteContentLogos(html);
 
     // Extract TOC (only h2 and h3 — h1 is the page title, rendered separately)
     const toc = extractToc(html);
@@ -402,7 +476,7 @@ function build() {
       description,
       group: parentGroup ? parentGroup.label : "",
       url: leaf.url,
-      text: plainText.slice(0, 5000),
+      text: plainText.slice(0, 25000),
     });
   }
 
@@ -441,13 +515,13 @@ function build() {
   );
   console.log(`✓ search index (${searchIndex.length} entries)`);
 
-  // Write sitemap.xml
+  // Write sitemap.xml (canonical URLs: https://zedda.io/ for home)
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${searchIndex
   .map(
     (e) =>
-      `  <url><loc>https://zedda.io/${e.id === "home" ? "index" : e.id}.html</loc><changefreq>weekly</changefreq></url>`
+      `  <url><loc>${e.id === "home" ? "https://zedda.io/" : `https://zedda.io/${e.id}.html`}</loc><changefreq>weekly</changefreq></url>`
   )
   .join("\n")}
 </urlset>
@@ -462,7 +536,7 @@ ${searchIndex
   );
   console.log("✓ robots.txt");
 
-  // Write a 404.html (GitHub Pages custom 404)
+  // Write a 404.html (GitHub Pages custom 404 with local-friendly baseHref)
   const notFoundHtml = renderLayout({
     title: "Page Not Found",
     description: "The page you were looking for does not exist.",
@@ -484,6 +558,13 @@ ${searchIndex
   // Write .nojekyll (so GitHub Pages doesn't process with Jekyll)
   fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
   console.log("✓ .nojekyll");
+
+  // Copy CNAME file if present
+  const rootCname = path.join(ROOT, "CNAME");
+  if (fs.existsSync(rootCname)) {
+    fs.copyFileSync(rootCname, path.join(OUT, "CNAME"));
+    console.log("✓ CNAME");
+  }
 
   console.log("\n✅ Build complete. Output: public/docs/");
 }
@@ -537,4 +618,7 @@ function copyDir(src, dest, opts = {}) {
   }
 }
 
-build();
+build().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
