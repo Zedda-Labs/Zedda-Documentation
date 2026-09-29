@@ -550,7 +550,7 @@ ${searchIndex
     version,
     repoUrl,
     isHome: false,
-    customBaseHref: "./",
+    customBaseHref: "https://zedda.io/",
   });
   fs.writeFileSync(path.join(OUT, "404.html"), notFoundHtml);
   console.log("✓ 404.html");
