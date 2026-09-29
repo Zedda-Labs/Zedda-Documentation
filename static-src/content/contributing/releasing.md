@@ -1,120 +1,107 @@
-# Releasing
+# Releasing Zedda
 
-The release process is documented in [`RELEASING.md`](https://github.com/Zedda-Labs/Zedda/blob/main/RELEASING.md). This page summarises the 6-step release flow and the hotfix flow.
+This document describes the step-by-step process for publishing a new release of Zedda.
 
-## Version policy
+## Prerequisites
+
+- You must be a member of `@Zedda-Labs/core` with push access to `main`.
+- The `pypi` and `testpypi` GitHub Environments must be configured with OIDC trusted publishing.
+- Docker Hub secrets (`DOCKER_USERNAME`, `DOCKER_PASSWORD`) must be set in the repository.
+
+## Release Process
+
+### 1. Prepare the Release
+
+```bash
+# Ensure you're on main and up to date
+git checkout main
+git pull origin main
+
+# Verify all tests pass
+pytest tests/
+
+# Update the version in python/zedda/__init__.py
+# Example: __version__ = "0.3.0"
+```
+
+### 2. Update the Changelog
+
+Edit `CHANGELOG.md`:
+- Move items from `[Unreleased]` to a new version header: `## [0.3.0] - YYYY-MM-DD`
+- Add a fresh empty `[Unreleased]` section at the top.
+
+### 3. Commit and Tag
+
+```bash
+git add python/zedda/__init__.py CHANGELOG.md
+git commit -m "release: v0.3.0"
+
+# Create an annotated tag
+git tag -a v0.3.0 -m "Release v0.3.0"
+
+# Push both the commit and the tag
+git push origin main --follow-tags
+```
+
+### 4. Automated Pipeline
+
+Pushing the `v*.*.*` tag triggers the following automated pipeline:
+
+```
+Tag push (vX.Y.Z)
+    │
+    ├── build_wheels.yml
+    │   ├── build_wheels (4 matrix jobs: 4 OS × 1 cp39-abi3 wheel)
+    │   ├── build_sdist
+    │   ├── publish_test → TestPyPI
+    │   └── publish_pypi → Production PyPI (only if TestPyPI succeeds)
+    │
+    └── docker_publish.yml
+        ├── Build Docker image (amd64)
+        ├── Smoke test (import zedda)
+        └── Push to GHCR + Docker Hub (amd64 + arm64)
+```
+
+### 5. Verify the Release
+
+After the pipeline completes (~15-30 minutes):
+
+```bash
+# Verify PyPI
+pip install zedda==0.3.0
+python -c "import zedda; print(zedda.__version__)"
+
+# Verify Docker
+docker pull ghcr.io/zedda-labs/zedda:0.3.0
+docker run --rm ghcr.io/zedda-labs/zedda:0.3.0 python -c "import zedda; print(zedda.__version__)"
+```
+
+### 6. Create the GitHub Release
+
+The **Release Drafter** workflow automatically maintains a draft release with categorized changes from merged PRs. After verifying the release:
+
+1. Go to [GitHub Releases](https://github.com/Zedda-Labs/Zedda/releases).
+2. Find the draft release created by Release Drafter.
+3. Edit it: set the tag to `v0.3.0`, review the auto-generated notes.
+4. Click **Publish release**.
+
+## Emergency Hotfix Process
+
+For critical security patches (e.g., CVE in `pyarrow`):
+
+1. Branch from the latest tag: `git checkout -b hotfix/v0.2.1 v0.2.0`
+2. Apply the minimal fix.
+3. Bump version to `0.2.1`.
+4. Tag and push: `git tag -a v0.2.1 -m "Security hotfix"`.
+5. The same automated pipeline runs.
+6. Cherry-pick the fix back to `main`.
+
+## Version Numbering
 
 Zedda follows [Semantic Versioning](https://semver.org/):
 
-| Bump | When |
-|---|---|
-| Major (0.x → 1.0)    | Breaking API changes |
-| Minor (0.4.x → 0.5.0) | New features, backwards-compatible |
-| Patch (0.4.8 → 0.4.9) | Bug fixes only |
-
-The current version is **0.4.9**.
-
-Version is single-sourced from `python/zedda/__init__.py` (`__version__ = "0.4.9"`) and consumed via `scikit_build_core.metadata.regex` provider in `pyproject.toml` (SEC-PKG01). It is mirrored in:
-
-- `CMakeLists.txt:11` — `project(zedda VERSION 0.4.9 ...)`
-- `CITATION.cff:7` — `version: 0.4.9`
-- `python/zedda/cli.py` — CLI fallback string
-- `python/zedda/report.py` — HTML report footer
-
-::::warning
-`conda-recipe/meta.yaml` is at version `0.4.5` — out of sync. The recipe's SHA256 is also a placeholder. This needs to be bumped manually before the next conda release.
-::::
-
-## The 6-step release process
-
-### 1. Bump the version
-
-Use the `bump.py` helper:
-
-```bash
-python bump.py 0.4.9 0.4.10
-```
-
-This sed-replaces the version string in 5 files:
-
-- `python/zedda/__init__.py`
-- `python/zedda/cli.py`
-- `CMakeLists.txt`
-- `tests/python/test_fasteda.py`
-- `tests/python/test_extracted_modules.py`
-
-::::note
-`bump.py` does **not** bump `CITATION.cff`, `conda-recipe/meta.yaml`, or `python/zedda/report.py` — those have their own version strings and must be bumped manually.
-::::
-
-### 2. Update the CHANGELOG
-
-Add a new section at the top of `CHANGELOG.md` in [Keep-a-Changelog](https://keepachangelog.com/en/1.1.0/) 1.1.0 format:
-
-```markdown
-## [0.4.9] - YYYY-MM-DD
-
-### Added
-- ...
-
-### Changed
-- ...
-
-### Fixed
-- ...
-```
-
-### 3. Commit and tag
-
-```bash
-git add -A
-git commit -m "Release v0.4.9"
-git tag v0.4.9
-git push origin main --tags
-```
-
-### 4. CI builds the wheels
-
-The `release.yml` workflow triggers on the tag push and:
-
-- Builds wheels on `ubuntu-latest`, `windows-latest`, `macos-14` × `cp39, cp310, cp311, cp312, cp313, cp314`
-- Linux archs: `x86_64 aarch64` (manylinux_2_28 + musllinux_1_2)
-- macOS archs: `arm64` (on macos-14) / `x86_64`
-- Windows: `AMD64` only
-- Skips `*-win32` and `*-manylinux_i686`
-- Build deps pinned: `cmake==3.30.5 ninja==1.11.1.1 scikit-build-core==0.10.7 nanobind==2.4.0`
-- Uses ccache for faster rebuilds
-- Generates an SBOM (SPDX-JSON) via `anchore/sbom-action@v0.18.0`
-
-### 5. PyPI publishing via OIDC trusted publishing
-
-Wheels are published to PyPI via [OIDC trusted publishing](https://docs.pypi.org/trusted-publishers/) — no API tokens. The publishing action is SHA-pinned: `pypa/gh-action-pypi-publish@v1.12.4` (CI-H1).
-
-### 6. Post-publish verification
-
-The release workflow installs from PyPI on Linux / Windows / macOS × Python 3.13, runs `zedda --help`, and opens a GitHub issue on failure.
-
-## Docker release
-
-The `docker.yml` workflow triggers on the same tag and:
-
-- Builds multi-arch images (`linux/amd64`, `linux/arm64`)
-- Publishes to both GHCR (`ghcr.io/zedda-labs/zedda`) and Docker Hub
-- Runs Trivy and blocks HIGH/CRITICAL CVEs
-
-## Hotfix flow
-
-For an urgent fix on the current release:
-
-1. Branch from the release tag: `git checkout -b hotfix/0.4.9.1 v0.4.9`
-2. Apply the fix
-3. Bump the patch version (e.g. `0.4.9` → `0.4.9.1`)
-4. Add a hotfix section to the CHANGELOG
-5. Commit, tag, push — same as the normal release flow
-6. Merge the hotfix branch back to `main`
-
-## See also
-
-- [CHANGELOG.md](https://github.com/Zedda-Labs/Zedda/blob/main/CHANGELOG.md) — every release.
-- [RELEASING.md](https://github.com/Zedda-Labs/Zedda/blob/main/RELEASING.md) — the source-of-truth process.
-- [Development Setup](#contributing/setup) — how to build locally.
+| Change Type | Version Bump | Example |
+|:---|:---|:---|
+| Breaking API change | Major (`X.0.0`) | Removing `zd.scan()` |
+| New feature (backward-compatible) | Minor (`0.X.0`) | Adding `zd.compare()` |
+| Bug fix / security patch | Patch (`0.0.X`) | Fixing CVE in pyarrow pin |
